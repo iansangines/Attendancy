@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 
@@ -11,7 +12,6 @@ class UserProfile(models.Model):
     # def create_user_profile(sender, instance, created, **kwargs):
     #     if created:
     #         UserProfile.objects.create(user=instance)
-
 
 
 class Alumne(UserProfile):
@@ -27,9 +27,11 @@ class Dispositiu(models.Model):
     MAC = models.TextField(blank=False)
     codi = models.TextField(blank=False)
 
+
 class Sala(models.Model):
     MAC = models.TextField(blank=False)
 
-class Classe(models.Model):
-    #hora_inici : models.TimeField
 
+class Classe(models.Model):
+    # hora_inici : models.TimeField
+    primo = models.CharField(max_length=100)
