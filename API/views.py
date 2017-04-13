@@ -17,12 +17,17 @@ def userprofiles(request):
     #return HttpResponse("Retorna JSON amb les clases")
 
 
-class Alumnes(APIView):
-
+class AlumnesList(APIView):
     def get(self, request, format=None):
         alumnes = Alumne.objects.all()
         serializer = AlumneSerializer(alumnes, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data)
+
+class SalesList(APIView):
+    def get(self, request, format=None):
+        sales = Sala.objects.all()
+        serializer = SalaSerializer(sales, many=True)
+        return Response(serializer.data)
 
 
 def alumnes(request):
@@ -42,13 +47,6 @@ def dispositius(request):
     serializer = DispositiuSerializer(dispositius, many=True)
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
-
-class SalesList(APIView):
-    def get(self, request, format=None):
-        salas = Sala.objects.all()
-        serializer = SalaSerializer(salas, many=True)
-        return Response(serializer.data)
-
 
 def sales(request):
     sales = Sala.objects.all()
