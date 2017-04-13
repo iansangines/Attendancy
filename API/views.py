@@ -1,4 +1,6 @@
 #from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse
 from models import *
 from serializers import *
@@ -7,6 +9,15 @@ from serializers import *
 
 def index(request):
     return HttpResponse("Hello, world. You're at the API index.")
+
+
+class Alumnes(APIView):
+
+    def get(self, request, format=None):
+        alumnes = Alumne.objects.all()
+        serializer = AlumneSerializer(alumnes, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
 
 def alumnes(request):
     alumnes = Alumne.objects.all()
@@ -26,6 +37,15 @@ def dispositius(request):
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
 
+
+class SalesList(APIView):
+    def get(self, request, format=None):
+        salas = Sala.objects.all()
+        serializer = SalaSerializer(salas, many=True)
+        return Response(serializer.data)
+
+
+
 def salas(request):
     salas = Sala.objects.all()
     serializer = SalaSerializer(salas, many=True)
@@ -40,7 +60,7 @@ def classes(request):
 
 def classesalumnes(request):
     classesalumnes = ClasseAlumne.objects.all()
-    serializer = ClasseAlumneSerializer(classesAlumnes, many=True)
+    serializer = ClasseAlumneSerializer(classesalumnes, many=True)
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
 
