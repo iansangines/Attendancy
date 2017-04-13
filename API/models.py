@@ -15,23 +15,35 @@ class UserProfile(models.Model):
 
 
 class Alumne(UserProfile):
-    dni = models.TextField(blank=False)
+    dni = models.CharField(max_length=8, unique=True)
     dispositiu = models.OneToOneField('Dispositiu')
+    classes = models.ManyToManyField('Classe')
+    # Com a string perque la classe Dispositiu es creara mes endavant
 
 
 class Professor(UserProfile):
-    something = models.TextField()
+    classes = models.ManyToManyField('Classe')
 
 
 class Dispositiu(models.Model):
-    MAC = models.TextField(blank=False)
-    codi = models.TextField(blank=False)
+    MAC = models.CharField(max_length=17, primary_key=True)
+    codi = models.CharField(max_length=256)
 
 
 class Sala(models.Model):
-    MAC = models.TextField(blank=False)
+    nom = models.CharField(max_length=256)
+    MAC = models.CharField(max_length=17, primary_key=True)
 
 
 class Classe(models.Model):
-    # hora_inici : models.TimeField
-    primo = models.CharField(max_length=100)
+    professorTutor = models.ForeignKey(Professor)
+    sala = models.ForeignKey(Sala)
+    horaInici = models.TimeField()
+    horaFinal = models.TimeField()
+
+
+class Assistencia(models.Model):
+    dispositiuAlumne = models.ForeignKey(Dispositiu)
+    classeAlumne = models.ForeignKey(Classe)
+    horaEntrada = models.TimeField()
+    horaSortida = models.TimeField()
