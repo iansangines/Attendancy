@@ -1,4 +1,3 @@
-#from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from models import *
 from serializers import *
@@ -6,7 +5,13 @@ from serializers import *
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the API index.")
+    return HttpResponse("To see models: http://localhost:8000/API/#modelname#")
+
+def userprofiles(request):
+    userprofiles = UserProfile.objects.all()
+    serializer = UserProfileSerializer(userprofiles, many=True)
+    return JsonResponse(serializer.data, safe=False)
+    #return HttpResponse("Retorna JSON amb les clases")
 
 def alumnes(request):
     alumnes = Alumne.objects.all()
@@ -26,9 +31,9 @@ def dispositius(request):
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
 
-def salas(request):
-    salas = Sala.objects.all()
-    serializer = SalaSerializer(salas, many=True)
+def sales(request):
+    sales = Sala.objects.all()
+    serializer = SalaSerializer(sales, many=True)
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
 
@@ -38,9 +43,9 @@ def classes(request):
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
 
-def classesalumnes(request):
-    classesalumnes = ClasseAlumne.objects.all()
-    serializer = ClasseAlumneSerializer(classesAlumnes, many=True)
+def classealumne(request):
+    classealumne = ClasseAlumne.objects.all()
+    serializer = ClasseAlumneSerializer(classealumne, many=True)
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
 

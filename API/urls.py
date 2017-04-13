@@ -3,11 +3,12 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url('userprofiles', views.userprofiles, name='userprofiles'),
     url('alumnes', views.alumnes, name='alumnes'),
     url('professors', views.professors, name='professors'),
     url('dispositius', views.dispositius, name='dispositius'),
-    url('salas', views.salas, name='salas'),
+    url('sales', views.sales, name='sales'),
     url('classes', views.classes, name='classes'),
-    url('classesalumnes', views.classesalumnes, name='classesalumnes'),
+    url('classealumne', views.classealumne, name='classealumne'),
     url('assistencies', views.assistencies, name='assistencies'),
 ]
