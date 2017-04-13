@@ -23,6 +23,18 @@ class AlumnesList(APIView):
         serializer = AlumneSerializer(alumnes, many=True)
         return Response(serializer.data)
 
+class ProfessorsList(APIView):
+   def get(self, request, format=None):
+       professors = Professor.objects.all()
+       serializer = ProfessorSerializer(professors, many=True)
+       return Response(serializer.data)
+
+class DispositiusList(APIView):
+    def get(self, request, format=None):
+        dispositius = Dispositiu.objects.all()
+        serializer = DispositiuSerializer(dispositius, many=True)
+        return Response(serializer.data)
+
 class SalesList(APIView):
     def get(self, request, format=None):
         sales = Sala.objects.all()
