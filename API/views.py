@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 #from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
->>>>>>> fd9974da399681c38eb62ed91ab053e090399ccc
 from django.http import HttpResponse, JsonResponse
 from models import *
 from serializers import *
