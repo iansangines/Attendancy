@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+#from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+>>>>>>> fd9974da399681c38eb62ed91ab053e090399ccc
 from django.http import HttpResponse, JsonResponse
 from models import *
 from serializers import *
@@ -12,6 +18,15 @@ def userprofiles(request):
     serializer = UserProfileSerializer(userprofiles, many=True)
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
+
+
+class Alumnes(APIView):
+
+    def get(self, request, format=None):
+        alumnes = Alumne.objects.all()
+        serializer = AlumneSerializer(alumnes, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
 
 def alumnes(request):
     alumnes = Alumne.objects.all()
@@ -30,6 +45,13 @@ def dispositius(request):
     serializer = DispositiuSerializer(dispositius, many=True)
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
+
+class SalesList(APIView):
+    def get(self, request, format=None):
+        salas = Sala.objects.all()
+        serializer = SalaSerializer(salas, many=True)
+        return Response(serializer.data)
+
 
 def sales(request):
     sales = Sala.objects.all()
