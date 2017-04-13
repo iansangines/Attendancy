@@ -17,7 +17,6 @@ class UserProfile(models.Model):
 class Alumne(UserProfile):
     dni = models.CharField(max_length=8, unique=True)
     dispositiu = models.OneToOneField('Dispositiu')
-    classes = models.ManyToManyField('Classe')
     # Com a string perque la classe Dispositiu es creara mes endavant
 
 
@@ -40,6 +39,11 @@ class Classe(models.Model):
     sala = models.ForeignKey(Sala)
     horaInici = models.TimeField()
     horaFinal = models.TimeField()
+
+
+class ClasseAlumne(models.Model):
+    alumne = models.ForeignKey(Alumne)
+    classe = models.ForeignKey(Classe)
 
 
 class Assistencia(models.Model):
