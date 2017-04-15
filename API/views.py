@@ -1,6 +1,7 @@
 #from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from django.http import HttpResponse, JsonResponse
 from models import *
 from serializers import *
@@ -10,54 +11,114 @@ from serializers import *
 def index(request):
     return HttpResponse("To see models: http://localhost:8000/API/#modelname#")
 
+class UsersList(APIView):
+    def get(self, request, format=None):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
+    def post(self, request, format=None):
+    	serializer = UserSerializer(data=request.data)
+	if serializer.is_valid():
+	    serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class UserprofilesList(APIView):
     def get(self, request, format=None):
         userprofiles = UserProfile.objects.all()
         serializer = UserProfileSerializer(userprofiles, many=True)
         return Response(serializer.data)
+    def post(self, request, format=None):
+    	serializer = UserProfileSerializer(data=request.data)
+	if serializer.is_valid():
+	    serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AlumnesList(APIView):
     def get(self, request, format=None):
         alumnes = Alumne.objects.all()
         serializer = AlumneSerializer(alumnes, many=True)
         return Response(serializer.data)
+    def post(self, request, format=None):
+    	serializer = AlumneSerializer(data=request.data)
+	if serializer.is_valid():
+	    serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProfessorsList(APIView):
    def get(self, request, format=None):
        professors = Professor.objects.all()
        serializer = ProfessorSerializer(professors, many=True)
        return Response(serializer.data)
+   def post(self, request, format=None):
+    	serializer = ProfessorSerializer(data=request.data)
+	if serializer.is_valid():
+	    serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DispositiusList(APIView):
     def get(self, request, format=None):
         dispositius = Dispositiu.objects.all()
         serializer = DispositiuSerializer(dispositius, many=True)
         return Response(serializer.data)
+    def post(self, request, format=None):
+    	serializer = DispositiuSerializer(data=request.data)
+	if serializer.is_valid():
+	    serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class SalesList(APIView):
     def get(self, request, format=None):
         sales = Sala.objects.all()
         serializer = SalaSerializer(sales, many=True)
         return Response(serializer.data)
+    def post(self, request, format=None):
+    	serializer = SalaSerializer(data=request.data)
+	if serializer.is_valid():
+	    serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ClassesList(APIView):
     def get(self, request, format=None):
         classes = Classe.objects.all()
         serializer = ClasseSerializer(classes, many=True)
         return Response(serializer.data)
+    def post(self, request, format=None):
+    	serializer = ClasseSerializer(data=request.data)
+	if serializer.is_valid():
+	    serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ClassealumneList(APIView):
     def get(self, request, format=None):
         classealumne = ClasseAlumne.objects.all()
         serializer = ClasseAlumneSerializer(classealumne, many=True)
         return Response(serializer.data)
+    def post(self, request, format=None):
+    	serializer = ClasseAlumneSerializer(data=request.data)
+	if serializer.is_valid():
+	    serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AssistenciesList(APIView):
     def get(self, request, format=None):
         assistencies = Assistencia.objects.all()
         serializer = AssistenciaSerializer(assistencies, many=True)
         return Response(serializer.data)
-
+    def post(self, request, format=None):
+    	serializer = AssistenciaSerializer(data=request.data)
+	if serializer.is_valid():
+	    serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#######################################################################################
 def userprofiles(request):
     userprofiles = UserProfile.objects.all()
     serializer = UserProfileSerializer(userprofiles, many=True)

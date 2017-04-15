@@ -5,6 +5,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url('users', views.UsersList.as_view(), name='users'),
     url('userprofiles', views.UserprofilesList.as_view(), name='userprofiles'),
     url('alumnes', views.AlumnesList.as_view(), name='alumnes'),
     url('professors', views.ProfessorsList.as_view(), name='professors'),
