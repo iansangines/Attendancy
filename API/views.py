@@ -10,12 +10,11 @@ from serializers import *
 def index(request):
     return HttpResponse("To see models: http://localhost:8000/API/#modelname#")
 
-def userprofiles(request):
-    userprofiles = UserProfile.objects.all()
-    serializer = UserProfileSerializer(userprofiles, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    #return HttpResponse("Retorna JSON amb les clases")
-
+class UserprofilesList(APIView):
+    def get(self, request, format=None):
+        userprofiles = UserProfile.objects.all()
+        serializer = UserProfileSerializer(userprofiles, many=True)
+        return Response(serializer.data)
 
 class AlumnesList(APIView):
     def get(self, request, format=None):
@@ -41,6 +40,29 @@ class SalesList(APIView):
         serializer = SalaSerializer(sales, many=True)
         return Response(serializer.data)
 
+class ClassesList(APIView):
+    def get(self, request, format=None):
+        classes = Classe.objects.all()
+        serializer = ClasseSerializer(classes, many=True)
+        return Response(serializer.data)
+
+class ClassealumneList(APIView):
+    def get(self, request, format=None):
+        classealumne = ClasseAlumne.objects.all()
+        serializer = ClasseAlumneSerializer(classealumne, many=True)
+        return Response(serializer.data)
+
+class AssistenciesList(APIView):
+    def get(self, request, format=None):
+        assistencies = Assistencia.objects.all()
+        serializer = AssistenciaSerializer(assistencies, many=True)
+        return Response(serializer.data)
+
+def userprofiles(request):
+    userprofiles = UserProfile.objects.all()
+    serializer = UserProfileSerializer(userprofiles, many=True)
+    return JsonResponse(serializer.data, safe=False)
+    #return HttpResponse("Retorna JSON amb les clases")
 
 def alumnes(request):
     alumnes = Alumne.objects.all()
