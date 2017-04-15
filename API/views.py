@@ -1,15 +1,15 @@
-#from django.shortcuts import render
+from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import HttpResponse, JsonResponse
-from models import *
 from serializers import *
 
 # Create your views here.
 
 def index(request):
     return HttpResponse("To see models: http://localhost:8000/API/#modelname#")
+
 
 class UsersList(APIView):
     def get(self, request, format=None):
@@ -167,5 +167,30 @@ def assistencies(request):
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
 
+@api_view(['POST'])
+def altaAlumne(request):
+    user = User(username=request.username, password=request.password, email=request.email)
+    insertedUser = user.save()
+    alumne = Alumne(user=insertedUser, dni=request.dni)
+    alumne.save()
+    #fer login
+    return Response(status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+def altaDispositiu(request):
+    #comprobar si esta autenticat (que ho estara fijo)
+    user = User.get(id=request.user.id)
+    alumne = Alumne.objects.get(user=user)
+    if alumne.dispositiu is None:
+        dispositiuSerializer = DispositiuSerializer(data=request.data)
+        if dispositiuSerializer.is_valid():
+            nouDispositiu = dispositiuSerializer.save()
+        else:
+            return Response(dispositiuSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        alumne.dispositiu = nouDispositiu
+        alumne.save()
+        return Response(dispositiuSerializer.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(status.HTTP_405_METHOD_NOT_ALLOWED)
 
 

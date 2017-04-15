@@ -16,7 +16,7 @@ class UserProfile(models.Model):
 
 class Alumne(UserProfile):
     dni = models.CharField(max_length=8, unique=True)
-    dispositiu = models.OneToOneField('Dispositiu')
+    dispositiu = models.OneToOneField('Dispositiu', null=True)
     # Com a string perque la classe Dispositiu es creara mes endavant
 
 
@@ -25,13 +25,13 @@ class Professor(UserProfile):
 
 
 class Dispositiu(models.Model):
-    MAC = models.CharField(max_length=17, primary_key=True)
+    MAC = models.CharField(max_length=17, unique=True)
     codi = models.CharField(max_length=256)
 
 
 class Sala(models.Model):
     nom = models.CharField(max_length=256)
-    MAC = models.CharField(max_length=17, primary_key=True)
+    MAC = models.CharField(max_length=17, unique=True)
 
 
 class Classe(models.Model):
