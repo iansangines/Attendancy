@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -169,7 +171,8 @@ def assistencies(request):
 
 @api_view(['POST'])
 def altaAlumne(request):
-    user = User(username=request.username, password=request.password, email=request.email)
+    user = User.objects.create_user(username=request.username, password=request.password, email=request.email,
+                                    first_name=request.name, second_name=request.surname)
     insertedUser = user.save()
     alumne = Alumne(user=insertedUser, dni=request.dni)
     alumne.save()
@@ -177,9 +180,11 @@ def altaAlumne(request):
     return Response(status=status.HTTP_201_CREATED)
 
 @api_view(['POST'])
+@login_required
 def altaDispositiu(request):
+    user = User.objects.get(id=request.user.id)
     #comprobar si esta autenticat (que ho estara fijo)
-    user = User.get(id=request.user.id)
+    authenticatedUser = authenticate(username=user.username, password=user.password)
     alumne = Alumne.objects.get(user=user)
     if alumne.dispositiu is None:
         dispositiuSerializer = DispositiuSerializer(data=request.data)
@@ -192,5 +197,4 @@ def altaDispositiu(request):
         return Response(dispositiuSerializer.data, status=status.HTTP_201_CREATED)
     else:
         return Response(status.HTTP_405_METHOD_NOT_ALLOWED)
-
 

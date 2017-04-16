@@ -37,6 +37,7 @@ class Sala(models.Model):
 class Classe(models.Model):
     professorTutor = models.ForeignKey(Professor)
     sala = models.ForeignKey(Sala)
+    dia = models.IntegerField()
     horaInici = models.TimeField()
     horaFinal = models.TimeField()
 
