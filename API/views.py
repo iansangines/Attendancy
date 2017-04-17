@@ -168,7 +168,7 @@ def assistencies(request):
     serializer = AssistenciaSerializer(assistencies, many=True)
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
-
+########################################################################################
 @api_view(['POST'])
 def altaAlumne(request):
     user = User.objects.create_user(username=request.username, password=request.password, email=request.email,
