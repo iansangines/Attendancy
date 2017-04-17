@@ -8,10 +8,11 @@
 </head>
 <body>
   {% block pagecontent %}
-    <p> "ATTENDANCY" </p>
-    <a href="{% url 'home' %}">Go Home</a>
-    <a href="{% url 'users' %}">See Users</a>
-    <a href="{% url 'createsala' %}">Create Sala</a>
+   <form action="/WEB/createSala/" method="post">
+   	 {% csrf_token %}
+    	 {{ form }}
+    	<input type="submit" value="Submit" />
+   </form>
   {% endblock %}
 </body>
 </html>
