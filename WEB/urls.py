@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^$', views.HomePageView.as_view(), name='home'),
     url(r'^users/$', views.UserPageView.as_view(), name = 'users'),
     url(r'^createSala/$', views.create_sala, name = 'createsala'),
+    url(r'^sales/$', views.llista_sales, name='sales'),
 ]

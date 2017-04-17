@@ -27,3 +27,11 @@ def create_sala(request):
         form = SalaForm()
 	return render(request,'createSala.html', {'form':form})
 
+
+def llista_sales(request):
+    sales = Sala.objects.all()
+    serializer = SalaSerializer(sales, many=True)
+    context = { 'sales' : serializer.data}
+    return render (request, 'sales.html', context)
+
+
