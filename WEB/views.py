@@ -10,10 +10,17 @@ from API.models import *
 
 def professor_check(user):
     try:
-        p = Professor.objects.get(id=user.id) 
+        p = Professor.objects.get(user_id=user.id) 
     except:
 	p = None
     return p is not None
+
+def alumne_check(user):
+    try:
+        a = Alumne.objects.get(user_id=user.id) 
+    except:
+	a = None
+    return a is not None
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
@@ -22,6 +29,7 @@ def home(request):
     return render(request,template_name)
 
 @login_required(login_url='/WEB/login/')
+@user_passes_test(alumne_check, login_url='/WEB/')
 def deny_alumnes(request):
     template_name = "denyalumnes.html"
     return render(request,template_name)
@@ -54,6 +62,20 @@ def llista_sales(request):
     serializer = SalaSerializer(sales, many=True)
     context = { 'sales' : serializer.data}
     return render (request, 'sales.html', context)
+
+def alta_professor(request):
+    if request.method == 'POST':
+        form = ProfessorForm(request.POST)
+        if form.is_valid():
+		user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'], email=form.cleaned_data['email'],
+                                    first_name=form.cleaned_data['first_name'])
+		user.save()
+		professor = Professor(user=user)
+		professor.save()
+		return HttpResponseRedirect('/WEB/')
+    else:
+        form = ProfessorForm()
+	return render(request,'altaProfessor.html', {'form':form})
 
 
 
