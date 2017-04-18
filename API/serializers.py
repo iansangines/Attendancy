@@ -47,3 +47,6 @@ class AssistenciaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assistencia
         fields = ('id','dispositiuAlumne', 'classeAlumne', 'horaEntrada', 'horaSortida')
+
+class MacSerializer(serializers.Serializer):
+    MAC = models.CharField(max_length=17,validators=[RegexValidator(regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", message="MAC no valida", code="invalid_mac")], unique=True)
