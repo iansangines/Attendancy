@@ -12,10 +12,6 @@ def home(request):
     template_name = "index.html"
     return render(request,template_name)
 
-def login(request):
-    template_response = views.login(request)
-    return template_response
-
 @login_required(login_url='/WEB/login/')
 def llista_users(request):
 	users = User.objects.all()
