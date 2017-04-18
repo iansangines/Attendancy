@@ -178,7 +178,6 @@ def assistencies(request):
     #return HttpResponse("Retorna JSON amb les clases")
 ########################################################################################
 @api_view(['POST'])
-@login_required
 def altaAlumne(request):
     user = User.objects.create_user(username=request.username, password=request.password, email=request.email,
                                     first_name=request.name, second_name=request.surname)
