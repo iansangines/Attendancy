@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^users/$', views.llista_users, name = 'users'),
     url(r'^sales/$', views.llista_sales, name='sales'),
     url(r'^createSala/$', views.create_sala, name = 'createsala'),
+    url(r'^altaProfessor/$', views.alta_professor, name = 'altaprofessor'),
     
 ]
