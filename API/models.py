@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 
 
 # Create your models here.
@@ -15,7 +16,7 @@ class UserProfile(models.Model):
 
 
 class Alumne(UserProfile):
-    dni = models.CharField(max_length=8, unique=True)
+    dni = models.CharField(max_length=8, validators=[RegexValidator(regex=" (([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))", message="El DNI/NIE no es valid")], unique=True)
     dispositiu = models.OneToOneField('Dispositiu', null=True)
     # Com a string perque la classe Dispositiu es creara mes endavant
 
@@ -25,13 +26,14 @@ class Professor(UserProfile):
 
 
 class Dispositiu(models.Model):
-    MAC = models.CharField(max_length=17, unique=True)
+    MAC = models.CharField(max_length=17, validators=[RegexValidator(regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", message="MAC no valida",  code="invalid_mac")], unique=True)
     codi = models.CharField(max_length=256)
 
 
 class Sala(models.Model):
     nom = models.CharField(max_length=256)
-    MAC = models.CharField(max_length=17, unique=True)
+    MAC = models.CharField(max_length=17,validators=[RegexValidator(regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", message="MAC no valida", code="invalid_mac")], unique=True)
+    #Possible forat de seguretat si no es controla que una mac de dispositiu estigui a una mac de sala :)
 
 
 class Classe(models.Model):

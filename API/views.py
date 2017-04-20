@@ -12,8 +12,44 @@ from serializers import *
 def index(request):
     return HttpResponse("To see models: http://localhost:8000/API/#modelname#")
 
+@api_view(['POST'])
+def altaAlumne(request):
+    user = User.objects.create_user(username=request.username, password=request.password, email=request.email,
+                                    first_name=request.name, second_name=request.surname)
+    insertedUser = user.save()
+    alumne = Alumne(user=insertedUser, dni=request.dni)
+    alumne.save()
+    #fer login
+    return Response(status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+@login_required
+def altaDispositiu(request):
+    user = User.objects.get(id=request.user.id)
+    # #comprobar si esta autenticat (que ho estara fijo)
+    # authenticatedUser = authenticate(username=user.username, password=user.password)
+    alumne = Alumne.objects.get(user=user)
+    if alumne.dispositiu is None:
+        dispositiuSerializer = DispositiuSerializer(data=request.data)
+        if dispositiuSerializer.is_valid():
+            nouDispositiu = dispositiuSerializer.save()
+        else:
+            return Response(dispositiuSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        alumne.dispositiu = nouDispositiu
+        alumne.save()
+        return Response(status=status.HTTP_201_CREATED)
+    else:
+        return Response(status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(['GET'])
+def get_alumnes_classe(request):
+    mac = MacSerializer(data=request.data)
+    classe = Classe.objects.get(MAC=mac)
+    alumnes_classe = ClasseAlumne.objects.filter(classe=classe)
+    return JsonResponse(alumnes_classe)
+
 class UsersList(APIView):
- 
+
     def get(self, request, format=None):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
@@ -26,7 +62,7 @@ class UsersList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserprofilesList(APIView):
-    
+
     def get(self, request, format=None):
         userprofiles = UserProfile.objects.all()
         serializer = UserProfileSerializer(userprofiles, many=True)
@@ -39,7 +75,7 @@ class UserprofilesList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AlumnesList(APIView):
-    
+
     def get(self, request, format=None):
         alumnes = Alumne.objects.all()
         serializer = AlumneSerializer(alumnes, many=True)
@@ -52,7 +88,7 @@ class AlumnesList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProfessorsList(APIView):
-   
+
    def get(self, request, format=None):
        professors = Professor.objects.all()
        serializer = ProfessorSerializer(professors, many=True)
@@ -65,7 +101,7 @@ class ProfessorsList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DispositiusList(APIView):
-    
+
     def get(self, request, format=None):
         dispositius = Dispositiu.objects.all()
         serializer = DispositiuSerializer(dispositius, many=True)
@@ -78,7 +114,7 @@ class DispositiusList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class SalesList(APIView):
-    
+
     def get(self, request, format=None):
         sales = Sala.objects.all()
         serializer = SalaSerializer(sales, many=True)
@@ -91,7 +127,7 @@ class SalesList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ClassesList(APIView):
-    
+
     def get(self, request, format=None):
         classes = Classe.objects.all()
         serializer = ClasseSerializer(classes, many=True)
@@ -104,7 +140,7 @@ class ClassesList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ClassealumneList(APIView):
-    
+
     def get(self, request, format=None):
         classealumne = ClasseAlumne.objects.all()
         serializer = ClasseAlumneSerializer(classealumne, many=True)
@@ -117,7 +153,7 @@ class ClassealumneList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AssistenciesList(APIView):
-    
+
     def get(self, request, format=None):
         assistencies = Assistencia.objects.all()
         serializer = AssistenciaSerializer(assistencies, many=True)
@@ -177,32 +213,4 @@ def assistencies(request):
     return JsonResponse(serializer.data, safe=False)
     #return HttpResponse("Retorna JSON amb les clases")
 ########################################################################################
-@api_view(['POST'])
-def altaAlumne(request):
-    user = User.objects.create_user(username=request.username, password=request.password, email=request.email,
-                                    first_name=request.name, second_name=request.surname)
-    insertedUser = user.save()
-    alumne = Alumne(user=insertedUser, dni=request.dni)
-    alumne.save()
-    #fer login
-    return Response(status=status.HTTP_201_CREATED)
-
-@api_view(['POST'])
-@login_required
-def altaDispositiu(request):
-    user = User.objects.get(id=request.user.id)
-    #comprobar si esta autenticat (que ho estara fijo)
-    authenticatedUser = authenticate(username=user.username, password=user.password)
-    alumne = Alumne.objects.get(user=user)
-    if alumne.dispositiu is None:
-        dispositiuSerializer = DispositiuSerializer(data=request.data)
-        if dispositiuSerializer.is_valid():
-            nouDispositiu = dispositiuSerializer.save()
-        else:
-            return Response(dispositiuSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        alumne.dispositiu = nouDispositiu
-        alumne.save()
-        return Response(dispositiuSerializer.data, status=status.HTTP_201_CREATED)
-    else:
-        return Response(status.HTTP_405_METHOD_NOT_ALLOWED)
 
