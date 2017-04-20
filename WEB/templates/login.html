@@ -1,13 +1,10 @@
-{% extends 'base.html' %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}Log In {% endblock %}</title>
+  <title> Log In </title>
 </head>
 <body>
-  {% block pagecontent %}
   {% if form.errors %}
   <p>Your username and password didn't match. Please try again.</p>
   {% endif %}
@@ -38,7 +35,7 @@
 <input type="hidden" name="next" value="/WEB/" />
 </form>
 <a href="/WEB/altaProfessor">New User</a>
-  {% endblock %}
+
 </body>
 </html>
 
