@@ -50,7 +50,6 @@ class ClasseAlumne(models.Model):
 
 
 class Assistencia(models.Model):
-    dispositiuAlumne = models.ForeignKey(Dispositiu)
-    classeAlumne = models.ForeignKey(Classe)
-    horaEntrada = models.TimeField()
-    horaSortida = models.TimeField()
+    classeAlumne = models.ForeignKey(ClasseAlumne)
+    entrada = models.DateTimeField()
+    sortida = models.DateTimeField(null=True)
