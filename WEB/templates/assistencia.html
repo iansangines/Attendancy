@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Assistencia {% endblock %}</title>
+</head>
+<body>
+{% block pagecontent %}
+
+    <form action="/WEB/getAssistencies/" method="get">
+
+        <p>Quin horari de classe vols veure: </p>
+        {{ form }}
+        <input type="submit" value="Llista assistències">
+    </form>
+
+    {% block assistencies %}
+        {% comment %}Llistat d'assistencies{% endcomment %}
+    {% endblock %}
+
+    <script>
+        $(function () {
+            $('#datepicker').datetimepicker({format : 'DD/MM/YYYY'});
+        });
+    </script>
+
+{% endblock %}
+
+</body>
+</html>

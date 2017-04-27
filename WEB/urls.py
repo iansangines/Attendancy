@@ -12,5 +12,7 @@ urlpatterns = [
     url(r'^sales/$', views.llista_sales, name='sales'),
     url(r'^createSala/$', views.create_sala, name = 'createsala'),
     url(r'^altaProfessor/$', views.alta_professor, name = 'altaprofessor'),
-    
+    url(r'^assistencia/$', views.assistencia, name = 'getassistencies'),
+    url(r'^getAssistencies/$', views.llista_assistencies, name = 'getassistencies'),
+
 ]
