@@ -22,7 +22,7 @@ class Alumne(UserProfile):
 
 
 class Professor(UserProfile):
-    classes = models.ManyToManyField('Classe')
+    algo = models.CharField(max_length=1)
 
 
 class Dispositiu(models.Model):
@@ -38,11 +38,15 @@ class Sala(models.Model):
 
 class Classe(models.Model):
     assignatura = models.CharField(max_length=256)
-    professorTutor = models.ForeignKey(Professor)
     sala = models.ForeignKey(Sala)
     dia = models.IntegerField()
     horaInici = models.TimeField()
     horaFinal = models.TimeField()
+
+class ClasseProfe(models.Model):
+    classe = models.ForeignKey('ClasseAlumne')
+    professor = models.ForeignKey(Professor)
+
 
 
 class ClasseAlumne(models.Model):

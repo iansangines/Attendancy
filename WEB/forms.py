@@ -1,5 +1,4 @@
 from django import forms
-from API.models import *
 
 
 class SalaForm(forms.Form):
@@ -18,13 +17,13 @@ class ProfessorForm(forms.Form):
                                  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First name'}))
 
 
-# class assistenciaForm(forms.Form):
-#     def __init__(self, *args, **kwargs):
-#         self.professorId = kwargs.pop('professorId')
-#         super(assistenciaForm, self).__init__(*args,**kwargs)
-#         # assignatura = forms.ModelChoiceField(queryset=Professor.objects.get(id=self.professorId).classes.assignatura,initial=0)
-#         diaClasse = forms.DateField(widget=forms.TextInput(attrs={'class': 'datepicker'}))
-
-
 class assistenciaForm(forms.Form):
-    diaClasse = forms.DateField(widget=forms.TextInput(attrs={'id': 'datepicker'}))
+    def __init__(self, *args, **kwargs):
+        self.choices = kwargs.pop('assignatures')
+        super(assistenciaForm, self).__init__(*args, **kwargs)
+        self.fields['assignatures'].choices = self.choices
+
+    assignatures = forms.ChoiceField(initial=0, widget=forms.Select(), required=True)
+    diaClasse = forms.TimeField(widget=forms.TextInput(
+        attrs={'id': 'datepicker', 'class': 'form-control', 'placeholder': 'Dia de classe'})
+    )

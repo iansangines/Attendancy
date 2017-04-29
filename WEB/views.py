@@ -92,8 +92,8 @@ def alta_professor(request):
 def assistencia(request):
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
-    # form = assistenciaForm(request.GET, professorId=professor.id)
-    form = assistenciaForm()
+    assignaturesProfessor = ClasseProfe.objects.filter(professor=professor)
+    form = assistenciaForm(assignatures=assignaturesProfessor)
     return render(request, 'assistencia.html', {'form': form})
 
 
@@ -101,6 +101,6 @@ def assistencia(request):
 @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
 def llista_assistencies(request):
     if request.method == 'GET':
-        form = assistenciaForm(request.GET)
-        data = form.diaClasse
-        return render(render, 'llistaAssistencia.html', {'data' : data})
+        # form = assistenciaForm(request.GET)
+        # data = form.diaClasse
+        return render(request, 'llistaAssistencia.html', {'data' : request.GET.get("diaClasse")})

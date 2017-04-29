@@ -10,12 +10,20 @@
 <body>
 {% block pagecontent %}
 
-    <form action="/WEB/getAssistencies/" method="get">
+    <form action="/WEB/getAssistencies" method="get">
+        <div class="form-inline">
 
-        <p>Quin horari de classe vols veure: </p>
-        {{ form }}
-        <input type="submit" value="Llista assistències">
+            <div class="col-xs-2 input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+                {{ form.diaClasse }}
+            </div>
+            {{ form.assignatures }}
+            <input type="submit" class="btn btn-primary" value="Veure assistències">
+        </div>
     </form>
+
 
     {% block assistencies %}
         {% comment %}Llistat d'assistencies{% endcomment %}
@@ -23,7 +31,7 @@
 
     <script>
         $(function () {
-            $('#datepicker').datetimepicker({format : 'DD/MM/YYYY'});
+            $('#datepicker').datetimepicker({format: 'DD/MM/YYYY'});
         });
     </script>
 
