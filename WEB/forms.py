@@ -24,7 +24,8 @@ class assistenciaForm(forms.Form):
 
         # self.fields['assignaturesProfessor'].queryset = assignatures
         self.fields['assignaturesProfessor'] = forms.ModelChoiceField(queryset=self.choices, initial=0, required=True,
-                                                                      to_field_name="assignatura")
+                                                                      to_field_name="assignatura",
+                                                                      widget=forms.Select(attrs={'class': 'form-control'}))
 
     # assignaturesProfessor = forms.ModelChoiceField(initial=0, required=True, to_field_name="assignatura")
     diaClasse = forms.TimeField(widget=forms.TextInput(

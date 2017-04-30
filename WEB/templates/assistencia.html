@@ -13,13 +13,15 @@
     <form action="/WEB/getAssistencies" method="get">
         <div class="form-inline">
 
+            {{ form.assignaturesProfessor }}
+
             <div class="col-xs-2 input-group">
                 <span class="input-group-addon" id="basic-addon1">
                     <i class="glyphicon glyphicon-calendar"></i>
                 </span>
                 {{ form.diaClasse }}
             </div>
-            {{ form.assignaturesProfessor }}
+
             <input type="submit" class="btn btn-primary" value="Veure assistències">
         </div>
     </form>
