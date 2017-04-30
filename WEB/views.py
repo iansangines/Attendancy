@@ -92,8 +92,8 @@ def alta_professor(request):
 def assistencia(request):
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
-    assignaturesProfessor = ClasseProfe.objects.filter(professor=professor)
-    form = assistenciaForm(assignatures=assignaturesProfessor)
+    classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
+    form = assistenciaForm(classesProfessor=classesProfessor)
     return render(request, 'assistencia.html', {'form': form})
 
 

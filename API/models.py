@@ -44,7 +44,7 @@ class Classe(models.Model):
     horaFinal = models.TimeField()
 
 class ClasseProfe(models.Model):
-    classe = models.ForeignKey('ClasseAlumne')
+    classe = models.ForeignKey(Classe)
     professor = models.ForeignKey(Professor)
 
 
