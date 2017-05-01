@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, validate_comma_separated_integer_list
 
 
 # Create your models here.
@@ -32,14 +32,14 @@ class Dispositiu(models.Model):
 
 class Sala(models.Model):
     nom = models.CharField(max_length=256)
-    MAC = models.CharField(max_length=17,validators=[RegexValidator(regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", message="MAC no valida", code="invalid_mac")], unique=True)
+    MAC = models.CharField(max_length=17, validators=[RegexValidator(regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", message="MAC no valida", code="invalid_mac")], unique=True)
     #Possible forat de seguretat si no es controla que una mac de dispositiu estigui a una mac de sala :)
 
 
 class Classe(models.Model):
     assignatura = models.CharField(max_length=256)
     sala = models.ForeignKey(Sala)
-    dia = models.IntegerField()
+    dies = models.CharField(max_length=7, validators=[validate_comma_separated_integer_list])
     horaInici = models.TimeField()
     horaFinal = models.TimeField()
 

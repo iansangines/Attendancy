@@ -103,4 +103,13 @@ def llista_assistencies(request):
     if request.method == 'GET':
         # form = assistenciaForm(request.GET)
         # data = form.diaClasse
-        return render(request, 'llistaAssistencia.html', {'data' : request.GET.get("diaClasse")})
+        return render(request, 'llistaAssistencia.html', {'data' : request.GET.get("diaClasse"), 'classe' : request.GET.get("assignaturesProfessor")})
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
+def llista_classes_professor(request):
+    userProfessor = User.objects.get(id=request.user.id)
+    professor = Professor.objects.get(user=userProfessor)
+    classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
+    return render(request, 'llistaClassesProfessor.html', {'classes': classesProfessor})
+
