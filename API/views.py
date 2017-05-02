@@ -48,7 +48,7 @@ def altaDispositiu(request):
 @api_view(['GET'])
 def get_alumnes_classe(request):
     mac = MacSerializer(data=request.data)
-    classe = Classe.objects.get(MAC=mac)
+    classe = Classe.objects.get(Sala=Sala.objects.get(MAC=mac))
     alumnes_classe = ClasseAlumne.objects.filter(classe=classe)
     return JsonResponse(alumnes_classe)
 

@@ -15,6 +15,6 @@ urlpatterns = [
     url('assistencies', views.AssistenciesList.as_view(), name='assistencies'),
     url('altaDisp', views.altaDispositiu),
     url('altaAlumne', views.altaAlumne),
-    url('alumnesClasse', views.get_alumnes_classe),
+    url('alumneClasse', views.get_alumnes_classe),
 
 ]

@@ -21,7 +21,7 @@ class AlumneSerializer(serializers.ModelSerializer):
 class ProfessorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Professor
-        fields = ('id','user','classes',)
+        fields = ('id','user','algo',)
 
 class DispositiuSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,7 +36,7 @@ class SalaSerializer(serializers.ModelSerializer):
 class ClasseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Classe
-        fields = ('id','professorTutor', 'sala', 'dia', 'horaInici', 'horaFinal')
+        fields = ('id', 'sala', 'dies', 'horaInici', 'horaFinal')
 
 class ClasseAlumneSerializer(serializers.ModelSerializer):
     class Meta:
