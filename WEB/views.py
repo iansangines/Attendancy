@@ -103,7 +103,9 @@ def llista_assistencies(request):
     if request.method == 'GET':
         # form = assistenciaForm(request.GET)
         # data = form.diaClasse
-        return render(request, 'llistaAssistencia.html', {'data' : request.GET.get("diaClasse"), 'classe' : request.GET.get("assignaturesProfessor")})
+        return render(request, 'llistaAssistencia.html',
+                      {'data': request.GET.get("diaClasse"), 'classe': request.GET.get("assignaturesProfessor")})
+
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
@@ -111,5 +113,27 @@ def llista_classes_professor(request):
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
-    return render(request, 'llistaClassesProfessor.html', {'classes': classesProfessor})
+    classes = []
+    for classe in classesProfessor:
+        dies_classe = ""
+        dies_setmana = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendes", "Dissabte", "Diumnege"]
+        dies = classe.dies.split(",")
+        for dia in dies:
+            dies_classe = dies_classe + dies_setmana[int(dia)] + ", "
+        print dies_classe
+        classe.dies = dies_classe
+        classes.append(classe)
+
+    return render(request, 'llistaClassesProfessor.html', {'classes': classes})
+
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
+def crear_classe(request):
+    if request.method == 'GET':
+        render(request, 'crearHoraris.html')
+
+    if request.method == 'POST':
+        print request.POST.__getitem__('keyvalue')
+
 

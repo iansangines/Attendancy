@@ -37,9 +37,9 @@ class Sala(models.Model):
 
 
 class Classe(models.Model):
-    assignatura = models.CharField(max_length=256)
+    assignatura = models.ForeignKey('Assignatura')
     sala = models.ForeignKey(Sala)
-    dies = models.CharField(max_length=7, validators=[validate_comma_separated_integer_list])
+    dies = models.IntegerField()
     horaInici = models.TimeField()
     horaFinal = models.TimeField()
 
@@ -58,3 +58,6 @@ class Assistencia(models.Model):
     classeAlumne = models.ForeignKey(ClasseAlumne)
     entrada = models.DateTimeField()
     sortida = models.DateTimeField(null=True)
+
+class Assignatura(models.Model):
+    nom = models.CharField(max_length=256)

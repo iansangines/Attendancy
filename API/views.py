@@ -1,11 +1,10 @@
-import datetime
-from django.contrib.auth import authenticate
+import time
 from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.http import HttpResponse, JsonResponse, request
+from django.http import HttpResponse, JsonResponse
 from serializers import *
 
 
@@ -54,38 +53,50 @@ def get_alumnes_classe(request):
     return JsonResponse(alumnes_classe)
 
 
-class ControlAssistencia():
-    def post(self, request, format=None):
-        # quan l'alumne entra a classe
-        # request.codi -> codi del android
-        # request.classe -> objecte classe que te previament la rasPi
-        # request.alumne -> obbjecte alumne que ha entrat a la classe
-        if request.alumne.dispositiu.codi != request.codi:
-            return HttpResponse(status_code=status.HTTP_412_PRECONDITION_FAILED)
+class getCodi():
+    def get(self, request):
+        mac = request.mac
+        dispositiu = Dispositiu.objects.get(MAC=mac)
+        if dispositiu is None:
+            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
         else:
-            classealumne = ClasseAlumne(alumne=request.alumne, classe=request.classe)
-            entrada = datetime.datetime.now()
-            assistencia = Assistencia(classeAlumne=classealumne, entrada=entrada)
-            assistencia.save()
-            return HttpResponse(status_code=status.HTTP_201_CREATED)
+            return JsonResponse({'codi': dispositiu.codi})
+
+
+class control_assstencia():
+    def post(self, request):
+        mac = request.mac
+        classe = request.classe
+        alumne = Dispositiu.objects.get(MAC=mac).alumne
+        if alumne is None:
+            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
+
+        classeAlumne = ClasseAlumne.objects.get(alumne=alumne, classe=classe)
+        if classeAlumne is None:
+            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
+
+        entrada = time.time()
+        assistencia = Assistencia(classeAlumne=classealumne, entrada=entrada)
+        assistencia.save()
+        return HttpResponse(status_code=status.HTTP_201_CREATED)
 
     def put(self, request, format=None):
-        # cuan l'alumne surt de classe
-        # request.codi -> codi del android
-        # request.classe -> objecte classe que te previament la rasPi
-        # request.alumne -> obbjecte alumne que ha entrat a la classe
-        if request.alumne.dispositiu.codi != request.codi:
-            return HttpResponse(status_code=status.HTTP_412_PRECONDITION_FAILED)
-        else:
-            classealumne = ClasseAlumne(alumne=request.alumne, classe=request.classe)
-            assistencia = Assistencia.objects.filter(classeAlumne=classealumne)
-            if assistencia is None:
-                return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-            else:
-                sortida = datetime.datetime.now()
-                assistencia.sortida = sortida
-                assistencia.save()
-                return HttpResponse(status_code=status.HTTP_200_OK)
+        mac = request.mac
+        classe = request.classe
+        alumne = Dispositiu.objects.get(MAC=mac).alumne
+        if alumne is None:
+            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
+
+        classeAlumne = ClasseAlumne.objects.get(alumne=alumne, classe=classe)
+        if classeAlumne is None:
+            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
+
+        assistencia = Assistencia.objects.filter(classeAlumne=classeAlumne).order_by('-entrada')[0] #Obte la primera entrada mes gran, es a dir, la ultima entrada ue ha tingut aquest alumne
+        sortida = time.time()
+        assistencia.sortida = sortida
+        assistencia.save()
+        return HttpResponse(status_code=status.HTTP_200_OK)
+
 
 class UsersList(APIView):
     def get(self, request, format=None):
