@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import views
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import login as contrib_login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect
 from forms import *
@@ -25,6 +26,12 @@ def alumne_check(user):
     return a is not None
 
 
+def login(request):
+	template_name = "login.html"
+	if request.user.is_authenticated():
+		return HttpResponseRedirect ('/WEB/home/')
+	return contrib_login(request, template_name)
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
 def home(request):
@@ -33,7 +40,7 @@ def home(request):
 
 
 @login_required(login_url='/WEB/login/')
-@user_passes_test(alumne_check, login_url='/WEB/')
+@user_passes_test(alumne_check, login_url='/WEB/home/')
 def deny_alumnes(request):
     template_name = "denyalumnes.html"
     return render(request, template_name)
@@ -41,7 +48,7 @@ def deny_alumnes(request):
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
-def llista_users(request):
+def llista_alumnes(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
     context = {'users': serializer.data}

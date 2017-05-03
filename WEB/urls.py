@@ -3,12 +3,12 @@ from django.contrib.auth import views as auth_views
 from WEB import views
 
 urlpatterns = [
-    url(r'^$',auth_views.login, {'template_name':'login.html'}),
+    url(r'^$', views.login),
     url(r'^home/$', views.home, name='home'),
-    url(r'^login/$', auth_views.login, {'template_name':'login.html'}),
+    url(r'^login/$', views.login),
     url(r'^logout/$', auth_views.logout_then_login, {'login_url':"/WEB/"}),
     url(r'^denyalumnes/$', views.deny_alumnes, name = 'denyalumnes'),
-    url(r'^users/$', views.llista_users, name = 'users'),
+    url(r'^alumnesLlista/$', views.llista_alumnes, name = 'alumnesLLista'),
     url(r'^sales/$', views.llista_sales, name='sales'),
     url(r'^createSala/$', views.create_sala, name = 'createsala'),
     url(r'^altaProfessor/$', views.alta_professor, name = 'altaprofessor'),
