@@ -66,6 +66,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
+	    'libraries':{
+            	'bootstrap_calendar': 'WEB.templatetags.bootstrap_calendar',
+
+            }
         },
     },
 ]

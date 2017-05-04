@@ -8,6 +8,11 @@ from django.http import HttpResponseRedirect
 from forms import *
 from API.serializers import *
 from API.models import *
+from serializers import *
+from models import *
+from django.views.generic import ListView, TemplateView
+from utils import timestamp_to_datetime
+import datetime
 
 
 def professor_check(user):
@@ -143,4 +148,35 @@ def crear_classe(request):
     if request.method == 'POST':
         print request.POST.__getitem__('keyvalue')
 
+class CalendarJsonListView(ListView):
 
+    template_name = 'calendar_events.html'
+    def get_queryset(self):
+        queryset = CalendarEvent.objects.filter()
+        from_date = self.request.GET.get('from', False)
+        to_date = self.request.GET.get('to', False)
+
+        if from_date and to_date:
+            queryset = queryset.filter(
+                start__range=(
+                    timestamp_to_datetime(from_date) + datetime.timedelta(-30),
+                    timestamp_to_datetime(to_date)
+                    )
+            )
+        elif from_date:
+            queryset = queryset.filter(
+                start__gte=timestamp_to_datetime(from_date)
+            )
+        elif to_date:
+            queryset = queryset.filter(
+                end__lte=timestamp_to_datetime(to_date)
+            )
+
+        return event_serializer(queryset)
+
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
+def CalendarView(request):
+    template_name = 'calendar.html'
+    return render(request, template_name)

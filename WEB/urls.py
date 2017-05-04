@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^altaProfessor/$', views.alta_professor, name = 'altaprofessor'),
     url(r'^assistencia/$', views.assistencia, name = 'getassistencies'),
     url(r'^getAssistencies/$', views.llista_assistencies, name = 'getassistencies'),
-    url(r'^classesProfessor/$', views.llista_classes_professor, name = 'classesprofessor'),
+    url(r'^classesProfessor/$', views.llista_classes_professor, name = 'classesprofessor'), 
+    url(r'^json/$', views.CalendarJsonListView.as_view(), name='calendar_json'),
+    url(r'^calendar/', views.CalendarView, name ='calander'), 
 
 ]
