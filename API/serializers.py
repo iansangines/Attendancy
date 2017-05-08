@@ -5,12 +5,12 @@ from django.contrib.auth.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','username', 'password','email','first_name')
+        fields = ('username', 'password','email','first_name')
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('id','user','alumne','professor')
+        fields = ('user','alumne','professor')
 
 class AlumneSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,17 +36,27 @@ class SalaSerializer(serializers.ModelSerializer):
 class ClasseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Classe
-        fields = ('id', 'sala', 'dies', 'horaInici', 'horaFinal')
+        fields = ('assignatura', 'sala', 'dia', 'horaInici', 'horaFinal')
 
 class ClasseAlumneSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClasseAlumne
-        fields = ('id','alumne','classe')
+        fields = ('alumne','classe')
+
+class ClasseProfeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClasseProfe
+        fields = ('professor','classe')
 
 class AssistenciaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assistencia
-        fields = ('id','dispositiuAlumne', 'classeAlumne', 'horaEntrada', 'horaSortida')
+        fields = ('classeAlumne', 'entrada', 'sortida')
+
+class AssignaturaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Assignatura
+        fields = ('id','nom')
 
 class MacSerializer(serializers.Serializer):
     MAC = models.CharField(max_length=17,validators=[RegexValidator(regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", message="MAC no valida", code="invalid_mac")], unique=True)

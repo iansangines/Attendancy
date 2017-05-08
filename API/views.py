@@ -196,7 +196,7 @@ class ClassesList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ClassealumneList(APIView):
+class ClasseAlumneList(APIView):
     def get(self, request, format=None):
         classealumne = ClasseAlumne.objects.all()
         serializer = ClasseAlumneSerializer(classealumne, many=True)
@@ -204,6 +204,19 @@ class ClassealumneList(APIView):
 
     def post(self, request, format=None):
         serializer = ClasseAlumneSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ClasseProfeList(APIView):
+    def get(self, request, format=None):
+        classeprofe = ClasseProfe.objects.all()
+        serializer = ClasseProfeSerializer(classeprofe, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = ClasseProfeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -223,61 +236,16 @@ class AssistenciesList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class AssignaturesList(APIView):
+    def get(self, request, format=None):
+        assignatures = Assignatura.objects.all()
+        serializer = AssignaturaSerializer(assignatures, many=True)
+        return Response(serializer.data)
 
-#######################################################################################
-def userprofiles(request):
-    userprofiles = UserProfile.objects.all()
-    serializer = UserProfileSerializer(userprofiles, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    # return HttpResponse("Retorna JSON amb les clases")
+    def post(self, request, format=None):
+        serializer = AssignaturaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-def alumnes(request):
-    alumnes = Alumne.objects.all()
-    serializer = AlumneSerializer(alumnes, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    # return HttpResponse("Retorna JSON amb les clases")
-
-
-def professors(request):
-    professors = Professor.objects.all()
-    serializer = ProfessorSerializer(professors, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    # return HttpResponse("Retorna JSON amb les clases")
-
-
-def dispositius(request):
-    dispositius = Dispositiu.objects.all()
-    serializer = DispositiuSerializer(dispositius, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    # return HttpResponse("Retorna JSON amb les clases")
-
-
-def sales(request):
-    sales = Sala.objects.all()
-    serializer = SalaSerializer(sales, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    # return HttpResponse("Retorna JSON amb les clases")
-
-
-def classes(request):
-    classes = Classe.objects.all()
-    serializer = ClasseSerializer(classes, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    # return HttpResponse("Retorna JSON amb les clases")
-
-
-def classealumne(request):
-    classealumne = ClasseAlumne.objects.all()
-    serializer = ClasseAlumneSerializer(classealumne, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    # return HttpResponse("Retorna JSON amb les clases")
-
-
-def assistencies(request):
-    assistencies = Assistencia.objects.all()
-    serializer = AssistenciaSerializer(assistencies, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    # return HttpResponse("Retorna JSON amb les clases")
-
-########################################################################################
