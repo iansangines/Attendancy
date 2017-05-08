@@ -21,9 +21,9 @@
             <tbody>
             {% for classe in classes %}
                 <tr>
-                    <td>{{ classe.assignatura }}</td>
+                    <td>{{ classe.assignatura.nom }}</td>
                     <td>{{ classe.sala.nom }}</td>
-                    <td>{{ classe.dies }}</td>
+                    <td>{{ classe.dia }}</td>
                     <td>{{ classe.horaInici }}</td>
                     <td>{{ classe.horaFinal }}</td>
                 </tr>

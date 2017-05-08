@@ -1,4 +1,6 @@
 from django import forms
+from API.models import *
+from django.utils.translation import ugettext_lazy as _
 
 
 class SalaForm(forms.Form):
@@ -35,15 +37,16 @@ class assistenciaForm(forms.Form):
 
 
 class ClasseForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        self.sales = kwargs.pop('sales')
-        super(ClasseForm, self).__init__(*args, **kwargs)
-        self.fields['sales'] = forms.ModelChoiceField(queryset=self.sales, initial=0, required=True,
-                                                      to_field_name="MAC",
-                                                      widget=forms.Select(attrs={'class': 'form-control'}))
+  DIES_CHOICE = (
+        ('dilluns', _('Dilluns')),
+        ('dimarts', _('Dimarts')),
+        ('dimecres', _('Dimecres')),
+        ('dijous', _('Dijous')),
+        ('divendres', _('Divendres')),
+    )
+  assignatura = forms.ModelChoiceField(queryset=Assignatura.objects.all())
+  sala = forms.ModelChoiceField(queryset=Sala.objects.all())
+  dia = forms.ChoiceField(choices=DIES_CHOICE)
+  horaInici = forms.TimeField()
+  horaFinal = forms.TimeField()
 
-    assignatura = forms.CharField(label='Nom assignatura', max_length=256, widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'Nom assignatura'}))
-    # dies = models.CharField(max_length=7, validators=[validate_comma_separated_integer_list])
-    # horaInici = models.TimeField()
-    # horaFinal = models.TimeField()

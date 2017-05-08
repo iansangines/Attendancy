@@ -127,13 +127,13 @@ def llista_classes_professor(request):
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
     classes = []
     for classe in classesProfessor:
-        dies_classe = ""
-        dies_setmana = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendes", "Dissabte", "Diumnege"]
-        dies = classe.dies.split(",")
-        for dia in dies:
-            dies_classe = dies_classe + dies_setmana[int(dia)] + ", "
-        print dies_classe
-        classe.dies = dies_classe
+        #dies_classe = ""
+        #dies_setmana = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendes", "Dissabte", "Diumnege"]
+        #dies = classe.dies.split(",")
+        #for dia in dies:
+        #    dies_classe = dies_classe + dies_setmana[int(dia)] + ", "
+        #print dies_classe
+        #classe.dies = dies_classe
         classes.append(classe)
 
     return render(request, 'llistaClassesProfessor.html', {'classes': classes})
@@ -142,11 +142,19 @@ def llista_classes_professor(request):
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
 def crear_classe(request):
-    if request.method == 'GET':
-        render(request, 'crearHoraris.html')
-
     if request.method == 'POST':
-        print request.POST.__getitem__('keyvalue')
+        form = ClasseForm(request.POST)
+        if form.is_valid():
+            classe = Classe(assignatura=form.cleaned_data['assignatura'],sala=form.cleaned_data['sala'],dia=form.cleaned_data['dia'], horaInici=form.cleaned_data['horaInici'], horaFinal=form.cleaned_data['horaFinal'])
+            classe.save()
+	    u = User.objects.get(id=request.user.id)
+	    p = Professor.objects.get(user=u)
+	    classeprofe = ClasseProfe(classe=classe,professor=p)
+	    classeprofe.save()
+            return HttpResponseRedirect('/WEB/')
+    else:
+        form = ClasseForm()
+        return render(request, 'crearHoraris.html', {'form': form})
 
 class CalendarJsonListView(ListView):
 

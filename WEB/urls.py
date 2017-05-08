@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^classesProfessor/$', views.llista_classes_professor, name = 'classesprofessor'), 
     url(r'^json/$', views.CalendarJsonListView.as_view(), name='calendar_json'),
     url(r'^calendar/', views.CalendarView, name ='calander'), 
+    url(r'^crearClasse/', views.crear_classe, name ='crearclasse'),
 
 ]
