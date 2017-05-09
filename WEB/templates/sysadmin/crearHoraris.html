@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'sysadmin/base.html' %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,12 +8,12 @@
 </head>
 <body>
 {% block pagecontent %}
-    {% comment %}<form action="/WEB/crearClasse/" method="post">
+    {% comment %}<form action="/WEB/sysadmin/crearclasse/" method="post">
    	 {% csrf_token %}
     	 {{ form }}
     	<input type="submit" value="Submit" />
    </form>{% endcomment %}
-    <form action="/WEB/crearClasse/" method="post">
+    <form action="/WEB/sysadmin/crearclasse/" method="post">
         {% csrf_token %}
         <div class="row-fluid" style="padding: 0px 700px 0px 0px;">
             <div class="form-group">

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'sysadmin/base.html' %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,7 @@
 </head>
 <body>
   {% block pagecontent %}
-   <form action="/WEB/createSala/" method="post">
+   <form action="/WEB/sysadmin/crearsala/" method="post">
    	 {% csrf_token %}
     	 {{ form }}
     	<input type="submit" value="Submit" />

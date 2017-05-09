@@ -12,6 +12,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = ('user','alumne','professor')
 
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Admin
+        fields = ('id','user','uni',)
+
 class AlumneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alumne
@@ -21,7 +26,7 @@ class AlumneSerializer(serializers.ModelSerializer):
 class ProfessorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Professor
-        fields = ('id','user','algo',)
+        fields = ('id','user','uni',)
 
 class DispositiuSerializer(serializers.ModelSerializer):
     class Meta:

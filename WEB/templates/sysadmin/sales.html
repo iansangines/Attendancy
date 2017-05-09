@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'sysadmin/base.html' %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}Users List {% endblock %}</title>
+    <title>{% block title %}Sales List {% endblock %}</title>
   </head>
   <body>
     {% block pagecontent %}
@@ -11,15 +11,15 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Username</th>
-            <th>Password</th>
+            <th>Nom</th>
+            <th>MAC</th>
           </tr>
         </thead>
         <tbody>
-          {% for user in users %}
+          {% for sala in sales %}
             <tr>
-              <td>{{ user.username }}</td>
-              <td>{{ user.password }}</td>
+              <td>{{ sala.nom }}</td>
+              <td>{{ sala.MAC }}</td>
             </tr>
           {% endfor %}
         </tbody>

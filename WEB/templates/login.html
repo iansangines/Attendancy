@@ -27,9 +27,8 @@
     			{{ form.password.label_tag }}
     			{{ form.password }}
 		<input class="btn btn-primary btn-lg" type="submit" value="login" />
-		<input type="hidden" name="next" value="/WEB/home" />
+		<input type="hidden" name="next" value="/WEB/" />
   </form>
-  <a href="/WEB/altaProfessor">New User</a>
   {% if form.errors %}
   <p>Your username and password didn't match. Please try again.</p>
   {% else %}

@@ -14,6 +14,8 @@ class UserProfile(models.Model):
     #     if created:
     #         UserProfile.objects.create(user=instance)
 
+class Admin(UserProfile):
+	uni = models.CharField(max_length=20)
 
 class Alumne(UserProfile):
     dni = models.CharField(max_length=8, validators=[RegexValidator(regex=" (([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))", message="El DNI/NIE no es valid")], unique=True)
@@ -22,8 +24,7 @@ class Alumne(UserProfile):
 
 
 class Professor(UserProfile):
-    algo = models.CharField(max_length=1)
-
+    uni = models.CharField(max_length=20)
 
 class Dispositiu(models.Model):
     MAC = models.CharField(max_length=17, validators=[RegexValidator(regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", message="MAC no valida",  code="invalid_mac")], unique=True)

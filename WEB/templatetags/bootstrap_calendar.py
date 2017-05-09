@@ -14,7 +14,7 @@ def bootstrap_calendar(css_classes):
     return a calendar div if none push empty ""
     """
     return render_to_string(
-        '../templates/partial/calendar.html',
+        '../templates/profe/partial/calendar.html',
         {'css_classes': css_classes}
     )
 
@@ -25,7 +25,7 @@ def bootstrap_controls(css_classes):
     return a calendar controls div if none push empty ""
     """
     return render_to_string(
-        '../templates/partial/calendar_controls.html',
+        '../templates/profe/partial/calendar_controls.html',
         {'css_classes': css_classes}
     )
 
@@ -44,7 +44,7 @@ def bootstrap_calendar_js(*args, **kwargs):
         pass
 
     return render_to_string(
-        '../templates/partial/calendar_js.html',
+        '../templates/profe/partial/calendar_js.html',
         options
     )
 
@@ -55,7 +55,7 @@ def bootstrap_calendar_css(*args):
     return a boostrap calendar tag css files
     """
     return render_to_string(
-        '../templates/partial/calendar_css.html'
+        '../templates/profe/partial/calendar_css.html'
     )
 
 
@@ -90,7 +90,7 @@ def bootstrap_calendar_init(*args, **kwargs):
     except KeyError:
         options["width"] = '100%'
 
-    return render_to_string('../templates/partial/calendar_init.html', options)
+    return render_to_string('../templates/profe/partial/calendar_init.html', options)
 
 
 @register.tag

@@ -30,60 +30,108 @@ def alumne_check(user):
         a = None
     return a is not None
 
+def admin_check(user):
+    try:
+        aa = Admin.objects.get(user_id=user.id)
+    except:
+        aa = None
+    return aa is not None
+
 
 def login(request):
     template_name = "login.html"
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/WEB/home/')
+    	if admin_check(request.user):
+		return HttpResponseRedirect('/WEB/sysadmin/')
+        if professor_check(request.user):
+        	return HttpResponseRedirect('/WEB/profe/')
+	if alumne_check(request.user):
+		return HttpResponseRedirect('/WEB/nonauthorized/')
     return contrib_login(request, template_name)
 
-
-@login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
-def home(request):
-    template_name = "index.html"
+def non_authorized(request):
+    template_name = "nonauthorized.html"
     return render(request, template_name)
 
 
 @login_required(login_url='/WEB/login/')
-@user_passes_test(alumne_check, login_url='/WEB/home/')
-def deny_alumnes(request):
-    template_name = "denyalumnes.html"
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+def home_admin(request):
+    template_name = "sysadmin/index.html"
     return render(request, template_name)
 
-
 @login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
-def llista_alumnes(request):
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+def llista_users(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
     context = {'users': serializer.data}
-    return render(request, 'users.html', context)
-
+    return render(request, 'sysadmin/users.html', context)
 
 @login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
-def create_sala(request):
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+def llista_sales(request):
+    sales = Sala.objects.all()
+    serializer = SalaSerializer(sales, many=True)
+    context = {'sales': serializer.data}
+    return render(request, 'sysadmin/sales.html', context)
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+def llista_assignatures(request):
+    assignatures = Assignatura.objects.all()
+    serializer = AssignaturaSerializer(assignatures, many=True)
+    context = {'assignatures': serializer.data}
+    return render(request, 'sysadmin/assignatures.html', context)
+
+# @login_required(login_url='/WEB/login/')
+# @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+# def crear_classe(request):
+#     if request.method == 'POST':
+#         form = ClasseForm(request.POST)
+#         if form.is_valid():
+#             classe = Classe(assignatura=form.cleaned_data['assignatura'],sala=form.cleaned_data['sala'],dia=form.cleaned_data['dia'], horaInici=form.cleaned_data['horaInici'], horaFinal=form.cleaned_data['horaFinal'])
+# 	    u = User.objects.get(id=request.user.id)
+# 	    p = Professor.objects.get(user=u)
+# 	    classeprofe = ClasseProfe(classe=classe,professor=p)
+# 	    #ce = CalendarEvent(title=classe.assignatura.nom,url='/WEB/',start=,end=)
+#             classe.save()
+#             classeprofe.save()
+#             #ce.save()
+#             return HttpResponseRedirect('/WEB/admin/')
+#     else:
+#         form = ClasseForm()
+#         return render(request, 'crearHoraris.html', {'form': form, 'diesSetmana': range(0, 5), 'horesDia': range(8, 21)})
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+def crear_classe(request):
+    if request.method == 'POST':
+        # something
+        horari = request.POST.getlist('horari')
+        print(horari)
+        return HttpResponseRedirect('/WEB/sysadmin')
+
+    else:
+        form = ClasseForm()
+        return render(request, 'sysadmin/crearHoraris.html',
+                      {'form': form, 'diesSetmana': range(0, 5), 'horesDia': range(8, 21)})
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+def crear_sala(request):
     if request.method == 'POST':
         form = SalaForm(request.POST)
         if form.is_valid():
             sala = Sala(nom=form.cleaned_data['name'], MAC=form.cleaned_data['MAC'])
             sala.save()
-            return HttpResponseRedirect('/WEB/')
+            return HttpResponseRedirect('/WEB/sysadmin')
     else:
         form = SalaForm()
-        return render(request, 'createSala.html', {'form': form})
-
+        return render(request, 'sysadmin/createSala.html', {'form': form})
 
 @login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
-def llista_sales(request):
-    sales = Sala.objects.all()
-    serializer = SalaSerializer(sales, many=True)
-    context = {'sales': serializer.data}
-    return render(request, 'sales.html', context)
-
-
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def alta_professor(request):
     if request.method == 'POST':
         form = ProfessorForm(request.POST)
@@ -97,31 +145,27 @@ def alta_professor(request):
             return HttpResponseRedirect('/WEB/')
     else:
         form = ProfessorForm()
-        return render(request, 'altaProfessor.html', {'form': form})
+        return render(request, 'sysadmin/altaProfessor.html', {'form': form})
 
-
-@login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
-def assistencia(request):
-    userProfessor = User.objects.get(id=request.user.id)
-    professor = Professor.objects.get(user=userProfessor)
-    classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
-    form = assistenciaForm(classesProfessor=classesProfessor)
-    return render(request, 'assistencia.html', {'form': form})
 
 
 @login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
-def llista_assistencies(request):
-    if request.method == 'GET':
-        # form = assistenciaForm(request.GET)
-        # data = form.diaClasse
-        return render(request, 'llistaAssistencia.html',
-                      {'data': request.GET.get("diaClasse"), 'classe': request.GET.get("assignaturesProfessor")})
+@user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
+def home_profe(request):
+    template_name = "profe/index.html"
+    return render(request, template_name)
 
 
 @login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
+@user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
+def llista_alumnes(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    context = {'users': serializer.data}
+    return render(request, 'profe/alumnes.html', context)
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def llista_classes_professor(request):
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
@@ -137,45 +181,11 @@ def llista_classes_professor(request):
         # classe.dies = dies_classe
         classes.append(classe)
 
-    return render(request, 'llistaClassesProfessor.html', {'classes': classes})
-
-
-# @login_required(login_url='/WEB/login/')
-# @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
-# def crear_classe(request):
-#     if request.method == 'POST':
-#         form = ClasseForm(request.POST)
-#         if form.is_valid():
-#             classe = Classe(assignatura=form.cleaned_data['assignatura'],sala=form.cleaned_data['sala'],dia=form.cleaned_data['dia'], horaInici=form.cleaned_data['horaInici'], horaFinal=form.cleaned_data['horaFinal'])
-# 	    u = User.objects.get(id=request.user.id)
-# 	    p = Professor.objects.get(user=u)
-# 	    classeprofe = ClasseProfe(classe=classe,professor=p)
-# 	    #ce = CalendarEvent(title=classe.assignatura.nom,url='/WEB/',start=,end=)
-#             classe.save()
-#             classeprofe.save()
-#             #ce.save()
-#             return HttpResponseRedirect('/WEB/')
-#     else:
-#         form = ClasseForm()
-#         return render(request, 'crearHoraris.html', {'form': form, 'diesSetmana': range(0, 5), 'horesDia': range(8, 21)})
-
-@login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
-def crear_classe(request):
-    if request.method == 'POST':
-        # something
-        horari = request.POST.getlist('horari')
-        print(horari)
-        return HttpResponseRedirect('/WEB/')
-
-    else:
-        form = ClasseForm()
-        return render(request, 'crearHoraris.html',
-                      {'form': form, 'diesSetmana': range(0, 5), 'horesDia': range(8, 21)})
+    return render(request, 'profe/llistaClassesProfessor.html', {'classes': classes})
 
 
 class CalendarJsonListView(ListView):
-    template_name = 'calendar_events.html'
+    template_name = 'profe/calendar_events.html'
 
     def get_queryset(self):
         queryset = CalendarEvent.objects.filter()
@@ -202,7 +212,27 @@ class CalendarJsonListView(ListView):
 
 
 @login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
+@user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def CalendarView(request):
-    template_name = 'calendar.html'
+    template_name = 'profe/calendar.html'
     return render(request, template_name)
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
+def assistencia(request):
+    userProfessor = User.objects.get(id=request.user.id)
+    professor = Professor.objects.get(user=userProfessor)
+    classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
+    form = assistenciaForm(classesProfessor=classesProfessor)
+    return render(request, 'profe/assistencia.html', {'form': form})
+
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
+def llista_assistencies(request):
+    if request.method == 'GET':
+        # form = assistenciaForm(request.GET)
+        # data = form.diaClasse
+        return render(request, 'profe/llistaAssistencia.html',
+                      {'data': request.GET.get("diaClasse"), 'classe': request.GET.get("assignaturesProfessor")})
+

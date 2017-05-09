@@ -10,15 +10,26 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <title> Deny Alumnes </title>
+  <title>Create Profe</title>
 </head>
 <body>
 <div class=jumbotron>
 <div class='text-center' >
 <div class="page-header">
-  <h1>YOU HAVE NOTHING TO DO HERE</h1>
+  <h1>Register a new professor</h1>
 </div>
-  <a href="/WEB/logout">Logout</a>
+   <form action="/WEB/admin/altaProfessor/" method="post">
+	<div class="container">
+	<ul class = "list-group">
+   	 {% csrf_token %}
+    	  <li class="list-group-item">{{ form.username }}</li>
+	  <li class="list-group-item">{{ form.password }}</li>
+	  <li class="list-group-item">{{ form.email }}</li>
+	  <li class="list-group-item">{{ form.first_name }}</li>
+    	  <li class="list-group-item"><input class="btn btn-primary btn-lg"type="submit" value="Register" /></li>
+	</ul>
+	</div>
+   </form>
 </div>
 </div>
 </body>
