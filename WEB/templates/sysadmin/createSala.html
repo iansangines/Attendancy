@@ -9,9 +9,14 @@
 <body>
   {% block pagecontent %}
    <form action="/WEB/sysadmin/crearsala/" method="post">
+    <div class="container">
+	<ul class = "list-group">
    	 {% csrf_token %}
-    	 {{ form }}
-    	<input type="submit" value="Submit" />
+    	  <li class="list-group-item">{{ form.name }}</li>
+	  <li class="list-group-item">{{ form.MAC }}</li>
+    	  <li class="list-group-item"><input class="btn btn-primary btn-lg"type="submit" value="Afageix" /></li>
+	</ul>
+	</div>
    </form>
   {% endblock %}
 </body>

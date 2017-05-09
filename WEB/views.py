@@ -125,7 +125,7 @@ def crear_sala(request):
         if form.is_valid():
             sala = Sala(nom=form.cleaned_data['name'], MAC=form.cleaned_data['MAC'])
             sala.save()
-            return HttpResponseRedirect('/WEB/sysadmin')
+            return HttpResponseRedirect('/WEB/sales')
     else:
         form = SalaForm()
         return render(request, 'sysadmin/createSala.html', {'form': form})
@@ -139,15 +139,15 @@ def alta_professor(request):
             user = User.objects.create_user(username=form.cleaned_data['username'],
                                             password=form.cleaned_data['password'], email=form.cleaned_data['email'],
                                             first_name=form.cleaned_data['first_name'])
+            a = Admin.objects.get(user_id=request.user.id)
+	    uni = a.uni
+            professor = Professor(user=user,uni=uni)
             user.save()
-            professor = Professor(user=user)
             professor.save()
-            return HttpResponseRedirect('/WEB/')
+            return HttpResponseRedirect('/WEB/users')
     else:
         form = ProfessorForm()
         return render(request, 'sysadmin/altaProfessor.html', {'form': form})
-
-
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
@@ -155,15 +155,23 @@ def home_profe(request):
     template_name = "profe/index.html"
     return render(request, template_name)
 
-
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def llista_alumnes(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    context = {'users': serializer.data}
-    return render(request, 'profe/alumnes.html', context)
+    userProfessor = User.objects.get(id=request.user.id)
+    professor = Professor.objects.get(user=userProfessor)
+    classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
+    users = []
+    for classe in classesProfessor:
+	alumnes = Alumne.objects.all()
+	for alumne in alumnes:
+		classealumne = Classe.objects.filter(classealumne__alumne=alumne)
+		if classealumne == classe: ##NO FUNCIONA!!!
+			user = alumne.user
+			users.append(user)
 
+    return render(request, 'profe/alumnes.html', {'users':users})
+ 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def llista_classes_professor(request):

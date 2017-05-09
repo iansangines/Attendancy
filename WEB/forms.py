@@ -4,8 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class SalaForm(forms.Form):
-    name = forms.CharField(label='nom', max_length=100)
-    MAC = forms.CharField(label='MAC', max_length=100)
+    name = forms.CharField(label='nom', max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom'}))
+    MAC = forms.CharField(label='MAC', max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'XX:XX:XX:XX:XX'}))
 
 
 class ProfessorForm(forms.Form):
