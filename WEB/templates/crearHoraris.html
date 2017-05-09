@@ -3,16 +3,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>{% block title %}Crear Classe {% endblock %}</title>
+    <meta charset="UTF-8">
+    <title>{% block title %}Crear Classe {% endblock %}</title>
 </head>
 <body>
-  {% block pagecontent %}
-   <form action="/WEB/crearClasse/" method="post">
+{% block pagecontent %}
+    {% comment %}<form action="/WEB/crearClasse/" method="post">
    	 {% csrf_token %}
     	 {{ form }}
     	<input type="submit" value="Submit" />
-   </form>
-  {% endblock %}
+   </form>{% endcomment %}
+    <form action="/WEB/crearClasse/" method="post">
+        {% csrf_token %}
+        <div class="row-fluid" style="padding: 0px 700px 0px 0px;">
+            <div class="form-group">
+                <label><b>Assignatura: </b></label>
+                {{ form.assignatura }}
+            </div>
+            <div class="form-group">
+                <label><b> Sala: </b></label>
+                {{ form.sala }}
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Dilluns</th>
+                <th>Dimarts</th>
+                <th>Dimecres</th>
+                <th>Dijous</th>
+                <th>Divendres</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for hour in horesDia %}
+                <tr>
+                    <td class="text-center col-md-1"><b>{{ hour }}:00 h</b></td>
+                    {% for day in diesSetmana %}
+                        <td class="text-center col-md-1"><input style="height: 17px; width: 17px;" type="checkbox"
+                                                                name="horari" value="{{ day }}:{{ hour }}"/></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-default pull-right">Crear</button>
+    </form>
+{% endblock %}
 </body>
 </html>

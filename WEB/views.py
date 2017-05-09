@@ -32,10 +32,11 @@ def alumne_check(user):
 
 
 def login(request):
-	template_name = "login.html"
-	if request.user.is_authenticated():
-		return HttpResponseRedirect ('/WEB/home/')
-	return contrib_login(request, template_name)
+    template_name = "login.html"
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/WEB/home/')
+    return contrib_login(request, template_name)
+
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
@@ -127,40 +128,55 @@ def llista_classes_professor(request):
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
     classes = []
     for classe in classesProfessor:
-        #dies_classe = ""
-        #dies_setmana = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendes", "Dissabte", "Diumnege"]
-        #dies = classe.dies.split(",")
-        #for dia in dies:
+        # dies_classe = ""
+        # dies_setmana = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendes", "Dissabte", "Diumnege"]
+        # dies = classe.dies.split(",")
+        # for dia in dies:
         #    dies_classe = dies_classe + dies_setmana[int(dia)] + ", "
-        #print dies_classe
-        #classe.dies = dies_classe
+        # print dies_classe
+        # classe.dies = dies_classe
         classes.append(classe)
 
     return render(request, 'llistaClassesProfessor.html', {'classes': classes})
 
 
+# @login_required(login_url='/WEB/login/')
+# @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
+# def crear_classe(request):
+#     if request.method == 'POST':
+#         form = ClasseForm(request.POST)
+#         if form.is_valid():
+#             classe = Classe(assignatura=form.cleaned_data['assignatura'],sala=form.cleaned_data['sala'],dia=form.cleaned_data['dia'], horaInici=form.cleaned_data['horaInici'], horaFinal=form.cleaned_data['horaFinal'])
+# 	    u = User.objects.get(id=request.user.id)
+# 	    p = Professor.objects.get(user=u)
+# 	    classeprofe = ClasseProfe(classe=classe,professor=p)
+# 	    #ce = CalendarEvent(title=classe.assignatura.nom,url='/WEB/',start=,end=)
+#             classe.save()
+#             classeprofe.save()
+#             #ce.save()
+#             return HttpResponseRedirect('/WEB/')
+#     else:
+#         form = ClasseForm()
+#         return render(request, 'crearHoraris.html', {'form': form, 'diesSetmana': range(0, 5), 'horesDia': range(8, 21)})
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/denyalumnes/')
 def crear_classe(request):
     if request.method == 'POST':
-        form = ClasseForm(request.POST)
-        if form.is_valid():
-            classe = Classe(assignatura=form.cleaned_data['assignatura'],sala=form.cleaned_data['sala'],dia=form.cleaned_data['dia'], horaInici=form.cleaned_data['horaInici'], horaFinal=form.cleaned_data['horaFinal'])
-	    u = User.objects.get(id=request.user.id)
-	    p = Professor.objects.get(user=u)
-	    classeprofe = ClasseProfe(classe=classe,professor=p)
-	    #ce = CalendarEvent(title=classe.assignatura.nom,url='/WEB/',start=,end=)
-            classe.save()
-            classeprofe.save()
-            #ce.save()
-            return HttpResponseRedirect('/WEB/')
+        # something
+        horari = request.POST.getlist('horari')
+        print(horari)
+        return HttpResponseRedirect('/WEB/')
+
     else:
         form = ClasseForm()
-        return render(request, 'crearHoraris.html', {'form': form})
+        return render(request, 'crearHoraris.html',
+                      {'form': form, 'diesSetmana': range(0, 5), 'horesDia': range(8, 21)})
+
 
 class CalendarJsonListView(ListView):
-
     template_name = 'calendar_events.html'
+
     def get_queryset(self):
         queryset = CalendarEvent.objects.filter()
         from_date = self.request.GET.get('from', False)
@@ -171,7 +187,7 @@ class CalendarJsonListView(ListView):
                 start__range=(
                     timestamp_to_datetime(from_date) + datetime.timedelta(-30),
                     timestamp_to_datetime(to_date)
-                    )
+                )
             )
         elif from_date:
             queryset = queryset.filter(

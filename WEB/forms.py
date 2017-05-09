@@ -37,16 +37,18 @@ class assistenciaForm(forms.Form):
 
 
 class ClasseForm(forms.Form):
-  DIES_CHOICE = (
+    DIES_CHOICE = (
         ('dilluns', _('Dilluns')),
         ('dimarts', _('Dimarts')),
         ('dimecres', _('Dimecres')),
         ('dijous', _('Dijous')),
         ('divendres', _('Divendres')),
     )
-  assignatura = forms.ModelChoiceField(queryset=Assignatura.objects.all())
-  sala = forms.ModelChoiceField(queryset=Sala.objects.all())
-  dia = forms.ChoiceField(choices=DIES_CHOICE)
-  horaInici = forms.TimeField()
-  horaFinal = forms.TimeField()
+    assignatura = forms.ModelChoiceField(queryset=Assignatura.objects.all(),
+                                              widget=forms.Select(attrs={'class': 'form-control'}))
+    sala = forms.ModelChoiceField(queryset=Sala.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
+    dia = forms.ChoiceField(choices=DIES_CHOICE)
+    horaInici = forms.TimeField()
+    horaFinal = forms.TimeField()
+
 

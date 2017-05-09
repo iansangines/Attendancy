@@ -35,6 +35,9 @@ class Sala(models.Model):
     MAC = models.CharField(max_length=17, validators=[RegexValidator(regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", message="MAC no valida", code="invalid_mac")], unique=True)
     #Possible forat de seguretat si no es controla que una mac de dispositiu estigui a una mac de sala :)
 
+    def __unicode__(self):
+        return self.nom
+
 class Classe(models.Model):
     DIES_CHOICE = (
         ('dilluns', _('Dilluns')),
@@ -67,3 +70,6 @@ class Assignatura(models.Model):
     nom = models.CharField(max_length=256)
     inici = models.DateField()
     final = models.DateField()
+
+    def __unicode__(self):
+        return self.nom
