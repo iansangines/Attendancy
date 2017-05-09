@@ -146,11 +146,13 @@ def crear_classe(request):
         form = ClasseForm(request.POST)
         if form.is_valid():
             classe = Classe(assignatura=form.cleaned_data['assignatura'],sala=form.cleaned_data['sala'],dia=form.cleaned_data['dia'], horaInici=form.cleaned_data['horaInici'], horaFinal=form.cleaned_data['horaFinal'])
-            classe.save()
 	    u = User.objects.get(id=request.user.id)
 	    p = Professor.objects.get(user=u)
 	    classeprofe = ClasseProfe(classe=classe,professor=p)
-	    classeprofe.save()
+	    #ce = CalendarEvent(title=classe.assignatura.nom,url='/WEB/',start=,end=)
+            classe.save()
+            classeprofe.save()
+            #ce.save()
             return HttpResponseRedirect('/WEB/')
     else:
         form = ClasseForm()

@@ -19,19 +19,27 @@ class CalendarEvent(models.Model):
         ('event-special', _('Special')),
         ('event-important', _('Important')),
     )
+    DIES_CHOICE = (
+        ('dilluns', _('Dilluns')),
+        ('dimarts', _('Dimarts')),
+        ('dimecres', _('Dimecres')),
+        ('dijous', _('Dijous')),
+        ('divendres', _('Divendres')),
+    )
     title = models.CharField(max_length=255, verbose_name=_('Title'))
     url = models.URLField(verbose_name=_('URL'), null=True, blank=True)
     css_class = models.CharField(blank=True, max_length=20, verbose_name=_('CSS Class'),
                                  choices=CSS_CLASS_CHOICES)
-    start = models.DateTimeField(verbose_name=_('Start Date'))
-    end = models.DateTimeField(verbose_name=_('End Date'), null=True,
-                               blank=True)
 
+    start = models.DateField(verbose_name=_('Start Date'))
+    end = models.DateField(verbose_name=_('End Date'), null=True,
+                               blank=True)
     @property
     def start_timestamp(self):
-        """
+        """    
         Return start date as timestamp
-        """
+	"""
+        
         return datetime_to_timestamp(self.start)
 
     @property
@@ -42,4 +50,4 @@ class CalendarEvent(models.Model):
         return datetime_to_timestamp(self.end)
 
     def __unicode__(self):
-        return self.title
+        return self.title 
