@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}Users List {% endblock %}</title>
+    <title>{% block title %}Assignatures List {% endblock %}</title>
   </head>
   <body>
     {% block pagecontent %}
@@ -12,8 +12,8 @@
         <thead>
           <tr>
             <th>Nom</th>
-	    <th>Data Inici<th>
-	    <th>Data Fi<th>
+            <th>Data inici</th>
+	    <th>Data fi</th>
           </tr>
         </thead>
         <tbody>
@@ -22,12 +22,13 @@
               <td>{{ assig.nom }}</td>
               <td>{{ assig.inici }}</td>
 	      <td>{{ assig.final }}</td>
-	      <td><button> Esborra </button></td>
+              <td><a href="/WEB/sysadmin/classesassignatura">Horaris</a></td>
+              <td><button> Esborra </button></td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
-      <a href="/WEB/sysadmin/crearclasse">Afageix una nova assignatura</a>
+  <a href="/WEB/sysadmin/crearclasse">Afageix una nova assignatura</a>
     </div>
     {% endblock %}
   </body>

@@ -84,6 +84,15 @@ def llista_assignatures(request):
     context = {'assignatures': serializer.data}
     return render(request, 'sysadmin/assignatures.html', context)
 
+@login_required(login_url='/WEB/login/')
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+def llista_classes_assignatura(request):
+    ##HA DE MOSTRAR LES CLASSES DE L'ASSIGNATURA
+    assignatures = Assignatura.objects.all()
+    serializer = AssignaturaSerializer(assignatures, many=True)
+    context = {'assignatures': serializer.data}
+    return render(request, 'sysadmin/assignatures.html', context)
+
 # @login_required(login_url='/WEB/login/')
 # @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 # def crear_classe(request):
@@ -155,6 +164,9 @@ def home_profe(request):
     template_name = "profe/index.html"
     return render(request, template_name)
 
+def __eq__(self, other): 
+        return self.__dict__ == other.__dict__
+ 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def llista_alumnes(request):
@@ -165,16 +177,32 @@ def llista_alumnes(request):
     for classe in classesProfessor:
 	alumnes = Alumne.objects.all()
 	for alumne in alumnes:
-		classealumne = Classe.objects.filter(classealumne__alumne=alumne)
-		if classealumne == classe: ##NO FUNCIONA!!!
-			user = alumne.user
-			users.append(user)
+		classesAlumne = Classe.objects.filter(classealumne__alumne=alumne)
+		for classe2 in classesAlumne:
+			if classe == classe2:
+				users.append(alumne.user)
+	
 
     return render(request, 'profe/alumnes.html', {'users':users})
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
+def llista_assignatures_professor(request):
+    userProfessor = User.objects.get(id=request.user.id)
+    professor = Professor.objects.get(user=userProfessor)
+    classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
+    assignaturesres = []
+    for classe in classesProfessor:
+	assignatures = Assignatura.objects.all()
+	for assig in assignatures:
+		if classe.assignatura == assig:
+			assignaturesres.append(assig)
+    return render(request, 'profe/assignatures.html', {'assignatures':assignaturesres})
  
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
-def llista_classes_professor(request):
+def llista_classes_assignatura_professor(request):
+    ##FALTA MIRA QUE L'ASSIGNATURA SIGUI LA MATEIXA
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
