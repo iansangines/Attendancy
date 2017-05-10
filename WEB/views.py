@@ -62,11 +62,27 @@ def home_admin(request):
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
-def llista_users(request):
+def llista_alumnes(request):
     users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    context = {'users': serializer.data}
-    return render(request, 'sysadmin/users.html', context)
+    alumnes = Alumne.objects.all()
+    alumnesres = []
+    for user in users:
+	for alumne in alumnes:
+		if alumne.user == user:
+			alumnesres.append(alumne)
+    return render(request, 'sysadmin/alumnes.html', {'alumnes':alumnesres})
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+def llista_professors(request):
+    users = User.objects.all()
+    professors = Professor.objects.all()
+    proferes = []
+    for user in users:
+	for professor in professors:
+		if professor.user == user:
+			proferes.append(professor)
+    return render(request, 'sysadmin/professors.html', {'professors':proferes})
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
@@ -87,11 +103,13 @@ def llista_assignatures(request):
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def llista_classes_assignatura(request):
-    ##HA DE MOSTRAR LES CLASSES DE L'ASSIGNATURA
-    assignatures = Assignatura.objects.all()
-    serializer = AssignaturaSerializer(assignatures, many=True)
-    context = {'assignatures': serializer.data}
-    return render(request, 'sysadmin/assignatures.html', context)
+    assignatura = request.GET.get('assignatura')
+    classes = Classe.objects.all()
+    classesres = []
+    for classe in classes:
+	if classe.assignatura.nom == assignatura:
+		classesres.append(classe)
+    return render(request, 'sysadmin/classes.html', {'classes':classesres})
 
 # @login_required(login_url='/WEB/login/')
 # @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
@@ -134,7 +152,7 @@ def crear_sala(request):
         if form.is_valid():
             sala = Sala(nom=form.cleaned_data['name'], MAC=form.cleaned_data['MAC'])
             sala.save()
-            return HttpResponseRedirect('/WEB/sales')
+            return HttpResponseRedirect('/WEB/sysadmin/sales')
     else:
         form = SalaForm()
         return render(request, 'sysadmin/createSala.html', {'form': form})
@@ -153,10 +171,35 @@ def alta_professor(request):
             professor = Professor(user=user,uni=uni)
             user.save()
             professor.save()
-            return HttpResponseRedirect('/WEB/users')
+            return HttpResponseRedirect('/WEB/sysadmin/professors')
     else:
         form = ProfessorForm()
         return render(request, 'sysadmin/altaProfessor.html', {'form': form})
+
+@login_required(login_url='/WEB/login/')
+@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
+def delete(request):
+	profenom = request.GET.get('professor')
+        alumnenom = request.GET.get('alumne')
+	salanom = request.GET.get('sala')
+        assignom = request.GET.get('assignatura')
+        if profenom is not None:
+		user = User.objects.get(username=profenom)
+		user.delete()
+	        return HttpResponseRedirect('/WEB/sysadmin/professors')
+        if alumnenom is not None:
+		user = User.objects.get(username=alumnenom)
+		user.delete()
+	        return HttpResponseRedirect('/WEB/sysadmin/alumnes')
+        elif salanom is not None:
+		sala = Sala.objects.get(nom=salanom)
+		sala.delete()
+	        return HttpResponseRedirect('/WEB/sysadmin/sales')
+        elif assignom is not None:
+		assignatura = Assignatura.objects.get(nom=assignom)
+		assignatura.delete()
+	        return HttpResponseRedirect('/WEB/sysadmin/assignatures')
+        
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
@@ -169,7 +212,7 @@ def __eq__(self, other):
  
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
-def llista_alumnes(request):
+def llista_alumnes_professor(request):
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
@@ -202,7 +245,7 @@ def llista_assignatures_professor(request):
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def llista_classes_assignatura_professor(request):
-    ##FALTA MIRA QUE L'ASSIGNATURA SIGUI LA MATEIXA
+    assignatura = request.GET.get('assignatura')
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
@@ -215,7 +258,8 @@ def llista_classes_assignatura_professor(request):
         #    dies_classe = dies_classe + dies_setmana[int(dia)] + ", "
         # print dies_classe
         # classe.dies = dies_classe
-        classes.append(classe)
+        if classe.assignatura.nom == assignatura:
+        	classes.append(classe)
 
     return render(request, 'profe/llistaClassesProfessor.html', {'classes': classes})
 

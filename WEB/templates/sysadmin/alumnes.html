@@ -1,0 +1,39 @@
+{% extends 'sysadmin/base.html' %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Alumnes List {% endblock %}</title>
+  </head>
+  <body>
+    {% block pagecontent %}
+    <div class="table-div">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Password</th>
+	    <th>Email</th>
+            <th>Nom</th>
+            <th>Dni</th>
+            <th>MAC dispositiu</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for alumne in alumnes %}
+            <tr>
+              <td>{{ alumne.user.username }}</td>
+              <td>{{ alumne.user.password }}</td>
+	      <td>{{ alumne.user.email }}</td>
+              <td>{{ alumne.user.first_name }}</td>
+              <td>{{ alumne.dni }}</td>
+              <td>{{ alumne.dispositiu.MAC }}</td>
+              <td><a href="/WEB/sysadmin/delete/?alumne={{ alumne.user.username }}"> Esborra </a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endblock %}
+  </body>
+</html>

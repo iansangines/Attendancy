@@ -1,0 +1,36 @@
+{% extends 'sysadmin/base.html' %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Classes List {% endblock %}</title>
+</head>
+<body>
+{% block pagecontent %}
+    <div class="table-div">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Assignatura</th>
+                <th>Sala</th>
+                <th>Dies</th>
+                <th>Hora d'Inici</th>
+                <th>Hora de Fi</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for classe in classes %}
+                <tr>
+                    <td>{{ classe.assignatura.nom }}</td>
+                    <td>{{ classe.sala.nom }}</td>
+                    <td>{{ classe.dia }}</td>
+                    <td>{{ classe.horaInici }}</td>
+                    <td>{{ classe.horaFinal }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+</body>
+</html>
