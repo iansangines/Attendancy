@@ -4,8 +4,9 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url('altaDisp', views.altaDispositiu),
-    url('altaAlumne', views.altaAlumne),
-    url('alumneClasse', views.get_alumnes_classe),
+    # url('altaDisp', views.altaDispositiu),
+    # url('altaAlumne', views.altaAlumne),
+    # url('alumneClasse', views.get_alumnes_classe),
+    url('classes', views.get_alumnesClasse),
 
 ]

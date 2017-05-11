@@ -1,7 +1,6 @@
 import time
 from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import HttpResponse, JsonResponse
@@ -45,54 +44,68 @@ def altaDispositiu(request):
         return Response(status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-@api_view(['GET'])
-def get_alumnes_classe(request):
-    mac = MacSerializer(data=request.data)
-    classe = Classe.objects.get(Sala=Sala.objects.get(MAC=mac))
-    alumnes_classe = ClasseAlumne.objects.filter(classe=classe)
-    return JsonResponse(alumnes_classe)
+# class getCodi():
+#     def get(self, request):
+#         mac_dispositiu = request.GET.get('mac')
+#         dispositiu = Dispositiu.objects.get(MAC=mac_dispositiu)
+#         if dispositiu is None:
+#             return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
+#         else:
+#             return JsonResponse({'codi': dispositiu.codi})
+#
+#
+# class control_assstencia():
+#     def post(self, request):
+#         mac = request.mac
+#         classe = request.classe
+#         alumne = Dispositiu.objects.get(MAC=mac).alumne
+#         if alumne is None:
+#             return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
+#
+#         classeAlumne = ClasseAlumne.objects.get(alumne=alumne, classe=classe)
+#         if classeAlumne is None:
+#             return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
+#
+#         entrada = time.time()
+#         assistencia = Assistencia(classeAlumne=classeAlumne, entrada=entrada)
+#         assistencia.save()
+#         return HttpResponse(status_code=status.HTTP_201_CREATED)
+#
+#     def put(self, request, format=None):
+#         mac = request.mac
+#         classe = request.classe
+#         alumne = Dispositiu.objects.get(MAC=mac).alumne
+#         if alumne is None:
+#             return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
+#
+#         classeAlumne = ClasseAlumne.objects.get(alumne=alumne, classe=classe)
+#         if classeAlumne is None:
+#             return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
+#
+#         assistencia = Assistencia.objects.filter(classeAlumne=classeAlumne).order_by('-entrada')[0]  # Obte la primera entrada mes gran, es a dir, la ultima entrada ue ha tingut aquest alumne
+#         sortida = time.time()
+#         assistencia.sortida = sortida
+#         assistencia.save()
+#         return HttpResponse(status_code=status.HTTP_200_OK)
 
 
-class getCodi():
-    def get(self, request):
-        mac = request.mac
-        dispositiu = Dispositiu.objects.get(MAC=mac)
-        if dispositiu is None:
-            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-        else:
-            return JsonResponse({'codi': dispositiu.codi})
 
+def get_alumnesClasse(request):
+    mac_sala = request.GET.get('mac')
+    dies = {'Mon': 'dilluns', 'Tue': 'dimarts', 'Wed': 'dimecres', 'Thu': 'dijous', 'Fri': 'divendres'}
+    if mac_sala is not None:
+        day = time.strftime("%a")
+        classes = Classe.objects.filter(sala__MAC=mac_sala).filter(dia=dies[day])
+        alumnes_classes = []
+        for classe in classes:
+            classeAlumnes = ClasseAlumne.objects.filter(classe=classe)
+            mac_dispositius = []
+            for classeAlumnes in classeAlumnes:
+                dispositiu_alumne = classeAlumnes.alumne.dispositiu
+                if dispositiu_alumne is None:
+                    break
+                mac_dispositius.append(dispositiu_alumne.MAC)
+            alumnes_classe = {'classe': ClasseSerializer(classe).data, 'mac_dispositius': mac_dispositius}
+            alumnes_classes.append(alumnes_classe)
 
-class control_assstencia():
-    def post(self, request):
-        mac = request.mac
-        classe = request.classe
-        alumne = Dispositiu.objects.get(MAC=mac).alumne
-        if alumne is None:
-            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-
-        classeAlumne = ClasseAlumne.objects.get(alumne=alumne, classe=classe)
-        if classeAlumne is None:
-            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-
-        entrada = time.time()
-        assistencia = Assistencia(classeAlumne=classealumne, entrada=entrada)
-        assistencia.save()
-        return HttpResponse(status_code=status.HTTP_201_CREATED)
-
-    def put(self, request, format=None):
-        mac = request.mac
-        classe = request.classe
-        alumne = Dispositiu.objects.get(MAC=mac).alumne
-        if alumne is None:
-            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-
-        classeAlumne = ClasseAlumne.objects.get(alumne=alumne, classe=classe)
-        if classeAlumne is None:
-            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-
-        assistencia = Assistencia.objects.filter(classeAlumne=classeAlumne).order_by('-entrada')[0] #Obte la primera entrada mes gran, es a dir, la ultima entrada ue ha tingut aquest alumne
-        sortida = time.time()
-        assistencia.sortida = sortida
-        assistencia.save()
-        return HttpResponse(status_code=status.HTTP_200_OK)
+        return JsonResponse(alumnes_classes, safe=False)
