@@ -25,7 +25,7 @@ SECRET_KEY = '4p+a_wa&sq(rl8v=jyktqf1znf&%=slayc*)71pezwunsjxoxl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.4.41.154','localhost']
+ALLOWED_HOSTS = ['10.4.41.154','localhost', '127.0.0.1']
 
 
 # Application definition
@@ -76,6 +76,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'attendancy.wsgi.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    )
+}
 
 
 # Database
