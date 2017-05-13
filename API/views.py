@@ -55,8 +55,8 @@ def altaDispositiu(request):
 
 class Assistencies(APIView):
     def get(self, request,id_classe, mac_dispositiu):
-        # print (id_classe)
-        return Response(status=status.HTTP_200_OK)
+        print (id_classe)
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def post(self, request,id_classe, mac_dispositiu):
         print("post assistencia")
@@ -116,6 +116,7 @@ class Assistencies(APIView):
 
 @api_view(['GET'])
 def get_alumnesClasse(request):
+    print("holaaaaaaaaaaaaaaaaaaaaaaaaaa")
     mac_sala = request.GET.get('mac')
     dies = {'Mon': 'dilluns', 'Tue': 'dimarts', 'Wed': 'dimecres', 'Thu': 'dijous', 'Fri': 'divendres'}
     if mac_sala is not None:
@@ -137,7 +138,7 @@ def get_alumnesClasse(request):
                 mac_dispositius.append(dispositiu_alumne.MAC)
             alumnes_classe = {'classe': ClasseSerializer(classe).data, 'mac_dispositius': mac_dispositius}
             alumnes_classes.append(alumnes_classe)
-        return JsonResponse(alumnes_classes, safe=False)
+        return JsonResponse(status=status.HTTP_200_OK, data=alumnes_classes, safe=False)
 
 
 @api_view(['GET'])
