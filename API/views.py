@@ -3,6 +3,7 @@
 
 # Create your views here.
 import datetime
+import time
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -118,12 +119,13 @@ def get_alumnesClasse(request):
     mac_sala = request.GET.get('mac')
     dies = {'Mon': 'dilluns', 'Tue': 'dimarts', 'Wed': 'dimecres', 'Thu': 'dijous', 'Fri': 'divendres'}
     if mac_sala is not None:
-        day = datetime.time.strftime("%a")
+        day = time.strftime("%a")
         print(mac_sala)
-        print(dies[day])
+        if day == "Sat" or day == "Sun":
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"error":"There's no class today, you really wanna work?"})
         classes = Classe.objects.filter(sala__MAC=mac_sala).filter(dia=dies[day])
         if not classes:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any Classe with this MAC"})
         alumnes_classes = []
         for classe in classes:
             classeAlumnes = ClasseAlumne.objects.filter(classe=classe)
