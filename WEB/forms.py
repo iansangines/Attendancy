@@ -47,8 +47,7 @@ class ClasseForm(forms.Form):
     assignatura = forms.ModelChoiceField(queryset=Assignatura.objects.all(),
                                               widget=forms.Select(attrs={'class': 'form-control'}))
     sala = forms.ModelChoiceField(queryset=Sala.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
-    dia = forms.ChoiceField(choices=DIES_CHOICE)
-    horaInici = forms.TimeField()
-    horaFinal = forms.TimeField()
+    professor = forms.ModelChoiceField(queryset=Professor.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
+
 
 

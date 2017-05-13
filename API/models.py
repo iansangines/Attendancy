@@ -26,6 +26,9 @@ class Alumne(UserProfile):
 class Professor(UserProfile):
     uni = models.CharField(max_length=20)
 
+    def __unicode__(self):
+        return self.user.get_full_name()
+
 class Dispositiu(models.Model):
     MAC = models.CharField(max_length=17, validators=[RegexValidator(regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", message="MAC no valida",  code="invalid_mac")], unique=True)
     codi = models.CharField(max_length=256)

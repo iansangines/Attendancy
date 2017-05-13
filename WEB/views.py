@@ -134,9 +134,39 @@ def llista_classes_assignatura(request):
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def crear_classe(request):
     if request.method == 'POST':
-        # something
-        horari = request.POST.getlist('horari')
-        print(horari)
+        form = ClasseForm(request.POST)
+        dies = {'0': 'dilluns', '1': 'dimarts', '2': 'dimecres', '3' : 'dijous', '4': 'divendres'}
+        horaris = request.POST.getlist('horari') #llistat dels values dels checkboxes apretats
+        print(horaris)
+        for horari in horaris:
+            diaihora = horari.split(";")
+            print(diaihora)
+            dia = dies[diaihora[0]]
+            horainici = datetime.datetime.strptime(diaihora[1], '%H:%M')
+            horafinal = horainici + datetime.timedelta(hours=1)
+            horainici = horainici.time()
+            horafinal = horafinal.time()
+            print horainici
+            print horafinal
+
+            try:
+                if form.is_valid():
+                    assignatura = Assignatura.objects.get(nom=form.cleaned_data['assignatura'])
+                    sala = Sala.objects.get(nom=form.cleaned_data['sala'])
+                    print form.cleaned_data['professor']
+                    professor = Professor.objects.get(user__username=form.cleaned_data['professor'].user.username)
+                    classe = Classe(assignatura=assignatura, sala=sala, dia=dia, horaInici=horainici, horaFinal=horafinal)
+                    classe.save()
+                    print classe
+                    cp = ClasseProfe(classe=classe , professor=professor)
+                    cp.save()
+                    print cp
+                else:
+                    print "no valid"
+            except ValueError:
+                print ValueError
+                return HttpResponseRedirect('/WEB/denyalumne')
+
         return HttpResponseRedirect('/WEB/sysadmin')
 
     else:
