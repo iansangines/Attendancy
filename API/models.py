@@ -64,8 +64,9 @@ class ClasseAlumne(models.Model):
 
 class Assistencia(models.Model):
     classeAlumne = models.ForeignKey(ClasseAlumne)
-    entrada = models.DateTimeField()
-    sortida = models.DateTimeField(null=True)
+    data = models.DateField()
+    entrada = models.TimeField()
+    sortida = models.TimeField(null=True)
 
 class Assignatura(models.Model):
     nom = models.CharField(max_length=256)

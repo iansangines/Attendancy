@@ -1,16 +1,20 @@
-import time
-from django.contrib.auth.decorators import login_required
-from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser
-from rest_framework.response import Response
-from rest_framework import status
-from django.http import HttpResponse, JsonResponse
-from rest_framework.views import APIView
 
-from serializers import *
 
 
 # Create your views here.
+import datetime
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import HttpResponse, JsonResponse
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from API.models import *
+from API.serializers import *
+
 
 def index(request):
     return HttpResponse("To see models: http://localhost:8000/API/#modelname#")
@@ -48,47 +52,65 @@ def altaDispositiu(request):
 
 
 
-class Assistencia(APIView):
+class Assistencies(APIView):
     def get(self, request,id_classe, mac_dispositiu):
         # print (id_classe)
         return Response(status=status.HTTP_200_OK)
 
     def post(self, request,id_classe, mac_dispositiu):
         print("post assistencia")
-        print(request.data["hora"])
+        print(request.data["hora_entrada"])
+        entrada = request.data["hora_entrada"]
+        try:
+            classe = Classe.objects.get(id=id_classe)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any Classe with this Id"})
+        try:
+            alumne = Alumne.objects.get(dispositiu__MAC=mac_dispositiu)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any Alumne with this MAC"})
+        try:
+            classeAlumne = ClasseAlumne.objects.get(classe=classe, alumne=alumne)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any ClasseAlumne with this Alumne or Classe"})
+
+        try:
+            assistencia = Assistencia(classeAlumne=classeAlumne, data=datetime.datetime.now().date(),
+                                      entrada=datetime.datetime.strptime(entrada, '%H:%M').time(), sortida=None)
+            print(assistencia)
+            assistencia.save(True)
+        except ValueError:
+            print(ValueError)
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "Can't save Assistencia object"})
+
+        return Response(status=status.HTTP_201_CREATED)
+
+
+    def put(self, request, id_classe, mac_dispositiu):
+        sortida = request.data["hora_sortida"]
+        try:
+            classe = Classe.objects.get(id=id_classe)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any Classe with this Id"})
+        try:
+            alumne = Alumne.objects.get(dispositiu__MAC=mac_dispositiu)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any Alumne with this MAC"})
+        try:
+            classeAlumne = ClasseAlumne.objects.get(classe=classe, alumne=alumne)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any ClasseAlumne with this Alumne or Classe"})
+        try:
+            assistencia = Assistencia.objects.filter(classeAlumne=classeAlumne).filter(sortida=None).filter(data=datetime.datetime.now().date()).latest('id')
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any Assistencia with this parameters"})
+        try:
+            assistencia.sortida=sortida
+            assistencia.save()
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "Can't save Assistencia object"})
         return Response(status=status.HTTP_204_NO_CONTENT)
-        # mac = request.mac
-        # classe = request.classe
-        # alumne = Dispositiu.objects.get(MAC=mac).alumne
-        # if alumne is None:
-        #     return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-        #
-        # classeAlumne = ClasseAlumne.objects.get(alumne=alumne, classe=classe)
-        # if classeAlumne is None:
-        #     return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-        #
-        # entrada = time.time()
-        # assistencia = Assistencia(classeAlumne=classeAlumne, entrada=entrada)
-        # assistencia.save()
-        # return HttpResponse(status_code=status.HTTP_201_CREATED)
 
-
-    def put(self, request, format=None):
-        mac = request.mac
-        classe = request.classe
-        alumne = Dispositiu.objects.get(MAC=mac).alumne
-        if alumne is None:
-            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-
-        classeAlumne = ClasseAlumne.objects.get(alumne=alumne, classe=classe)
-        if classeAlumne is None:
-            return HttpResponse(status_code=status.HTTP_404_NOT_FOUND)
-
-        assistencia = Assistencia.objects.filter(classeAlumne=classeAlumne).order_by('-entrada')[0]  # Obte la primera entrada mes gran, es a dir, la ultima entrada ue ha tingut aquest alumne
-        sortida = time.time()
-        assistencia.sortida = sortida
-        assistencia.save()
-        return HttpResponse(status_code=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -96,7 +118,7 @@ def get_alumnesClasse(request):
     mac_sala = request.GET.get('mac')
     dies = {'Mon': 'dilluns', 'Tue': 'dimarts', 'Wed': 'dimecres', 'Thu': 'dijous', 'Fri': 'divendres'}
     if mac_sala is not None:
-        day = time.strftime("%a")
+        day = datetime.time.strftime("%a")
         print(mac_sala)
         print(dies[day])
         classes = Classe.objects.filter(sala__MAC=mac_sala).filter(dia=dies[day])
