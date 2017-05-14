@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import RegexValidator, validate_comma_separated_integer_list
+from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.

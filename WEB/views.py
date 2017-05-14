@@ -30,6 +30,7 @@ def alumne_check(user):
         a = None
     return a is not None
 
+
 def admin_check(user):
     try:
         aa = Admin.objects.get(user_id=user.id)
@@ -41,13 +42,14 @@ def admin_check(user):
 def login(request):
     template_name = "login.html"
     if request.user.is_authenticated():
-    	if admin_check(request.user):
-		return HttpResponseRedirect('/WEB/sysadmin/')
+        if admin_check(request.user):
+            return HttpResponseRedirect('/WEB/sysadmin/')
         if professor_check(request.user):
-        	return HttpResponseRedirect('/WEB/profe/')
-	if alumne_check(request.user):
-		return HttpResponseRedirect('/WEB/nonauthorized/')
+            return HttpResponseRedirect('/WEB/profe/')
+        if alumne_check(request.user):
+            return HttpResponseRedirect('/WEB/nonauthorized/')
     return contrib_login(request, template_name)
+
 
 def non_authorized(request):
     template_name = "nonauthorized.html"
@@ -60,6 +62,7 @@ def home_admin(request):
     template_name = "sysadmin/index.html"
     return render(request, template_name)
 
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def llista_alumnes(request):
@@ -67,10 +70,11 @@ def llista_alumnes(request):
     alumnes = Alumne.objects.all()
     alumnesres = []
     for user in users:
-	for alumne in alumnes:
-		if alumne.user == user:
-			alumnesres.append(alumne)
-    return render(request, 'sysadmin/alumnes.html', {'alumnes':alumnesres})
+        for alumne in alumnes:
+            if alumne.user == user:
+                alumnesres.append(alumne)
+    return render(request, 'sysadmin/alumnes.html', {'alumnes': alumnesres})
+
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
@@ -79,10 +83,11 @@ def llista_professors(request):
     professors = Professor.objects.all()
     proferes = []
     for user in users:
-	for professor in professors:
-		if professor.user == user:
-			proferes.append(professor)
-    return render(request, 'sysadmin/professors.html', {'professors':proferes})
+        for professor in professors:
+            if professor.user == user:
+                proferes.append(professor)
+    return render(request, 'sysadmin/professors.html', {'professors': proferes})
+
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
@@ -92,6 +97,7 @@ def llista_sales(request):
     context = {'sales': serializer.data}
     return render(request, 'sysadmin/sales.html', context)
 
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def llista_assignatures(request):
@@ -100,6 +106,7 @@ def llista_assignatures(request):
     context = {'assignatures': serializer.data}
     return render(request, 'sysadmin/assignatures.html', context)
 
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def llista_classes_assignatura(request):
@@ -107,9 +114,10 @@ def llista_classes_assignatura(request):
     classes = Classe.objects.all()
     classesres = []
     for classe in classes:
-	if classe.assignatura.nom == assignatura:
-		classesres.append(classe)
-    return render(request, 'sysadmin/classes.html', {'classes':classesres})
+        if classe.assignatura.nom == assignatura:
+            classesres.append(classe)
+    return render(request, 'sysadmin/classes.html', {'classes': classesres})
+
 
 # @login_required(login_url='/WEB/login/')
 # @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
@@ -135,8 +143,8 @@ def llista_classes_assignatura(request):
 def crear_classe(request):
     if request.method == 'POST':
         form = ClasseForm(request.POST)
-        dies = {'0': 'dilluns', '1': 'dimarts', '2': 'dimecres', '3' : 'dijous', '4': 'divendres'}
-        horaris = request.POST.getlist('horari') #llistat dels values dels checkboxes apretats
+        dies = {'0': 'dilluns', '1': 'dimarts', '2': 'dimecres', '3': 'dijous', '4': 'divendres'}
+        horaris = request.POST.getlist('horari')  # llistat dels values dels checkboxes apretats
         print(horaris)
         for horari in horaris:
             diaihora = horari.split(";")
@@ -155,10 +163,11 @@ def crear_classe(request):
                     sala = Sala.objects.get(nom=form.cleaned_data['sala'])
                     print form.cleaned_data['professor']
                     professor = Professor.objects.get(user__username=form.cleaned_data['professor'].user.username)
-                    classe = Classe(assignatura=assignatura, sala=sala, dia=dia, horaInici=horainici, horaFinal=horafinal)
+                    classe = Classe(assignatura=assignatura, sala=sala, dia=dia, horaInici=horainici,
+                                    horaFinal=horafinal)
                     classe.save()
                     print classe
-                    cp = ClasseProfe(classe=classe , professor=professor)
+                    cp = ClasseProfe(classe=classe, professor=professor)
                     cp.save()
                     print cp
                 else:
@@ -174,6 +183,7 @@ def crear_classe(request):
         return render(request, 'sysadmin/crearHoraris.html',
                       {'form': form, 'diesSetmana': range(0, 5), 'horesDia': range(8, 21)})
 
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def crear_sala(request):
@@ -187,6 +197,7 @@ def crear_sala(request):
         form = SalaForm()
         return render(request, 'sysadmin/createSala.html', {'form': form})
 
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def alta_professor(request):
@@ -197,8 +208,8 @@ def alta_professor(request):
                                             password=form.cleaned_data['password'], email=form.cleaned_data['email'],
                                             first_name=form.cleaned_data['first_name'])
             a = Admin.objects.get(user_id=request.user.id)
-	    uni = a.uni
-            professor = Professor(user=user,uni=uni)
+            uni = a.uni
+            professor = Professor(user=user, uni=uni)
             user.save()
             professor.save()
             return HttpResponseRedirect('/WEB/sysadmin/professors')
@@ -206,30 +217,31 @@ def alta_professor(request):
         form = ProfessorForm()
         return render(request, 'sysadmin/altaProfessor.html', {'form': form})
 
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def delete(request):
-	profenom = request.GET.get('professor')
-        alumnenom = request.GET.get('alumne')
-	salanom = request.GET.get('sala')
-        assignom = request.GET.get('assignatura')
-        if profenom is not None:
-		user = User.objects.get(username=profenom)
-		user.delete()
-	        return HttpResponseRedirect('/WEB/sysadmin/professors')
-        if alumnenom is not None:
-		user = User.objects.get(username=alumnenom)
-		user.delete()
-	        return HttpResponseRedirect('/WEB/sysadmin/alumnes')
-        elif salanom is not None:
-		sala = Sala.objects.get(nom=salanom)
-		sala.delete()
-	        return HttpResponseRedirect('/WEB/sysadmin/sales')
-        elif assignom is not None:
-		assignatura = Assignatura.objects.get(nom=assignom)
-		assignatura.delete()
-	        return HttpResponseRedirect('/WEB/sysadmin/assignatures')
-        
+    profenom = request.GET.get('professor')
+    alumnenom = request.GET.get('alumne')
+    salanom = request.GET.get('sala')
+    assignom = request.GET.get('assignatura')
+    if profenom is not None:
+        user = User.objects.get(username=profenom)
+        user.delete()
+        return HttpResponseRedirect('/WEB/sysadmin/professors')
+    if alumnenom is not None:
+        user = User.objects.get(username=alumnenom)
+        user.delete()
+        return HttpResponseRedirect('/WEB/sysadmin/alumnes')
+    elif salanom is not None:
+        sala = Sala.objects.get(nom=salanom)
+        sala.delete()
+        return HttpResponseRedirect('/WEB/sysadmin/sales')
+    elif assignom is not None:
+        assignatura = Assignatura.objects.get(nom=assignom)
+        assignatura.delete()
+        return HttpResponseRedirect('/WEB/sysadmin/assignatures')
+
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
@@ -237,9 +249,11 @@ def home_profe(request):
     template_name = "profe/index.html"
     return render(request, template_name)
 
-def __eq__(self, other): 
-        return self.__dict__ == other.__dict__
- 
+
+def __eq__(self, other):
+    return self.__dict__ == other.__dict__
+
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def llista_alumnes_professor(request):
@@ -248,15 +262,15 @@ def llista_alumnes_professor(request):
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
     users = []
     for classe in classesProfessor:
-	alumnes = Alumne.objects.all()
-	for alumne in alumnes:
-		classesAlumne = Classe.objects.filter(classealumne__alumne=alumne)
-		for classe2 in classesAlumne:
-			if classe == classe2:
-				users.append(alumne.user)
-	
+        alumnes = Alumne.objects.all()
+        for alumne in alumnes:
+            classesAlumne = Classe.objects.filter(classealumne__alumne=alumne)
+            for classe2 in classesAlumne:
+                if classe == classe2:
+                    users.append(alumne.user)
 
-    return render(request, 'profe/alumnes.html', {'users':users})
+    return render(request, 'profe/alumnes.html', {'users': users})
+
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
@@ -266,12 +280,13 @@ def llista_assignatures_professor(request):
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
     assignaturesres = []
     for classe in classesProfessor:
-	assignatures = Assignatura.objects.all()
-	for assig in assignatures:
-		if classe.assignatura == assig:
-			assignaturesres.append(assig)
-    return render(request, 'profe/assignatures.html', {'assignatures':assignaturesres})
- 
+        assignatures = Assignatura.objects.all()
+        for assig in assignatures:
+            if classe.assignatura == assig:
+                assignaturesres.append(assig)
+    return render(request, 'profe/assignatures.html', {'assignatures': assignaturesres})
+
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def llista_classes_assignatura_professor(request):
@@ -289,7 +304,7 @@ def llista_classes_assignatura_professor(request):
         # print dies_classe
         # classe.dies = dies_classe
         if classe.assignatura.nom == assignatura:
-        	classes.append(classe)
+            classes.append(classe)
 
     return render(request, 'profe/llistaClassesProfessor.html', {'classes': classes})
 
@@ -327,6 +342,7 @@ def CalendarView(request):
     template_name = 'profe/calendar.html'
     return render(request, template_name)
 
+
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def assistencia(request):
@@ -345,4 +361,3 @@ def llista_assistencies(request):
         # data = form.diaClasse
         return render(request, 'profe/llistaAssistencia.html',
                       {'data': request.GET.get("diaClasse"), 'classe': request.GET.get("assignaturesProfessor")})
-

@@ -131,9 +131,10 @@ def get_alumnesClasse(request):
         for classe in classes:
             classeAlumnes = ClasseAlumne.objects.filter(classe=classe)
             mac_dispositius = []
-            for classeAlumnes in classeAlumnes:
-                dispositiu_alumne = classeAlumnes.alumne.dispositiu
+            for classealumne in classeAlumnes:
+                dispositiu_alumne = classealumne.alumne.dispositiu
                 if dispositiu_alumne is None:
+                    print "L'alumne" + classealumne.alumne.user.username + "no te dispositiu"
                     break
                 mac_dispositius.append(dispositiu_alumne.MAC)
             alumnes_classe = {'classe': ClasseSerializer(classe).data, 'mac_dispositius': mac_dispositius}
