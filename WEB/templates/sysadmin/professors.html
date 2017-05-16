@@ -15,6 +15,7 @@
             <th>Password</th>
 	    <th>Email</th>
             <th>Nom</th>
+	    <th>Cognom</th>
           </tr>
         </thead>
         <tbody>
@@ -24,6 +25,7 @@
               <td>{{ professor.user.password }}</td>
 	      <td>{{ professor.user.email }}</td>
               <td>{{ professor.user.first_name }}</td>
+	      <td>{{ professor.user.last_name }}</td>
               <td><a href="/WEB/sysadmin/delete/?professor={{ professor.user.username }}"> Esborra </a></td>
             </tr>
           {% endfor %}

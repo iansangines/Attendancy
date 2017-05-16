@@ -15,6 +15,7 @@
             <th>Password</th>
 	    <th>Email</th>
             <th>Nom</th>
+	    <th>Cognom</th>
             <th>Dni</th>
             <th>MAC dispositiu</th>
           </tr>
@@ -26,6 +27,7 @@
               <td>{{ alumne.user.password }}</td>
 	      <td>{{ alumne.user.email }}</td>
               <td>{{ alumne.user.first_name }}</td>
+              <td>{{ alumne.user.last_name }}</td>
               <td>{{ alumne.dni }}</td>
               <td>{{ alumne.dispositiu.MAC }}</td>
               <td><a href="/WEB/sysadmin/delete/?alumne={{ alumne.user.username }}"> Esborra </a></td>

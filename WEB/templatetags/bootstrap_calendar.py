@@ -68,7 +68,7 @@ def bootstrap_calendar_init(*args, **kwargs):
     try:
         options["events_url"] = kwargs["events_url"]
     except KeyError:
-        options["events_url"] = '/WEB/json/'
+        options["events_url"] = '/WEB/profe/json/'
 
     try:
         options["view"] = kwargs["view"]

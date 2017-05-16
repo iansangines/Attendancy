@@ -17,6 +17,8 @@ class ProfessorForm(forms.Form):
                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
     first_name = forms.CharField(label='first name', max_length=100,
                                  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First name'}))
+    last_name = forms.CharField(label='last name', max_length=100,
+                                 widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last name'}))
 
 
 class assistenciaForm(forms.Form):
@@ -37,6 +39,7 @@ class assistenciaForm(forms.Form):
 
 
 class ClasseForm(forms.Form):
+
     DIES_CHOICE = (
         ('dilluns', _('Dilluns')),
         ('dimarts', _('Dimarts')),
@@ -44,8 +47,11 @@ class ClasseForm(forms.Form):
         ('dijous', _('Dijous')),
         ('divendres', _('Divendres')),
     )
-    assignatura = forms.ModelChoiceField(queryset=Assignatura.objects.all(),
-                                              widget=forms.Select(attrs={'class': 'form-control'}))
+    #assignatura = forms.ModelChoiceField(queryset=Assignatura.objects.all(),
+    #                                         widget=forms.Select(attrs={'class': 'form-control'}))
+    nom = forms.CharField(label='nom', max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom'}))
+    inici = forms.DateField(label='inici',widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'yyyy-mm-dd'}))
+    final = forms.DateField(label='final',widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'yyyy-mm-dd'}))
     sala = forms.ModelChoiceField(queryset=Sala.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
     professor = forms.ModelChoiceField(queryset=Professor.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
 

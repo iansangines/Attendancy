@@ -12,8 +12,7 @@ from serializers import *
 from models import *
 from django.views.generic import ListView, TemplateView
 from utils import timestamp_to_datetime
-import datetime
-
+from datetime import datetime, timedelta
 
 def professor_check(user):
     try:
@@ -21,7 +20,6 @@ def professor_check(user):
     except:
         p = None
     return p is not None
-
 
 def alumne_check(user):
     try:
@@ -111,7 +109,7 @@ def llista_assignatures(request):
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def llista_classes_assignatura(request):
     assignatura = request.GET.get('assignatura')
-    classes = Classe.objects.all()
+    classes = Classe.objects.all().order_by('dia')
     classesres = []
     for classe in classes:
         if classe.assignatura.nom == assignatura:
@@ -143,15 +141,21 @@ def llista_classes_assignatura(request):
 def crear_classe(request):
     if request.method == 'POST':
         form = ClasseForm(request.POST)
-        dies = {'0': 'dilluns', '1': 'dimarts', '2': 'dimecres', '3': 'dijous', '4': 'divendres'}
+        dies = {'0': 'dilluns', '1': 'dimarts', '2': 'dimecres', '3': 'dijous', '4': 'divendres', '5' : 'dissabte', '6' : 'diumenge'}
         horaris = request.POST.getlist('horari')  # llistat dels values dels checkboxes apretats
         print(horaris)
+        if form.is_valid():
+        	nomassig = form.cleaned_data['nom']
+        	dinici = form.cleaned_data['inici']
+        	dfinal = form.cleaned_data['final']
+       		a = Assignatura(nom=nomassig, inici = dinici, final = dfinal)
+        	a.save();
         for horari in horaris:
             diaihora = horari.split(";")
             print(diaihora)
             dia = dies[diaihora[0]]
-            horainici = datetime.datetime.strptime(diaihora[1], '%H:%M')
-            horafinal = horainici + datetime.timedelta(hours=1)
+            horainici = datetime.strptime(diaihora[1], '%H:%M')
+            horafinal = horainici + timedelta(hours=1)
             horainici = horainici.time()
             horafinal = horafinal.time()
             print horainici
@@ -159,13 +163,21 @@ def crear_classe(request):
 
             try:
                 if form.is_valid():
-                    assignatura = Assignatura.objects.get(nom=form.cleaned_data['assignatura'])
                     sala = Sala.objects.get(nom=form.cleaned_data['sala'])
                     print form.cleaned_data['professor']
                     professor = Professor.objects.get(user__username=form.cleaned_data['professor'].user.username)
-                    classe = Classe(assignatura=assignatura, sala=sala, dia=dia, horaInici=horainici,
+                    classe = Classe(assignatura=a, sala=sala, dia=dia, horaInici=horainici,
                                     horaFinal=horafinal)
                     classe.save()
+		    data = dinici;
+                    while data <= dfinal:
+			if dies[str(datetime.weekday(data))] == dia:
+				start = datetime.combine(data,horainici)
+				end = datetime.combine(data,horafinal)
+
+				ce = CalendarEvent(title = a.nom, start= start, end = end)
+				ce.save()
+			data = data + timedelta(days=1)
                     print classe
                     cp = ClasseProfe(classe=classe, professor=professor)
                     cp.save()
@@ -206,7 +218,8 @@ def alta_professor(request):
         if form.is_valid():
             user = User.objects.create_user(username=form.cleaned_data['username'],
                                             password=form.cleaned_data['password'], email=form.cleaned_data['email'],
-                                            first_name=form.cleaned_data['first_name'])
+                                            first_name=form.cleaned_data['first_name'],
+					    last_name=form.cleaned_data['last_name'])
             a = Admin.objects.get(user_id=request.user.id)
             uni = a.uni
             professor = Professor(user=user, uni=uni)
@@ -240,6 +253,10 @@ def delete(request):
     elif assignom is not None:
         assignatura = Assignatura.objects.get(nom=assignom)
         assignatura.delete()
+	ce = CalendareEvent.objects.all()
+	for event in ce:
+		if evenet.nom == assignom:
+			event.delete()
         return HttpResponseRedirect('/WEB/sysadmin/assignatures')
 
 
@@ -261,13 +278,15 @@ def llista_alumnes_professor(request):
     professor = Professor.objects.get(user=userProfessor)
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
     users = []
+    assigs = []
     for classe in classesProfessor:
         alumnes = Alumne.objects.all()
         for alumne in alumnes:
             classesAlumne = Classe.objects.filter(classealumne__alumne=alumne)
             for classe2 in classesAlumne:
                 if classe == classe2:
-                    users.append(alumne.user)
+  			if not alumne in users:
+                   		users.append(alumne)
 
     return render(request, 'profe/alumnes.html', {'users': users})
 
@@ -283,7 +302,8 @@ def llista_assignatures_professor(request):
         assignatures = Assignatura.objects.all()
         for assig in assignatures:
             if classe.assignatura == assig:
-                assignaturesres.append(assig)
+		if not assig in assignaturesres:
+                	assignaturesres.append(assig)
     return render(request, 'profe/assignatures.html', {'assignatures': assignaturesres})
 
 
@@ -293,7 +313,7 @@ def llista_classes_assignatura_professor(request):
     assignatura = request.GET.get('assignatura')
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
-    classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
+    classesProfessor = Classe.objects.filter(classeprofe__professor=professor).order_by('dia')
     classes = []
     for classe in classesProfessor:
         # dies_classe = ""
@@ -313,27 +333,39 @@ class CalendarJsonListView(ListView):
     template_name = 'profe/calendar_events.html'
 
     def get_queryset(self):
-        queryset = CalendarEvent.objects.filter()
-        from_date = self.request.GET.get('from', False)
-        to_date = self.request.GET.get('to', False)
+	
+   	userProfessor = User.objects.get(id=self.request.user.id)
+    	professor = Professor.objects.get(user=userProfessor)
+    	classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
+    	assignaturesres = []
+   	for classe in classesProfessor:
+        	assignatures = Assignatura.objects.all()
+        	for assig in assignatures:
+            		if classe.assignatura == assig:
+				if not assig in assignaturesres:
+                			assignaturesres.append(assig)
+	for asssig in assignaturesres:
+		queryset = CalendarEvent.objects.filter(title=assig.nom)
+		from_date = self.request.GET.get('from', False)
+		to_date = self.request.GET.get('to', False)
 
-        if from_date and to_date:
-            queryset = queryset.filter(
-                start__range=(
-                    timestamp_to_datetime(from_date) + datetime.timedelta(-30),
-                    timestamp_to_datetime(to_date)
-                )
-            )
-        elif from_date:
-            queryset = queryset.filter(
-                start__gte=timestamp_to_datetime(from_date)
-            )
-        elif to_date:
-            queryset = queryset.filter(
-                end__lte=timestamp_to_datetime(to_date)
-            )
+		if from_date and to_date:
+		    queryset = queryset.filter(
+		        start__range=(
+		            timestamp_to_datetime(from_date) + timedelta(-30),
+		            timestamp_to_datetime(to_date)
+		        )
+		    )
+		elif from_date:
+		    queryset = queryset.filter(
+		        start__gte=timestamp_to_datetime(from_date)
+		    )
+		elif to_date:
+		    queryset = queryset.filter(
+		        end__lte=timestamp_to_datetime(to_date)
+		    )
 
-        return event_serializer(queryset)
+		return event_serializer(queryset)
 
 
 @login_required(login_url='/WEB/login/')

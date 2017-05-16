@@ -31,8 +31,8 @@ class CalendarEvent(models.Model):
     css_class = models.CharField(blank=True, max_length=20, verbose_name=_('CSS Class'),
                                  choices=CSS_CLASS_CHOICES)
 
-    start = models.DateField(verbose_name=_('Start Date'))
-    end = models.DateField(verbose_name=_('End Date'), null=True,
+    start = models.DateTimeField(verbose_name=_('Start Date'))
+    end = models.DateTimeField(verbose_name=_('End Date'), null=True,
                                blank=True)
     @property
     def start_timestamp(self):
