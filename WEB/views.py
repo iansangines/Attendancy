@@ -284,8 +284,8 @@ def llista_alumnes_professor(request):
         for alumne in alumnes:
             classesAlumne = Classe.objects.filter(classealumne__alumne=alumne)
             for classe2 in classesAlumne:
-                if classe == classe2:
-  			if not alumne in users:
+                if classe == classe2: ##MODIFICAR PERQUE TAMBE ET DIGUI L?ASSIGNATURA
+  			if not alumne in users: ##Si un alumne el tens ha dos assignatures, hauria de sortir dos cops?
                    		users.append(alumne)
 
     return render(request, 'profe/alumnes.html', {'users': users})
