@@ -30,10 +30,9 @@
               <td>{{ alumne.user.last_name }}</td>
               <td>{{ alumne.dni }}</td>
               <td>{{ alumne.dispositiu.MAC }}</td>
-	   {% endfor %}
               <td><a href="/WEB/sysadmin/delete/?alumne={{ alumne.user.username }}"> Esborra </a></td>
             </tr>
-          
+          {% endfor %}
         </tbody>
       </table>
     </div>
