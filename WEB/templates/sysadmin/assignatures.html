@@ -23,11 +23,11 @@
               <td>{{ assig.nom }}</td>
               <td>{{ assig.inici }}</td>
 	      <td>{{ assig.final }}</td>
-              <td> </td>
+	      <td> </td>
               <td><a href="/WEB/sysadmin/classesassignatura/?assignatura={{ assig.nom }}">Horaris</a></td>
               <td><a href="/WEB/sysadmin/delete/?assignatura={{ assig.nom }}"> Esborra </a></td>
             </tr>
-          {% endfor %}
+ {% endfor %}
         </tbody>
       </table>
   <a href="/WEB/sysadmin/crearclasse">Afageix una nova assignatura</a>

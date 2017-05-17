@@ -20,7 +20,6 @@ class ProfessorForm(forms.Form):
     last_name = forms.CharField(label='last name', max_length=100,
                                  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last name'}))
 
-
 class assistenciaForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.choices = kwargs.pop('classesProfessor')

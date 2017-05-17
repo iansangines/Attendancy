@@ -101,8 +101,15 @@ def llista_sales(request):
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def llista_assignatures(request):
     assignatures = Assignatura.objects.all()
+    professors = []
+    for assig in assignatures:
+	classes = Classe.objects.filter(assignatura = assig)
+	classesprofe = ClasseProfe.objects.filter(classe=classes[0])
+	professor = classesprofe[0].professor
+	professors.append(professor)
+    print professors[0].user.first_name
     serializer = AssignaturaSerializer(assignatures, many=True)
-    context = {'assignatures': serializer.data}
+    context = {'assignatures': serializer.data, 'professors':professors}
     return render(request, 'sysadmin/assignatures.html', context)
 
 
@@ -210,7 +217,6 @@ def alta_professor(request):
     else:
         form = ProfessorForm()
         return render(request, 'sysadmin/altaProfessor.html', {'form': form})
-
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
