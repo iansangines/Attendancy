@@ -20,9 +20,19 @@
                 <label><b>Assignatura: </b></label>
                        {{ form.nom }}
                 <label><b>Data inici </b></label>
-                       {{ form.inici }}
+                       <div class="col-xs-2 input-group">
+				{{ form.inici }}
+                		<span class="input-group-addon" id="basic-addon1">
+                   		 <i class="glyphicon glyphicon-calendar"></i>
+                		</span>           		
+           		 </div>
                 <label><b>Data fi </b></label>
-                       {{ form.final }}
+			<div class="col-xs-2 input-group">
+				{{ form.final }}
+                		<span class="input-group-addon" id="basic-addon1">
+                   		 <i class="glyphicon glyphicon-calendar"></i>
+                		</span>        		          		
+           		 </div>
             </div>
             <div class="form-group">
                 <label><b> Sala: </b></label>
@@ -64,6 +74,16 @@
         </table>
         <button type="submit" class="btn btn-default pull-right">Crear</button>
     </form>
+	<script>
+		$(function () {
+	    		$('#datepicker1').datetimepicker({format: 'YYYY-MM-DD'});
+		});
+	</script>  
+	<script>
+		$(function () {
+	    		$('#datepicker2').datetimepicker({format: 'YYYY-MM-DD'});
+		});
+	</script> 
 {% endblock %}
 </body>
 </html>

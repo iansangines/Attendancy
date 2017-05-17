@@ -13,6 +13,7 @@ from models import *
 from django.views.generic import ListView, TemplateView
 from utils import timestamp_to_datetime
 from datetime import datetime, timedelta
+from itertools import chain
 
 def professor_check(user):
     try:
@@ -115,26 +116,6 @@ def llista_classes_assignatura(request):
         if classe.assignatura.nom == assignatura:
             classesres.append(classe)
     return render(request, 'sysadmin/classes.html', {'classes': classesres})
-
-
-# @login_required(login_url='/WEB/login/')
-# @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
-# def crear_classe(request):
-#     if request.method == 'POST':
-#         form = ClasseForm(request.POST)
-#         if form.is_valid():
-#             classe = Classe(assignatura=form.cleaned_data['assignatura'],sala=form.cleaned_data['sala'],dia=form.cleaned_data['dia'], horaInici=form.cleaned_data['horaInici'], horaFinal=form.cleaned_data['horaFinal'])
-# 	    u = User.objects.get(id=request.user.id)
-# 	    p = Professor.objects.get(user=u)
-# 	    classeprofe = ClasseProfe(classe=classe,professor=p)
-# 	    #ce = CalendarEvent(title=classe.assignatura.nom,url='/WEB/',start=,end=)
-#             classe.save()
-#             classeprofe.save()
-#             #ce.save()
-#             return HttpResponseRedirect('/WEB/admin/')
-#     else:
-#         form = ClasseForm()
-#         return render(request, 'crearHoraris.html', {'form': form, 'diesSetmana': range(0, 5), 'horesDia': range(8, 21)})
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
@@ -253,9 +234,9 @@ def delete(request):
     elif assignom is not None:
         assignatura = Assignatura.objects.get(nom=assignom)
         assignatura.delete()
-	ce = CalendareEvent.objects.all()
+	ce = CalendarEvent.objects.all()
 	for event in ce:
-		if evenet.nom == assignom:
+		if event.title == assignom:
 			event.delete()
         return HttpResponseRedirect('/WEB/sysadmin/assignatures')
 
@@ -274,6 +255,7 @@ def __eq__(self, other):
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def llista_alumnes_professor(request):
+    assignatura = request.GET.get('assignatura')
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
@@ -284,16 +266,17 @@ def llista_alumnes_professor(request):
         for alumne in alumnes:
             classesAlumne = Classe.objects.filter(classealumne__alumne=alumne)
             for classe2 in classesAlumne:
-                if classe == classe2: ##MODIFICAR PERQUE TAMBE ET DIGUI L?ASSIGNATURA
-  			if not alumne in users: ##Si un alumne el tens ha dos assignatures, hauria de sortir dos cops?
-                   		users.append(alumne)
+                if classe == classe2: 
+			if classe2.assignatura.nom == assignatura:
+  				if not alumne in users:
+                   			users.append(alumne)
 
-    return render(request, 'profe/alumnes.html', {'users': users})
-
+    return render(request, 'profe/alumnes.html', {'users': users,'assig':assignatura})
 
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def llista_assignatures_professor(request):
+
     userProfessor = User.objects.get(id=request.user.id)
     professor = Professor.objects.get(user=userProfessor)
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
@@ -316,13 +299,6 @@ def llista_classes_assignatura_professor(request):
     classesProfessor = Classe.objects.filter(classeprofe__professor=professor).order_by('dia')
     classes = []
     for classe in classesProfessor:
-        # dies_classe = ""
-        # dies_setmana = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendes", "Dissabte", "Diumnege"]
-        # dies = classe.dies.split(",")
-        # for dia in dies:
-        #    dies_classe = dies_classe + dies_setmana[int(dia)] + ", "
-        # print dies_classe
-        # classe.dies = dies_classe
         if classe.assignatura.nom == assignatura:
             classes.append(classe)
 
@@ -334,38 +310,45 @@ class CalendarJsonListView(ListView):
 
     def get_queryset(self):
 	
-   	userProfessor = User.objects.get(id=self.request.user.id)
-    	professor = Professor.objects.get(user=userProfessor)
-    	classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
-    	assignaturesres = []
-   	for classe in classesProfessor:
-        	assignatures = Assignatura.objects.all()
-        	for assig in assignatures:
-            		if classe.assignatura == assig:
-				if not assig in assignaturesres:
-                			assignaturesres.append(assig)
-	for asssig in assignaturesres:
-		queryset = CalendarEvent.objects.filter(title=assig.nom)
-		from_date = self.request.GET.get('from', False)
-		to_date = self.request.GET.get('to', False)
+	    userProfessor = User.objects.get(id=self.request.user.id)
+	    professor = Professor.objects.get(user=userProfessor)
+	    classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
+	    assignaturesres = []
+	    for classe in classesProfessor:
+		assignatures = Assignatura.objects.all()
+		for assig in assignatures:
+		    if classe.assignatura == assig:
+			if not assig in assignaturesres:
+		        	assignaturesres.append(assig)
+	    cont = 0;
+	    for assig in assignaturesres:
+		if cont == 0:
+			queryset = CalendarEvent.objects.filter(title=assig.nom)
+		else:
+			queryset = CalendarEvent.objects.filter(title=assig.nom) | prevqueryset
+		prevqueryset = queryset
+		cont = cont + 1
 
-		if from_date and to_date:
-		    queryset = queryset.filter(
-		        start__range=(
-		            timestamp_to_datetime(from_date) + timedelta(-30),
-		            timestamp_to_datetime(to_date)
-		        )
-		    )
-		elif from_date:
-		    queryset = queryset.filter(
-		        start__gte=timestamp_to_datetime(from_date)
-		    )
-		elif to_date:
-		    queryset = queryset.filter(
-		        end__lte=timestamp_to_datetime(to_date)
-		    )
+	    from_date = self.request.GET.get('from', False)
+	    to_date = self.request.GET.get('to', False)
 
-		return event_serializer(queryset)
+	    if from_date and to_date:
+	    	queryset = queryset.filter(
+	    		start__range=(
+	    			timestamp_to_datetime(from_date) + timedelta(-30),
+				timestamp_to_datetime(to_date)
+			)
+		)
+	    elif from_date:
+		queryset = queryset.filter(
+			start__gte=timestamp_to_datetime(from_date)
+		)
+	    elif to_date:
+		queryset = queryset.filter(
+			end__lte=timestamp_to_datetime(to_date)
+		)
+
+	    return event_serializer(queryset)
 
 
 @login_required(login_url='/WEB/login/')

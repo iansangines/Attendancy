@@ -50,8 +50,8 @@ class ClasseForm(forms.Form):
     #assignatura = forms.ModelChoiceField(queryset=Assignatura.objects.all(),
     #                                         widget=forms.Select(attrs={'class': 'form-control'}))
     nom = forms.CharField(label='nom', max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom'}))
-    inici = forms.DateField(label='inici',widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'yyyy-mm-dd'}))
-    final = forms.DateField(label='final',widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'yyyy-mm-dd'}))
+    inici = forms.DateField(label='inici',widget=forms.TextInput(attrs={'id': 'datepicker1','class': 'form-control'}))
+    final = forms.DateField(label='final',widget=forms.TextInput(attrs={'id': 'datepicker2','class': 'form-control'}))
     sala = forms.ModelChoiceField(queryset=Sala.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
     professor = forms.ModelChoiceField(queryset=Professor.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
 
