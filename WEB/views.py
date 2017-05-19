@@ -15,6 +15,7 @@ from utils import timestamp_to_datetime
 from datetime import datetime, timedelta
 from itertools import chain
 
+
 def professor_check(user):
     try:
         p = Professor.objects.get(user_id=user.id)
@@ -363,7 +364,45 @@ def CalendarView(request):
     template_name = 'profe/calendar.html'
     return render(request, template_name)
 
+@login_required(login_url='/WEB/login/')
+@user_passes_test(professor_check, login_url='/WEB/nonauthorized')
+def historial_alumne(request):
+	user = User.objects.get(username=request.GET.get('alumne'))
+	alumne = Alumne.objects.get(user=user)
+	assignatura = Assignatura.objects.get(nom=request.GET.get('assignatura'))
+	events = CalendarEvent.objects.filter(title=assignatura.nom, start__lte = datetime.now()) 
+	return render(request, 'profe/historialAlumne.html', {'range':range(5)})
 
+
+'''
+	classes = Classe.objects.filter(assignatura=assignatura)
+	classesAlumne = ClasseAlumne.objects.filter(alumne=alumne)
+	cas = []
+	for ca in classesAlumne:
+		for classe in classes:
+			if ca.classe == classe:
+				cas.append(ca)
+	cont = 0
+	for ca in cas:
+		if cont == 0:
+			assistencies = Assistencia.objects.filter(classeAlumne=ca)
+		else:
+			assistencies = Assistencia.objects.filter(classeAlumne=ca) | prev
+		prev = assistencies
+		cont = cont + 1
+		
+	for event in events:
+		durada = event.end.time - event.start.time ## escala y-axis
+		estada =  0 ## y-axis
+		for assist in assistencies:
+			if assist.data == event.start.date:## x-axis
+				if assist.entrada >= event.start.time and assist.sortida <= event.end.time:
+					estada += assist.sortida - assist.entrada
+		
+'''	
+
+
+'''
 @login_required(login_url='/WEB/login/')
 @user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
 def assistencia(request):
@@ -382,3 +421,5 @@ def llista_assistencies(request):
         # data = form.diaClasse
         return render(request, 'profe/llistaAssistencia.html',
                       {'data': request.GET.get("diaClasse"), 'classe': request.GET.get("assignaturesProfessor")})
+'''
+

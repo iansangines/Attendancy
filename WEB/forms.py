@@ -19,7 +19,7 @@ class ProfessorForm(forms.Form):
                                  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First name'}))
     last_name = forms.CharField(label='last name', max_length=100,
                                  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last name'}))
-
+'''
 class assistenciaForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.choices = kwargs.pop('classesProfessor')
@@ -35,7 +35,7 @@ class assistenciaForm(forms.Form):
     diaClasse = forms.TimeField(widget=forms.TextInput(
         attrs={'id': 'datepicker', 'class': 'form-control', 'placeholder': 'Dia de classe'})
     )
-
+'''
 
 class ClasseForm(forms.Form):
 

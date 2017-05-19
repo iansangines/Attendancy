@@ -28,7 +28,7 @@
 	      <td>{{ alumne.user.last_name}} </td>
               <td>{{ alumne.dni }}</td>
 	      <td>{{ assig }}</td>
-	      <td> <a href="#">Historial del Alumne</a></td>
+	      <td> <a href="/WEB/profe/historialAlumne?alumne={{alumne.user.username}}&assignatura={{assig}}">Historial del Alumne</a></td>
             </tr>
           {% endfor %}
         </tbody>
