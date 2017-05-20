@@ -11,5 +11,6 @@ urlpatterns = [
     url('^classes/(?P<id_classe>[0-9]{2})/assistencia/(?P<mac_dispositiu>([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))/$',
         views.Assistencies.as_view(), name="assistencia"),
     url('^dispositius/(?P<mac>([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))/codi/$', views.getCodi),
-
+    url('^alumnes/$', views.altaAlumne),
+    url('^alumnes/(?P<username>([A-z0-9.-])+)/dispositiu/$', views.altaDispositiu),
 ]

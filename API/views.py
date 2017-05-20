@@ -23,22 +23,35 @@ def index(request):
 
 @api_view(['POST'])
 def altaAlumne(request):
-    user = User.objects.create_user(username=request.username, password=request.password, email=request.email,
-                                    first_name=request.name, second_name=request.surname)
-    insertedUser = user.save()
-    alumne = Alumne(user=insertedUser, dni=request.dni)
-    alumne.save()
-    # fer login
-    return Response(status=status.HTTP_201_CREATED)
+    print(request.data)
+    serializedUser = UserSerializer(data=request.data)
+    if serializedUser.is_valid():
+        user = User.objects.create_user(email=serializedUser.validated_data['email'],
+            username=serializedUser.validated_data['username'],
+            password=serializedUser.validated_data['password'],
+            first_name=serializedUser.validated_data['first_name'],
+            last_name=serializedUser.validated_data['last_name'])
+        user.save()
+        alumne = Alumne(user=user, dni=request.data["dni"])
+        alumne.save()
+        return Response(status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializedUser.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @api_view(['POST'])
-@login_required
-def altaDispositiu(request):
-    user = User.objects.get(id=request.user.id)
-    # #comprobar si esta autenticat (que ho estara fijo)
-    # authenticatedUser = authenticate(username=user.username, password=user.password)
-    alumne = Alumne.objects.get(user=user)
+def altaDispositiu(request, username):
+    print(request.data)
+    print(username)
+    try:
+        user = User.objects.get(username=username)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error":"There's no user with this username"})
+    try:
+        alumne = Alumne.objects.get(user=user)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "There's no Alumne with this username"})
     if alumne.dispositiu is None:
         dispositiuSerializer = DispositiuSerializer(data=request.data)
         if dispositiuSerializer.is_valid():
@@ -49,7 +62,8 @@ def altaDispositiu(request):
         alumne.save()
         return Response(status=status.HTTP_201_CREATED)
     else:
-        return Response(status.HTTP_405_METHOD_NOT_ALLOWED)
+        print(alumne.dispositiu.MAC)
+        return Response(status=status.HTTP_409_CONFLICT, data={"error":"This Alumne already has a Dispositiu"})
 
 
 
@@ -116,7 +130,6 @@ class Assistencies(APIView):
 
 @api_view(['GET'])
 def get_alumnesClasse(request):
-    print("holaaaaaaaaaaaaaaaaaaaaaaaaaa")
     mac_sala = request.GET.get('mac')
     dies = {'Mon': 'dilluns', 'Tue': 'dimarts', 'Wed': 'dimecres', 'Thu': 'dijous', 'Fri': 'divendres'}
     if mac_sala is not None:
