@@ -13,4 +13,6 @@ urlpatterns = [
     url('^dispositius/(?P<mac>([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))/codi/$', views.getCodi),
     url('^alumnes/$', views.altaAlumne),
     url('^alumnes/(?P<username>([A-z0-9.-])+)/dispositiu/$', views.altaDispositiu),
+    url('^assignatures/(?P<codiassig>([A-z0-9]{32}))/alumnes/(?P<username>([A-z0-9.-])+)/$', views.alumneAssignatura),
+
 ]

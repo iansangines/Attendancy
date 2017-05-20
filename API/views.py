@@ -161,3 +161,21 @@ def getCodi(request, mac):
     except Dispositiu.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     return JsonResponse({'codi': dispositiu.codi})
+
+@api_view(['POST'])
+def alumneAssignatura(request, codiassig, username):
+    print(codiassig)
+    print(username)
+    try:
+        assignatura = Assignatura.objects.get(codiassig=codiassig)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error":"Doesn't exists an Assignatura with this codeassig"})
+    try:
+        alumne = Alumne.objects.get(user__username=username)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error":"Doesn't exists an Alumne with this username"})
+    classes = Classe.objects.filter(assignatura=assignatura)
+    for classe in classes:
+        ca = ClasseAlumne(classe=classe, alumne=alumne)
+        ca.save()
+    return Response(status=status.HTTP_200_OK)
