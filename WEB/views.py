@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import login as contrib_login
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.utils.crypto import get_random_string
 from django.http import HttpResponseRedirect
 from forms import *
 from API.serializers import *
@@ -180,7 +181,8 @@ def crear_classe(request):
         	nomassig = form.cleaned_data['nom']
         	dinici = form.cleaned_data['inici']
         	dfinal = form.cleaned_data['final']
-       		a = Assignatura(nom=nomassig, inici = dinici, final = dfinal)
+		codiassig = get_random_string(length=32)
+       		a = Assignatura(codiassig=codiassig,nom=nomassig, inici = dinici, final = dfinal)
         	a.save();
 	classes = []
         for horari in horaris:

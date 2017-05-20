@@ -61,4 +61,4 @@ class AssistenciaSerializer(serializers.ModelSerializer):
 class AssignaturaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assignatura
-        fields = ('id','nom','inici','final')
+        fields = ('codiassig','nom','inici','final')

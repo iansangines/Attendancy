@@ -51,8 +51,6 @@ def altaDispositiu(request):
     else:
         return Response(status.HTTP_405_METHOD_NOT_ALLOWED)
 
-
-
 class Assistencies(APIView):
     def get(self, request,id_classe, mac_dispositiu):
         print (id_classe)
