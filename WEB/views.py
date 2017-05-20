@@ -257,15 +257,15 @@ def crear_classe(request):
 		
 	for classe in classes:
 		    data = dinici;
+		    classe.save()
                     while data <= dfinal:
 			if dies[str(datetime.weekday(data))] == classe.dia:
 				start = datetime.combine(data,classe.horaInici)
 				end = datetime.combine(data,classe.horaFinal)
-				url = "/WEB/profe/assistenciaclasse?classe="+classe.assignatura.nom+"&data="+str(start)
+				url = "/WEB/profe/assistenciaclasse?classe="+str(classe.id)+"&data="+str(start)
 				ce = CalendarEvent(title = a.nom, url=url, start= start, end = end)
 				ce.save()
 			data = data + timedelta(days=1)
-		    classe.save()
                     cp = ClasseProfe(classe=classe, professor=professor)
                     cp.save()
         return HttpResponseRedirect('/WEB/sysadmin/assignatures')
@@ -475,6 +475,7 @@ def historial_alumne(request):
 			if ca.classe == classe:
 				cas.append(ca)
 	cont = 0
+	print len(cas)
 	for ca in cas:
 		if cont == 0:
 			assistencies = Assistencia.objects.filter(classeAlumne=ca)
@@ -507,7 +508,29 @@ def historial_alumne(request):
 def assistencia_classe(request):
 	classe = request.GET.get('classe')
 	data = request.GET.get('data')
-	return render(request, 'profe/assistenciaclasse.html', {'classe':classe,'data':data})
+	
+	classe = int(classe)
+	data = datetime.strptime(data,"%Y-%m-%d %H:%M:%S")
+	
+	classe = Classe.objects.get(id=classe)	
+
+	cas = ClasseAlumne.objects.filter(classe=classe)
+	alumnes = Alumne.objects.filter(classealumne__classe = classe)	
+	
+	cont = 0
+	for ca in cas:
+		if cont == 0:
+			assistencies = Assistencia.objects.filter(classeAlumne=ca, data=data)
+		else:
+			assistencies = Assistencia.objects.filter(classeAlumne=ca,data=data) | prev
+		prev = assistencies
+		cont = cont + 1	
+		
+	alumnesassistents = []
+	for assist in assistencies:
+		alumnesassistents.append(assit.classealumne.alumne)
+
+	return render(request, 'profe/assistenciaclasse.html', {'classe':classe.assignatura.nom,'data':data, 'alumnes':len(alumnes),'assistents':len(alumnesassistents)})
 
 '''
 @login_required(login_url='/WEB/login/')
