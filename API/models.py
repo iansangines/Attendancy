@@ -72,6 +72,7 @@ class Assistencia(models.Model):
     sortida = models.TimeField(null=True)
 
 class Assignatura(models.Model):
+    codiassig = models.CharField(max_length=256,null=True,blank=True,unique=True)
     nom = models.CharField(max_length=256)
     inici = models.DateField()
     final = models.DateField() 

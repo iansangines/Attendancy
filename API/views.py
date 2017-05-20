@@ -65,8 +65,6 @@ def altaDispositiu(request, username):
         print(alumne.dispositiu.MAC)
         return Response(status=status.HTTP_409_CONFLICT, data={"error":"This Alumne already has a Dispositiu"})
 
-
-
 class Assistencies(APIView):
     def get(self, request,id_classe, mac_dispositiu):
         print (id_classe)

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import login as contrib_login
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.utils.crypto import get_random_string
 from django.http import HttpResponseRedirect
 from forms import *
 from API.serializers import *
@@ -102,14 +103,8 @@ def llista_sales(request):
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def llista_assignatures(request):
     assignatures = Assignatura.objects.all()
-    professors = []
-    for assig in assignatures:
-	classes = Classe.objects.filter(assignatura = assig)
-	classesprofe = ClasseProfe.objects.filter(classe=classes[0])
-	professor = classesprofe[0].professor
-	professors.append(professor)
     serializer = AssignaturaSerializer(assignatures, many=True)
-    context = {'assignatures': serializer.data, 'professors':professors}
+    context = {'assignatures': serializer.data}
     return render(request, 'sysadmin/assignatures.html', context)
 
 
@@ -186,7 +181,8 @@ def crear_classe(request):
         	nomassig = form.cleaned_data['nom']
         	dinici = form.cleaned_data['inici']
         	dfinal = form.cleaned_data['final']
-       		a = Assignatura(nom=nomassig, inici = dinici, final = dfinal)
+		codiassig = get_random_string(length=32)
+       		a = Assignatura(codiassig=codiassig,nom=nomassig, inici = dinici, final = dfinal)
         	a.save();
 	classes = []
         for horari in horaris:
