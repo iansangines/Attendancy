@@ -6,16 +6,9 @@
     <title>{% block title %}Assistencia Classe {% endblock %}</title>
   </head>
   <body>
-<table class="table table-bordered table-hover" style="table-layout: fixed;"/>
-            <tbody>
-		 {% for i in range %}
-                <tr>
-		     {% for j in range %}
-                    <td style="height: 100px; widht: 100px; background-color:#FF0000;"/></td>
-		      {% endfor %}                
-		</tr>
-            {% endfor %}
-            </tbody>
-        </table>
+	{% block pagecontent %}
+	{{ classe }}
+	{{ data }}
+	{% endblock %}
   </body>
 </html>

@@ -74,7 +74,7 @@ class Assistencia(models.Model):
 class Assignatura(models.Model):
     nom = models.CharField(max_length=256)
     inici = models.DateField()
-    final = models.DateField()
+    final = models.DateField() 
 
     def __unicode__(self):
         return self.nom
