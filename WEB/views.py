@@ -103,8 +103,7 @@ def llista_sales(request):
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def llista_assignatures(request):
     assignatures = Assignatura.objects.all()
-    serializer = AssignaturaSerializer(assignatures, many=True)
-    context = {'assignatures': serializer.data}
+    context = {'assignatures': assignatures}
     return render(request, 'sysadmin/assignatures.html', context)
 
 
