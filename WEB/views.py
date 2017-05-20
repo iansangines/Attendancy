@@ -466,8 +466,7 @@ def historial_alumne(request):
 	alumne = Alumne.objects.get(user=user)
 	assignatura = Assignatura.objects.get(nom=request.GET.get('assignatura'))
 	events = CalendarEvent.objects.filter(title=assignatura.nom, start__lte = datetime.now()) 
-	return render(request, 'profe/historialAlumne.html', {'range':range(5)})
-'''
+
 	classes = Classe.objects.filter(assignatura=assignatura)
 	classesAlumne = ClasseAlumne.objects.filter(alumne=alumne)
 	cas = []
@@ -482,17 +481,25 @@ def historial_alumne(request):
 		else:
 			assistencies = Assistencia.objects.filter(classeAlumne=ca) | prev
 		prev = assistencies
-		cont = cont + 1
-		
+		cont = cont + 1	
+	cont = 0
 	for event in events:
-		durada = event.end.time - event.start.time ## escala y-axis
-		estada =  0 ## y-axis
+		durada = event.end - event.start
+		estada =  0 
 		for assist in assistencies:
-			if assist.data == event.start.date:## x-axis
+			if assist.data == event.start.date:
 				if assist.entrada >= event.start.time and assist.sortida <= event.end.time:
 					estada += assist.sortida - assist.entrada
-		
-'''
+		if cont == 0:
+			horesclasse = durada
+			horesassistides = estada
+		else:
+			horesclasse += durada
+			horesassistides += estada
+		cont += 1
+	horesclasse = horesclasse.days * 24 + horesclasse.seconds // 3600	
+
+ 	return render(request, 'profe/historialAlumne.html', {'assignatura':assignatura,'horesclasse':horesclasse,'horesassistides':horesassistides})
 	
 
 @login_required(login_url='/WEB/login/')
