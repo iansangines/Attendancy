@@ -518,6 +518,7 @@ def assistencia_classe(request):
 	alumnes = Alumne.objects.filter(classealumne__classe = classe)	
 	
 	cont = 0
+	assistencies = []
 	for ca in cas:
 		if cont == 0:
 			assistencies = Assistencia.objects.filter(classeAlumne=ca, data=data)
