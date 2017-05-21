@@ -1,16 +1,22 @@
 {% extends 'profe/base.html' %}
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>{% block title %}Assistencia Classe {% endblock %}</title>
-  </head>
-  <body>
-	{% block pagecontent %}
-	{{ classe }}
-	{{ data }}
-	{{ alumnes }}
-	{{ assistents }}
-	{% endblock %}
-  </body>
+</head>
+<body>
+{% block pagecontent %}
+    {{ classe.assignatura.nom }}
+    {{ data }}
+    <h3>Assistents:</h3>
+    {% for assistent in assistents %}
+        {{ assistent.user.username }}
+    {% endfor %}
+    <h3>No assistents:</h3>
+    {% for noassistent in noassistents %}
+        {{ noassistent.user.username }}
+    {% endfor %}
+{% endblock %}
+</body>
 </html>
