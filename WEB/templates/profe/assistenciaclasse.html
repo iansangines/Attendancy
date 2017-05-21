@@ -1,16 +1,64 @@
 {% extends 'profe/base.html' %}
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>{% block title %}Assistencia Classe {% endblock %}</title>
-  </head>
-  <body>
-	{% block pagecontent %}
-	{{ classe }}
-	{{ data }}
-	{{ alumnes }}
-	{{ assistents }}
-	{% endblock %}
-  </body>
+</head>
+<body>
+{% block pagecontent %}
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Assignatura:</h3>
+            <h2>{{ classe.assignatura.nom }}</h2>
+        </div>
+        <div class="col-md-8">
+            <h3>Horari:</h3>
+            <h2>{{ data }}</h2>
+        </div>
+    </div>
+    <div class="column" style="padding-top:3%;">
+        <div class="col-md-8">
+            <h3>Assistents:</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nom Alumne</th>
+                    <th>Hora d'entrada</th>
+                    <th>Hora de sortida</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for assistent in assistents %}
+                    <tr>
+                        <td>{{ assistent.user.first_name }} {{ assistent.user.last_name }}</td>
+                        <td>{{ assistent.entrada }}</td>
+                        <td>{{ assistent.sortida }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-lg-3">
+            <h3>No assistents:</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nom Alumne</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for noassistent in noassistents %}
+                    <tr class="danger">
+                        <td>{{ noassistent.user.first_name }} {{ noassistent.user.last_name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+</body>
 </html>

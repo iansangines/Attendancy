@@ -10,6 +10,11 @@
     tmpl_path: '{% get_static_prefix %}tmpls/',
     tmpl_cache: false,
     first_day: {{ first_day }},
+	onAfterViewLoad: function(view) {
+			$('.page-header h3').text(this.getTitle());
+			$('.btn-group button').removeClass('active');
+			$('button[data-calendar-view="' + view + '"]').addClass('active');
+    },
        onAfterEventsLoad: function(events) {
 	if(!events) {
 		return;
