@@ -432,11 +432,14 @@ def historial_alumne(request):
     events_assistits = []
     for event in events:
         durada = event.end - event.start
-        estada = 0
+	estada = event.end - event.end
         for assist in assistencies:
-            if assist.data == event.start.date:
-                if assist.entrada >= event.start.time and assist.sortida <= event.end.time:
-                    estada += assist.sortida - assist.entrada
+            if assist.data == event.start.date():
+                if assist.entrada >= event.start.time() and assist.sortida <= event.end.time():
+		    entrada = datetime.combine(event.start, assist.entrada)
+                    sortida = datetime.combine(event.start, assist.sortida)
+               	    estada += sortida - entrada
+		    
         if cont == 0:
             horesclasse = durada
             horesassistides = estada
@@ -449,10 +452,9 @@ def historial_alumne(request):
 
         cont += 1
 
-    horesclasse = horesclasse.days * 24 + horesclasse.seconds // 3600
-    percentatge = horesassistides / horesclasse * 100
-
-    percentatge = str(percentatge) + "%"
+    horesclasse = horesclasse.days * 24.00 + horesclasse.seconds / 3600.00
+    horesassistides = horesassistides.days*24.00 + horesassistides.seconds / 3600.00
+    percentatge = horesassistides / horesclasse * 100.00
     return render(request, 'profe/historialAlumne.html', {'assignatura': assignatura, 'events': events_assistits, 'horesclasse':horesclasse,'horesassistides':horesassistides,'percentatge':percentatge})
 
 
@@ -473,16 +475,17 @@ def assistencia_classe(request):
     alumnesAssistents = []
     not_assistencies = []
     datactual = datetime.now()
-    #if data < datactual:
-    for ca in cas:
-        print(ca.alumne.user.username)
-        try:
-            print(data)
-            assistenciaAlumne = Assistencia.objects.get(classeAlumne=ca, data=data)
-            assistenciaAlumne.entrada = assistenciaAlumne.entrada.isoformat()
-            alumnesAssistents.append(assistenciaAlumne)
-        except:
-            not_assistencies.append(ca.alumne)
-    return render(request, 'profe/assistenciaclasse.html',
+    if data < datactual.date():
+    	for ca in cas:
+    	    print(ca.alumne.user.username)
+    	    try:
+    	        print(data)
+    	        assistenciaAlumne = Assistencia.objects.get(classeAlumne=ca, data=data)
+    	        assistenciaAlumne.entrada = assistenciaAlumne.entrada.isoformat()
+		assistenciaAlumne.sortida = assistenciaAlumne.sortida.isoformat()
+    	        alumnesAssistents.append(assistenciaAlumne)
+    	    except:
+    	        not_assistencies.append(ca.alumne)
+    	return render(request, 'profe/assistenciaclasse.html',
                   {'classe': classe, 'data': data, 'noassistents': not_assistencies,
                    'assistents': alumnesAssistents})
