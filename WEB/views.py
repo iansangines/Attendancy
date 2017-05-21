@@ -119,61 +119,6 @@ def llista_classes_assignatura(request):
             classesres.append(classe)
     return render(request, 'sysadmin/classes.html', {'classes': classesres})
 
-
-'''
-@login_required(login_url='/WEB/login/')
-@user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
-def crear_classe(request):
-    if request.method == 'POST':
-        form = ClasseForm(request.POST)
-        dies = {'0': 'dilluns', '1': 'dimarts', '2': 'dimecres', '3': 'dijous', '4': 'divendres', '5' : 'dissabte', '6' : 'diumenge'}
-        horaris = request.POST.getlist('horari')  # llistat dels values dels checkboxes apretats
-        if form.is_valid():
-        	nomassig = form.cleaned_data['nom']
-        	dinici = form.cleaned_data['inici']
-        	dfinal = form.cleaned_data['final']
-       		a = Assignatura(nom=nomassig, inici = dinici, final = dfinal)
-        	a.save();
-        for horari in horaris:
-            diaihora = horari.split(";")
-            dia = dies[diaihora[0]]
-            horainici = datetime.strptime(diaihora[1], '%H:%M')
-            horafinal = horainici + timedelta(hours=1)
-            horainici = horainici.time()
-            horafinal = horafinal.time()
-            try:
-                if form.is_valid():
-                    sala = Sala.objects.get(nom=form.cleaned_data['sala'])
-                    professor = Professor.objects.get(user__username=form.cleaned_data['professor'].user.username)
-                    classe = Classe(assignatura=a, sala=sala, dia=dia, horaInici=horainici,
-                                    horaFinal=horafinal)
-                    classes.save()
-		    data = dinici;
-                    while data <= dfinal:
-			if dies[str(datetime.weekday(data))] == dia:
-				start = datetime.combine(data,horainici)
-				end = datetime.combine(data,horafinal)
-				url = "/WEB/profe/assistenciaclasse?classe={{classe}}&data={{start}}"
-				ce = CalendarEvent(title = a.nom, url=url, start= start, end = end)
-				ce.save()
-			data = data + timedelta(days=1)
-                    cp = ClasseProfe(classe=classe, professor=professor)
-                    cp.save()
-                else:
-                    print "no valid"
-            except ValueError:
-                print ValueError
-                return HttpResponseRedirect('/WEB/denyalumne')
-
-        return HttpResponseRedirect('/WEB/sysadmin')
-
-    else:
-        form = ClasseForm()
-        return render(request, 'sysadmin/crearHoraris.html',
-                      {'form': form, 'diesSetmana': range(0, 5), 'horesDia': range(8, 21)})
-'''
-
-
 @login_required(login_url='/WEB/login/')
 @user_passes_test(admin_check, login_url='/WEB/nonauthorized/')
 def crear_classe(request):
@@ -463,7 +408,7 @@ def historial_alumne(request):
     user = User.objects.get(username=request.GET.get('alumne'))
     alumne = Alumne.objects.get(user=user)
     assignatura = Assignatura.objects.get(nom=request.GET.get('assignatura'))
-    events = CalendarEvent.objects.filter(title=assignatura.nom, start__lte=datetime.now())
+    events = CalendarEvent.objects.filter(title=assignatura.nom, start__lte=datetime.now()).order_by('start')
 
     classes = Classe.objects.filter(assignatura=assignatura)
     classesAlumne = ClasseAlumne.objects.filter(alumne=alumne)
@@ -473,7 +418,6 @@ def historial_alumne(request):
             if ca.classe == classe:
                 cas.append(ca)
     cont = 0
-    print len(cas)
     for ca in cas:
         if cont == 0:
             assistencies = Assistencia.objects.filter(classeAlumne=ca)
@@ -482,6 +426,10 @@ def historial_alumne(request):
         prev = assistencies
         cont = cont + 1
     cont = 0
+    horesdeclasse = 0
+    horesassistides = 0
+    estades = []
+    durades = []
     for event in events:
         durada = event.end - event.start
         estada = 0
@@ -495,11 +443,15 @@ def historial_alumne(request):
         else:
             horesclasse += durada
             horesassistides += estada
+	estades.append(estada)
+	durades.append(durada)
         cont += 1
     horesclasse = horesclasse.days * 24 + horesclasse.seconds // 3600
+    percentatge = horesassistides/horesclasse * 100
 
+    percentatge = str(percentatge)+"%"
     return render(request, 'profe/historialAlumne.html',
-                  {'assignatura': assignatura, 'horesclasse': horesclasse, 'horesassistides': horesassistides})
+                  {'assignatura': assignatura, 'events': events,'durades':durades,'estades':estades, 'horesclasse':horesclasse,'horesassistides':horesassistides,'percentatge':percentatge,'range':range(len(events))})
 
 
 @login_required(login_url='/WEB/login/')
@@ -528,25 +480,3 @@ def assistencia_classe(request):
                   {'classe': classe, 'data': data, 'noassistents': not_assistencies,
                    'assistents': alumnesAssistents})
 
-
-
-'''
-@login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
-def assistencia(request):
-    userProfessor = User.objects.get(id=request.user.id)
-    professor = Professor.objects.get(user=userProfessor)
-    classesProfessor = Classe.objects.filter(classeprofe__professor=professor)
-    form = assistenciaForm(classesProfessor=classesProfessor)
-    return render(request, 'profe/assistencia.html', {'form': form})
-
-
-@login_required(login_url='/WEB/login/')
-@user_passes_test(professor_check, login_url='/WEB/nonauthorized/')
-def llista_assistencies(request):
-    if request.method == 'GET':
-        # form = assistenciaForm(request.GET)
-        # data = form.diaClasse
-        return render(request, 'profe/llistaAssistencia.html',
-                      {'data': request.GET.get("diaClasse"), 'classe': request.GET.get("assignaturesProfessor")})
-'''

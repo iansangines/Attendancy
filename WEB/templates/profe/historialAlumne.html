@@ -7,9 +7,56 @@
   </head>
   <body>
 	{% block pagecontent %}
-	{{ assignatura.nom }}
-	{{ horesclasse }}
-	{{ horesassistides }}
-	{% endblock %}
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Assignatura:</h3>
+            <h2>{{ assignatura.nom }}</h2>
+        </div>
+    </div>
+    <div class="column" style="padding-top:3%;">
+        <div class="col-md-8">
+            <h3>Assistencies:</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+		    <th>Durada classe</th>
+                    <th>Estada</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in range %}
+                    <tr>
+                        <td>{{ events.0.start }}  </td>
+			<td>{{ durades.0 }}  </td>
+			<td>{{ estades.0 }}  </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <div class="col-md-1"></div>
+        <div class="col-lg-3">
+            <h3>Estadistiques:</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Hores de classe</th>
+		    <th>Hores assistidies</th>
+		    <th>Percentatge</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ horesclasse}} </td>
+			<td>{{ horesassistides}} </td>
+			<td>{{ percentatge}} </td>
+                    </tr>
+               
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
   </body>
 </html>
