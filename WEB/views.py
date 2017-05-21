@@ -486,6 +486,6 @@ def assistencia_classe(request):
     	        alumnesAssistents.append(assistenciaAlumne)
     	    except:
     	        not_assistencies.append(ca.alumne)
-    	return render(request, 'profe/assistenciaclasse.html',
+    return render(request, 'profe/assistenciaclasse.html',
                   {'classe': classe, 'data': data, 'noassistents': not_assistencies,
                    'assistents': alumnesAssistents})
