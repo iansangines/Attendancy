@@ -514,17 +514,16 @@ def assistencia_classe(request):
     classe = Classe.objects.get(id=classe)
 
     cas = ClasseAlumne.objects.filter(classe=classe)
-    alumnes = Alumne.objects.filter(classealumne__classe=classe)
 
     alumnesAssistents = []
     not_assistencies = []
     for ca in cas:
-            try:
-                assistenciaAlumne = Assistencia.objects.get(classeAlumne=ca, data=data)
-            except:
-                not_assistencies.append(ca.alumne)
-                break
+        print(ca.alumne.user.get_full_name())
+        try:
+            assistenciaAlumne = Assistencia.objects.get(classeAlumne=ca, data=data)
             alumnesAssistents.append(assistenciaAlumne.classeAlumne.alumne)
+        except:
+            not_assistencies.append(ca.alumne)
     return render(request, 'profe/assistenciaclasse.html',
                   {'classe': classe, 'data': data, 'noassistents': not_assistencies,
                    'assistents': alumnesAssistents})
