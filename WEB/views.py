@@ -429,8 +429,7 @@ def historial_alumne(request):
     cont = 0
     horesdeclasse = 0
     horesassistides = 0
-    estades = []
-    durades = []
+    events_assistits = []
     for event in events:
         durada = event.end - event.start
         estada = 0
@@ -444,17 +443,17 @@ def historial_alumne(request):
         else:
             horesclasse += durada
             horesassistides += estada
-        estades.append(estada)
-        durades.append(durada)
+
+	event_assistit = {'event':event,'durada':durada,'estada':estada}
+	events_assistits.append(event_assistit)
+
         cont += 1
+
     horesclasse = horesclasse.days * 24 + horesclasse.seconds // 3600
     percentatge = horesassistides / horesclasse * 100
 
     percentatge = str(percentatge) + "%"
-    return render(request, 'profe/historialAlumne.html',
-                  {'assignatura': assignatura, 'events': events, 'durades': durades, 'estades': estades,
-                   'horesclasse': horesclasse, 'horesassistides': horesassistides, 'percentatge': percentatge,
-                   'range': range(len(events))})
+    return render(request, 'profe/historialAlumne.html', {'assignatura': assignatura, 'events': events_assistits, 'horesclasse':horesclasse,'horesassistides':horesassistides,'percentatge':percentatge})
 
 
 @login_required(login_url='/WEB/login/')

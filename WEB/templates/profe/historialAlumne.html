@@ -25,11 +25,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for i in range %}
+                {% for e in events %}
                     <tr>
-                        <td>{{ events.0.start }}  </td>
-			<td>{{ durades.0 }}  </td>
-			<td>{{ estades.0 }}  </td>
+                        <td>{{ e.event.start }}  </td>
+			<td>{{ e.durada }}  </td>
+			<td>{{ e.estada }}  </td>
                     </tr>
                 {% endfor %}
                 </tbody>
