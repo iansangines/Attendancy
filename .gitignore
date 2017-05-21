@@ -1,3 +1,6 @@
 *.pyc
 *.xml
 .idea/*
+attendancy/__init__.py
+attendancy/settings.py
+log-runserver-log
