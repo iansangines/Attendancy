@@ -31,7 +31,7 @@
                 <tbody>
                 {% for assistent in assistents %}
                     <tr>
-                        <td>{{ assistent.user.first_name }} {{ assistent.user.last_name }}</td>
+                        <td>{{ assistent.classeAlumne.alumne.user.first_name }} {{ assistent.classeAlumne.alumne.user.last_name }}</td>
                         <td>{{ assistent.entrada }}</td>
                         <td>{{ assistent.sortida }}</td>
                     </tr>

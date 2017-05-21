@@ -480,8 +480,8 @@ def assistencia_classe(request):
         try:
             print(data)
             assistenciaAlumne = Assistencia.objects.get(classeAlumne=ca, data=data)
-            print(assistenciaAlumne.entrada)
-            alumnesAssistents.append(assistenciaAlumne.classeAlumne.alumne)
+            assistenciaAlumne.entrada = assistenciaAlumne.entrada.isoformat()
+            alumnesAssistents.append(assistenciaAlumne)
         except:
             not_assistencies.append(ca.alumne)
     return render(request, 'profe/assistenciaclasse.html',
