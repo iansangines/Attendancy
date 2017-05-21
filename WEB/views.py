@@ -469,13 +469,15 @@ def assistencia_classe(request):
 
     alumnesAssistents = []
     not_assistencies = []
-    for ca in cas:
-        print(ca.alumne.user.get_full_name())
-        try:
-            assistenciaAlumne = Assistencia.objects.get(classeAlumne=ca, data=data)
-            alumnesAssistents.append(assistenciaAlumne.classeAlumne.alumne)
-        except:
-            not_assistencies.append(ca.alumne)
+    datactual = datetime.now()
+    if data < datactual:
+    	for ca in cas:
+        	print(ca.alumne.user.get_full_name())
+        	try:
+            		assistenciaAlumne = Assistencia.objects.get(classeAlumne=ca, data=data)
+            		alumnesAssistents.append(assistenciaAlumne.classeAlumne.alumne)
+        	except:
+            		not_assistencies.append(ca.alumne)
     return render(request, 'profe/assistenciaclasse.html',
                   {'classe': classe, 'data': data, 'noassistents': not_assistencies,
                    'assistents': alumnesAssistents})
