@@ -133,9 +133,9 @@ def get_alumnesClasse(request):
     if mac_sala is not None:
         day = time.strftime("%a")
         print(mac_sala)
-        if day == "Sat" or day == "Sun":
-            return Response(status=status.HTTP_400_BAD_REQUEST, data={"error":"There's no class today, you really wanna work?"})
-        classes = Classe.objects.filter(sala__MAC=mac_sala).filter(dia=dies[day])
+#        if day == "Sat" or day == "Sun":
+ #           return Response(status=status.HTTP_400_BAD_REQUEST, data={"error":"There's no class today, you really wanna work?"})
+        classes = Classe.objects.filter(sala__MAC=mac_sala).filter(dia=dies["Mon"])
         if not classes:
             return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any Classe with this MAC"})
         alumnes_classes = []
