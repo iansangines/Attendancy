@@ -36,7 +36,6 @@ def event_serializer(events):
             	}
             	objects_body.append(field)
 		cont = cont + 1
-
     objects_head = {"success": 1}
     objects_head["result"] = objects_body
     return json.dumps(objects_head)
