@@ -475,17 +475,16 @@ def assistencia_classe(request):
     alumnesAssistents = []
     not_assistencies = []
     datactual = datetime.now()
-    if data < datactual.date():
+    if data <= datactual.date():
     	for ca in cas:
     	    print(ca.alumne.user.username)
-    	    try:
-    	        print(data)
-    	        assistenciaAlumne = Assistencia.objects.get(classeAlumne=ca, data=data)
-    	        assistenciaAlumne.entrada = assistenciaAlumne.entrada.isoformat()
-		assistenciaAlumne.sortida = assistenciaAlumne.sortida.isoformat()
-    	        alumnesAssistents.append(assistenciaAlumne)
-    	    except:
-    	        not_assistencies.append(ca.alumne)
+    	    print(data)
+    	    assistenciesAlumne = Assistencia.objects.filter(classeAlumne=ca, data=data)
+	    if not assistenciesAlumne:
+		not_assistencies.append(ca.alumne)
+	    for a in assistenciesAlumne:
+    	        a.entrada = a.entrada.isoformat()
+    	        alumnesAssistents.append(a)
     return render(request, 'profe/assistenciaclasse.html',
                   {'classe': classe, 'data': data, 'noassistents': not_assistencies,
                    'assistents': alumnesAssistents})

@@ -1,551 +1,984 @@
-[21/May/2017 18:08:25] "GET /API/classes/?mac=B8:27:EB:B4:E2:05 HTTP/1.1" 400 5158
-[21/May/2017 18:08:47] "GET /WEB HTTP/1.1" 301 0
-[21/May/2017 18:08:47] "GET /WEB/ HTTP/1.1" 200 1588
-[21/May/2017 18:08:51] "POST /WEB/ HTTP/1.1" 302 0
-[21/May/2017 18:08:51] "GET /WEB/ HTTP/1.1" 302 0
-[21/May/2017 18:08:51] "GET /WEB/profe/ HTTP/1.1" 200 3101
-[21/May/2017 18:08:51] "GET /static/css/main.css HTTP/1.1" 200 1557
-[21/May/2017 18:08:51] "GET /static/js/bootstrap-datetimepicker.min.js HTTP/1.1" 200 38510
-[21/May/2017 18:08:51] "GET /static/css/bootstrap-datetimepicker.min.css HTTP/1.1" 200 7785
-[21/May/2017 18:08:53] "GET /static/js/moment.js HTTP/1.1" 200 128946
-[21/May/2017 18:08:55] "GET /WEB/profe/calendar HTTP/1.1" 301 0
-[21/May/2017 18:08:55] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5321
-[21/May/2017 18:08:56] "GET /static/css/calendar.css HTTP/1.1" 200 10981
-[21/May/2017 18:08:56] "GET /static/css/django_bootstrap_calendar.css HTTP/1.1" 200 0
-[21/May/2017 18:08:56] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 27726
-[21/May/2017 18:08:56] "GET /static/js/underscore-min.js HTTP/1.1" 200 14682
-[21/May/2017 18:08:56] "GET /static/js/calendar.js HTTP/1.1" 200 34179
-[21/May/2017 18:08:56] "GET /static/js/language/es-ES.js HTTP/1.1" 200 1999
-[21/May/2017 18:08:56] "GET /static/js/jquery.min.js HTTP/1.1" 200 93639
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-03-31 22:00:00) while time zone support is active.
-  RuntimeWarning)
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-05-31 22:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:08:57] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:08:57] "GET /static/tmpls/month.html?_=1495390137792 HTTP/1.1" 200 935
-[21/May/2017 18:08:57] "GET /static/tmpls/month-day.html?_=1495390137884 HTTP/1.1" 200 625
-[21/May/2017 18:08:58] "GET /static/tmpls/events-list.html?_=1495390138081 HTTP/1.1" 200 490
-[21/May/2017 18:09:01] "GET /static/img/tick.png?2 HTTP/1.1" 200 4085
-[21/May/2017 18:09:01] "GET /WEB/profe/assistenciaclasse?classe=48&data=2017-05-05%2008:00:00 HTTP/1.1" 301 0
-[21/May/2017 18:09:01] "GET /WEB/profe/assistenciaclasse/?classe=48&data=2017-05-05%2008:00:00 HTTP/1.1" 200 3101
-[21/May/2017 18:09:03] "GET /static/img/dark_wood.png HTTP/1.1" 200 134827
+[22/May/2017 09:16:36] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 302 0
+[22/May/2017 09:16:36] "GET /WEB/login/?next=/WEB/sysadmin/alumnes/ HTTP/1.1" 200 1631
+[22/May/2017 09:16:40] "POST /WEB/ HTTP/1.1" 302 0
+[22/May/2017 09:16:40] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 09:16:40] "GET /WEB/sysadmin/ HTTP/1.1" 200 3184
+[22/May/2017 09:16:43] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 4797
+[22/May/2017 09:16:54] "POST /API/alumnes/ HTTP/1.1" 400 79
+Not Found: /API/alumnes/fred/dispositiu/
+[22/May/2017 09:16:54] "POST /API/alumnes/fred/dispositiu/ HTTP/1.1" 404 46
+[22/May/2017 09:17:36] "POST /API/alumnes/ HTTP/1.1" 403 3613
+[22/May/2017 09:17:48] "GET /API/alumnes/ HTTP/1.1" 405 5388
+[22/May/2017 09:17:52] "POST /API/alumnes/ HTTP/1.1" 201 5301
+[22/May/2017 09:22:26] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 5194
+[22/May/2017 09:22:29] "POST /API/alumnes/ HTTP/1.1" 400 79
+Not Found: /API/alumnes/fred2/dispositiu/
+[22/May/2017 09:22:29] "POST /API/alumnes/fred2/dispositiu/ HTTP/1.1" 404 46
+[22/May/2017 09:26:02] "POST /API/alumnes/ HTTP/1.1" 400 79
+Not Found: /API/alumnes/fredericu/dispositiu/
+[22/May/2017 09:26:02] "POST /API/alumnes/fredericu/dispositiu/ HTTP/1.1" 404 46
 Performing system checks...
 
 System check identified no issues (0 silenced).
-May 21, 2017 - 18:08:02
+May 22, 2017 - 09:25:32
 Django version 1.10.6, using settings 'attendancy.settings'
 Starting development server at http://10.4.41.154:8000/
 Quit the server with CONTROL-C.
-B8:27:EB:B4:E2:05
-[21/May/2017 18:21:26] "GET /WEB/profe/assistenciaclasse/?classe=48&data=2017-05-05%2008:00:00 HTTP/1.1" 200 4423
-[21/May/2017 18:25:13] "GET /static/tmpls/month.html?_=1495391113793 HTTP/1.1" 200 935
-[21/May/2017 18:25:13] "GET /static/tmpls/month-day.html?_=1495391113886 HTTP/1.1" 200 625
-[21/May/2017 18:25:14] "GET /static/tmpls/events-list.html?_=1495391114073 HTTP/1.1" 200 490
-[21/May/2017 18:33:57] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-03-31 22:00:00) while time zone support is active.
-  RuntimeWarning)
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-05-31 22:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:33:58] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:33:58] "GET /static/tmpls/month.html?_=1495391638218 HTTP/1.1" 200 935
-[21/May/2017 18:33:58] "GET /static/tmpls/month-day.html?_=1495391638314 HTTP/1.1" 200 625
-[21/May/2017 18:33:58] "GET /static/tmpls/events-list.html?_=1495391638509 HTTP/1.1" 200 490
-[21/May/2017 18:34:17] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-[21/May/2017 18:34:17] "GET /static/css/main.css HTTP/1.1" 200 1557
-[21/May/2017 18:34:17] "GET /static/css/bootstrap-datetimepicker.min.css HTTP/1.1" 200 7785
-[21/May/2017 18:34:17] "GET /static/js/bootstrap-datetimepicker.min.js HTTP/1.1" 200 38510
-[21/May/2017 18:34:17] "GET /static/css/calendar.css HTTP/1.1" 200 10981
-[21/May/2017 18:34:17] "GET /static/css/django_bootstrap_calendar.css HTTP/1.1" 200 0
-[21/May/2017 18:34:17] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 27726
-[21/May/2017 18:34:18] "GET /static/js/underscore-min.js HTTP/1.1" 200 14682
-[21/May/2017 18:34:18] "GET /static/js/calendar.js HTTP/1.1" 200 34179
-[21/May/2017 18:34:18] "GET /static/js/language/es-ES.js HTTP/1.1" 200 1967
-[21/May/2017 18:34:18] "GET /static/js/jquery.min.js HTTP/1.1" 200 93639
-[21/May/2017 18:34:19] "GET /static/js/moment.js HTTP/1.1" 200 128946
-[21/May/2017 18:34:21] "GET /static/js/underscore-min.js HTTP/1.1" 200 14682
-[21/May/2017 18:34:21] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:34:22] "GET /static/tmpls/month.html?_=1495391662040 HTTP/1.1" 200 935
-[21/May/2017 18:34:22] "GET /static/tmpls/month-day.html?_=1495391662129 HTTP/1.1" 200 625
-[21/May/2017 18:34:22] "GET /static/tmpls/events-list.html?_=1495391662314 HTTP/1.1" 200 490
-[21/May/2017 18:34:38] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-[21/May/2017 18:34:38] "GET /static/css/main.css HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/js/moment.js HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/css/calendar.css HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/css/bootstrap-datetimepicker.min.css HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/js/bootstrap-datetimepicker.min.js HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/css/django_bootstrap_calendar.css HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/js/jquery.min.js HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/js/bootstrap.min.js HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/js/underscore-min.js HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/js/language/es-ES.js HTTP/1.1" 304 0
-[21/May/2017 18:34:38] "GET /static/js/calendar.js HTTP/1.1" 304 0
-[21/May/2017 18:34:39] "GET /static/js/underscore-min.js HTTP/1.1" 304 0
-[21/May/2017 18:34:39] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:34:39] "GET /static/tmpls/month.html?_=1495391679311 HTTP/1.1" 200 935
-[21/May/2017 18:34:39] "GET /static/tmpls/month-day.html?_=1495391679397 HTTP/1.1" 200 625
-[21/May/2017 18:34:39] "GET /static/tmpls/events-list.html?_=1495391679589 HTTP/1.1" 200 490
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-05-01 22:00:00) while time zone support is active.
-  RuntimeWarning)
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-06-30 22:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:34:52] "GET /WEB/profe/json/?from=1496268000000&to=1498860000000 HTTP/1.1" 200 3410
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-07-31 22:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:34:53] "GET /WEB/profe/json/?from=1498860000000&to=1501538400000 HTTP/1.1" 200 385
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-07-01 22:00:00) while time zone support is active.
-  RuntimeWarning)
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-08-31 22:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:34:53] "GET /WEB/profe/json/?from=1501538400000&to=1504216800000 HTTP/1.1" 200 31
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-08-01 22:00:00) while time zone support is active.
-  RuntimeWarning)
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-09-30 22:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:34:54] "GET /WEB/profe/json/?from=1504216800000&to=1506808800000 HTTP/1.1" 200 31
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-10-31 23:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:34:55] "GET /WEB/profe/json/?from=1506808800000&to=1509490800000 HTTP/1.1" 200 31
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-10-01 23:00:00) while time zone support is active.
-  RuntimeWarning)
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-11-30 23:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:34:56] "GET /WEB/profe/json/?from=1509490800000&to=1512082800000 HTTP/1.1" 200 31
-[21/May/2017 18:34:57] "GET /WEB/profe/json/?from=1506808800000&to=1509490800000 HTTP/1.1" 200 31
-[21/May/2017 18:34:57] "GET /WEB/profe/json/?from=1504216800000&to=1506808800000 HTTP/1.1" 200 31
-[21/May/2017 18:38:48] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-[21/May/2017 18:38:48] "GET /static/js/language/es-ES.js HTTP/1.1" 304 0
-[21/May/2017 18:38:48] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:38:49] "GET /static/tmpls/month.html?_=1495391928979 HTTP/1.1" 200 935
-[21/May/2017 18:38:49] "GET /static/tmpls/month-day.html?_=1495391929070 HTTP/1.1" 200 625
-[21/May/2017 18:38:49] "GET /static/tmpls/events-list.html?_=1495391929256 HTTP/1.1" 200 490
-[21/May/2017 18:38:51] "GET /WEB/profe/assistenciaclasse?classe=49&data=2017-05-02%2008:00:00 HTTP/1.1" 301 0
-[21/May/2017 18:38:51] "GET /WEB/profe/assistenciaclasse/?classe=49&data=2017-05-02%2008:00:00 HTTP/1.1" 200 4178
-[21/May/2017 18:38:56] "GET /static/tmpls/month.html?_=1495391936262 HTTP/1.1" 200 935
-[21/May/2017 18:38:56] "GET /static/tmpls/month-day.html?_=1495391936353 HTTP/1.1" 200 625
-[21/May/2017 18:38:56] "GET /static/tmpls/events-list.html?_=1495391936529 HTTP/1.1" 200 490
-[21/May/2017 18:38:58] "GET /WEB/profe/assistenciaclasse/?classe=48&data=2017-05-05%2008:00:00 HTTP/1.1" 200 4423
-[21/May/2017 18:39:05] "GET /WEB/profe/assistenciaclasse?classe=47&data=2017-05-01%2008:00:00 HTTP/1.1" 301 0
-[21/May/2017 18:39:05] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-01%2008:00:00 HTTP/1.1" 200 4423
-[21/May/2017 18:40:33] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-[21/May/2017 18:40:33] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:40:34] "GET /static/tmpls/month.html?_=1495392033982 HTTP/1.1" 200 935
-[21/May/2017 18:40:34] "GET /static/tmpls/month-day.html?_=1495392034072 HTTP/1.1" 200 625
-[21/May/2017 18:40:34] "GET /static/tmpls/events-list.html?_=1495392034254 HTTP/1.1" 200 490
-[21/May/2017 18:40:36] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-01%2008:00:00 HTTP/1.1" 200 4423
-[21/May/2017 18:40:43] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-[21/May/2017 18:40:43] "GET /static/css/main.css HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/js/bootstrap-datetimepicker.min.js HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/css/bootstrap-datetimepicker.min.css HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/js/moment.js HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/css/calendar.css HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/css/django_bootstrap_calendar.css HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/js/jquery.min.js HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/js/bootstrap.min.js HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/js/underscore-min.js HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/js/language/es-ES.js HTTP/1.1" 304 0
-[21/May/2017 18:40:43] "GET /static/js/calendar.js HTTP/1.1" 304 0
-[21/May/2017 18:40:48] "GET /static/js/underscore-min.js HTTP/1.1" 304 0
-[21/May/2017 18:40:48] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:40:48] "GET /static/tmpls/month.html?_=1495392048443 HTTP/1.1" 200 935
-[21/May/2017 18:40:48] "GET /static/tmpls/month-day.html?_=1495392048538 HTTP/1.1" 200 625
-[21/May/2017 18:40:48] "GET /static/tmpls/events-list.html?_=1495392048729 HTTP/1.1" 200 490
-[21/May/2017 18:40:55] "GET /static/img/tick.png?2 HTTP/1.1" 304 0
-[21/May/2017 18:40:55] "GET /static/img/dark_wood.png HTTP/1.1" 304 0
-[21/May/2017 18:41:14] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-01%2008:00:00 HTTP/1.1" 200 4423
-[21/May/2017 18:41:33] "GET /WEB/profe/assistenciaclasse/?classe=48&data=2017-05-05%2008:00:00 HTTP/1.1" 200 4423
-[21/May/2017 18:41:38] "GET /WEB/profe/assistenciaclasse?classe=49&data=2017-05-09%2008:00:00 HTTP/1.1" 301 0
-[21/May/2017 18:41:38] "GET /WEB/profe/assistenciaclasse/?classe=49&data=2017-05-09%2008:00:00 HTTP/1.1" 200 4178
-[21/May/2017 18:41:42] "GET /WEB/profe/assistenciaclasse?classe=50&data=2017-05-11%2008:00:00 HTTP/1.1" 301 0
-[21/May/2017 18:41:42] "GET /WEB/profe/assistenciaclasse/?classe=50&data=2017-05-11%2008:00:00 HTTP/1.1" 200 4179
-[21/May/2017 18:41:49] "GET /WEB/profe/assigsprofessor HTTP/1.1" 301 0
-[21/May/2017 18:41:49] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4109
-[21/May/2017 18:41:52] "GET /WEB/profe/classesassigprofessor/?assignatura=PTI HTTP/1.1" 200 3931
-[21/May/2017 18:42:43] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-[21/May/2017 18:42:43] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:42:44] "GET /static/tmpls/month.html?_=1495392163952 HTTP/1.1" 200 935
-[21/May/2017 18:42:44] "GET /static/tmpls/month-day.html?_=1495392164043 HTTP/1.1" 200 625
-[21/May/2017 18:42:44] "GET /static/tmpls/events-list.html?_=1495392164231 HTTP/1.1" 200 490
-[21/May/2017 18:42:46] "GET /WEB/profe/assistenciaclasse?classe=49&data=2017-05-23%2008:00:00 HTTP/1.1" 301 0
-[21/May/2017 18:42:46] "GET /WEB/profe/assistenciaclasse/?classe=49&data=2017-05-23%2008:00:00 HTTP/1.1" 200 4179
-[21/May/2017 18:42:50] "GET /WEB/profe/assistenciaclasse?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 301 0
-[21/May/2017 18:42:50] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4424
-[21/May/2017 18:43:52] "GET /WEB/profe/json/?from=1496268000000&to=1498860000000 HTTP/1.1" 200 3410
-[21/May/2017 18:43:53] "GET /WEB/profe/json/?from=1498860000000&to=1501538400000 HTTP/1.1" 200 385
-[21/May/2017 18:43:53] "GET /WEB/profe/json/?from=1501538400000&to=1504216800000 HTTP/1.1" 200 31
-[21/May/2017 18:43:54] "GET /WEB/profe/json/?from=1504216800000&to=1506808800000 HTTP/1.1" 200 31
-[21/May/2017 18:43:54] "GET /WEB/profe/json/?from=1506808800000&to=1509490800000 HTTP/1.1" 200 31
-[21/May/2017 18:43:55] "GET /WEB/profe/json/?from=1504216800000&to=1506808800000 HTTP/1.1" 200 31
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-08-11 22:00:00) while time zone support is active.
-  RuntimeWarning)
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-09-11 22:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:44:02] "GET /WEB/profe/json/?from=1505080800000&to=1505167200000 HTTP/1.1" 200 31
-[21/May/2017 18:44:02] "GET /static/tmpls/day.html?_=1495392242547 HTTP/1.1" 200 2851
-[21/May/2017 18:44:06] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-[21/May/2017 18:44:07] "GET /static/js/language/es-ES.js HTTP/1.1" 304 0
-[21/May/2017 18:44:07] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:44:07] "GET /static/tmpls/month.html?_=1495392247713 HTTP/1.1" 200 935
-[21/May/2017 18:44:07] "GET /static/tmpls/month-day.html?_=1495392247799 HTTP/1.1" 200 625
-[21/May/2017 18:44:08] "GET /static/tmpls/events-list.html?_=1495392247980 HTTP/1.1" 200 490
-[21/May/2017 18:44:11] "GET /WEB/profe/json/?from=1493589600000&to=1493676000000 HTTP/1.1" 200 3056
-[21/May/2017 18:44:11] "GET /static/tmpls/day.html?_=1495392251472 HTTP/1.1" 200 2851
-[21/May/2017 18:44:17] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4109
-[21/May/2017 18:44:19] "GET /WEB/profe/ HTTP/1.1" 200 3102
-[21/May/2017 18:44:21] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-[21/May/2017 18:44:21] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:44:22] "GET /static/tmpls/month.html?_=1495392262100 HTTP/1.1" 200 935
-[21/May/2017 18:44:22] "GET /static/tmpls/month-day.html?_=1495392262195 HTTP/1.1" 200 625
-[21/May/2017 18:44:22] "GET /static/tmpls/events-list.html?_=1495392262380 HTTP/1.1" 200 490
-[21/May/2017 18:44:23] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-01%2008:00:00 HTTP/1.1" 200 4423
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-04-01 22:00:00) while time zone support is active.
-  RuntimeWarning)
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-05-02 22:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:44:32] "GET /WEB/profe/json/?from=1493676000000&to=1493762400000 HTTP/1.1" 200 3233
-[21/May/2017 18:44:32] "GET /static/tmpls/day.html?_=1495392272183 HTTP/1.1" 200 2851
-[21/May/2017 18:44:43] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5545
-[21/May/2017 18:44:44] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 18:44:44] "GET /static/tmpls/month.html?_=1495392284304 HTTP/1.1" 200 935
-[21/May/2017 18:44:44] "GET /static/tmpls/month-day.html?_=1495392284395 HTTP/1.1" 200 625
-[21/May/2017 18:44:44] "GET /static/tmpls/events-list.html?_=1495392284586 HTTP/1.1" 200 490
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-04-03 22:00:00) while time zone support is active.
-  RuntimeWarning)
-/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1430: RuntimeWarning: DateTimeField CalendarEvent.start received a naive datetime (2017-05-04 22:00:00) while time zone support is active.
-  RuntimeWarning)
-[21/May/2017 18:44:52] "GET /WEB/profe/json/?from=1493848800000&to=1493935200000 HTTP/1.1" 200 3231
-[21/May/2017 18:44:52] "GET /static/tmpls/day.html?_=1495392292201 HTTP/1.1" 200 2851
-[21/May/2017 18:44:54] "GET /WEB/profe/assistenciaclasse?classe=50&data=2017-05-04%2008:00:00 HTTP/1.1" 301 0
-[21/May/2017 18:44:54] "GET /WEB/profe/assistenciaclasse/?classe=50&data=2017-05-04%2008:00:00 HTTP/1.1" 200 4178
-Performing system checks...
-
-System check identified no issues (0 silenced).
-May 21, 2017 - 18:17:54
-Django version 1.10.6, using settings 'attendancy.settings'
-Starting development server at http://10.4.41.154:8000/
-Quit the server with CONTROL-C.
-Subi 1
-Subi 2
-Subi 1
-Subi 2
-Subi 1
-Subi 2
-Subi 1
-Subi 2
-Subi 1
-Subi 2
-Subi 1
-Subi 2
-Subi 1
-Subi 2
-Subi 1
-Subi 2
-[21/May/2017 20:50:41] "GET /WEB/profe/assistenciaclasse/?classe=50&data=2017-05-04%2008:00:00 HTTP/1.1" 200 4178
-[21/May/2017 20:50:44] "GET /WEB/profe/ HTTP/1.1" 200 3102
-[21/May/2017 20:50:50] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4109
-[21/May/2017 20:50:53] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 4034
-[21/May/2017 20:50:57] "GET /WEB/profe/historialAlumne?alumne=subi1&assignatura=PTI HTTP/1.1" 301 0
-[21/May/2017 20:50:57] "GET /WEB/profe/historialAlumne/?alumne=subi1&assignatura=PTI HTTP/1.1" 200 3071
-[21/May/2017 20:50:59] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5549
-[21/May/2017 20:51:00] "GET /static/js/language/es-ES.js HTTP/1.1" 200 1966
-[21/May/2017 20:51:00] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 20:51:00] "GET /static/tmpls/month.html?_=1495392660632 HTTP/1.1" 200 935
-[21/May/2017 20:51:00] "GET /static/tmpls/month-day.html?_=1495392660722 HTTP/1.1" 200 625
-[21/May/2017 20:51:00] "GET /static/tmpls/events-list.html?_=1495392660902 HTTP/1.1" 200 490
-[21/May/2017 20:51:03] "GET /WEB/profe/json/?from=1493589600000&to=1493676000000 HTTP/1.1" 200 3056
-[21/May/2017 20:51:03] "GET /static/tmpls/day.html?_=1495392663438 HTTP/1.1" 200 2856
-[21/May/2017 20:51:08] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5549
-[21/May/2017 20:51:09] "GET /static/js/language/es-ES.js HTTP/1.1" 304 0
-[21/May/2017 20:51:09] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 20:51:09] "GET /static/tmpls/month.html?_=1495392669695 HTTP/1.1" 200 935
-[21/May/2017 20:51:09] "GET /static/tmpls/month-day.html?_=1495392669790 HTTP/1.1" 200 625
-[21/May/2017 20:51:10] "GET /static/tmpls/events-list.html?_=1495392669971 HTTP/1.1" 200 490
-[21/May/2017 20:51:11] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-01%2008:00:00 HTTP/1.1" 200 4423
-[21/May/2017 20:51:37] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4109
-[21/May/2017 20:51:38] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 4034
-[21/May/2017 20:51:42] "GET /WEB/profe/historialAlumne/?alumne=subi1&assignatura=PTI HTTP/1.1" 200 3071
-[21/May/2017 20:53:04] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5549
-[21/May/2017 20:53:05] "GET /static/js/language/es-ES.js HTTP/1.1" 304 0
-[21/May/2017 20:53:05] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 20:53:05] "GET /static/tmpls/month.html?_=1495392785518 HTTP/1.1" 200 935
-[21/May/2017 20:53:05] "GET /static/tmpls/month-day.html?_=1495392785609 HTTP/1.1" 200 625
-[21/May/2017 20:53:05] "GET /static/tmpls/events-list.html?_=1495392785794 HTTP/1.1" 200 490
-[21/May/2017 20:53:07] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-01%2008:00:00 HTTP/1.1" 200 4423
-[21/May/2017 20:58:20] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5549
-[21/May/2017 20:58:21] "GET /static/js/language/es-ES.js HTTP/1.1" 304 0
-[21/May/2017 20:58:21] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 20:58:21] "GET /static/tmpls/month.html?_=1495393101442 HTTP/1.1" 200 935
-[21/May/2017 20:58:21] "GET /static/tmpls/month-day.html?_=1495393101532 HTTP/1.1" 200 625
-[21/May/2017 20:58:21] "GET /static/tmpls/events-list.html?_=1495393101727 HTTP/1.1" 200 490
-Not Found: /alumnes
-[21/May/2017 21:02:23] "POST /alumnes HTTP/1.1" 404 2251
-Not Found: /alumnes/hgxbn/dispositiu
-[21/May/2017 21:02:23] "POST /alumnes/hgxbn/dispositiu HTTP/1.1" 404 2302
-Not Found: /alumnes
-[21/May/2017 21:04:08] "POST /alumnes HTTP/1.1" 404 2251
-Not Found: /alumnes/jhh/dispositiu
-[21/May/2017 21:04:08] "POST /alumnes/jhh/dispositiu HTTP/1.1" 404 2296
-Not Found: /alumnes
-[21/May/2017 21:12:54] "POST /alumnes HTTP/1.1" 404 2251
-Performing system checks...
-
-System check identified no issues (0 silenced).
-May 21, 2017 - 20:50:32
-Django version 1.10.6, using settings 'attendancy.settings'
-Starting development server at http://10.4.41.154:8000/
-Quit the server with CONTROL-C.
-2
-Subi 1
-Subi 2
-2
-Subi 1
-Subi 2
-Unhandled exception in thread started by <function wrapper at 0x7f01207025f0>
-Performing system checks...
-
+{}
+{'username': [u'This field is required.'], 'password': [u'This field is required.']}
+{}
+fredericu
+[22/May/2017 09:27:37] "GET /API/alumnes/ HTTP/1.1" 405 5388
+Internal Server Error: /API/alumnes/
 Traceback (most recent call last):
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
-    fn(*args, **kwargs)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/management/commands/runserver.py", line 121, in inner_run
-    self.check(display_num_errors=True)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/management/base.py", line 374, in check
-    include_deployment_checks=include_deployment_checks,
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/management/base.py", line 361, in _run_checks
-    return checks.run_checks(**kwargs)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/checks/registry.py", line 81, in run_checks
-    new_errors = check(app_configs=app_configs)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/checks/urls.py", line 14, in check_url_config
-    return check_resolver(resolver)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/checks/urls.py", line 24, in check_resolver
-    for pattern in resolver.url_patterns:
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/utils/functional.py", line 35, in __get__
-    res = instance.__dict__[self.name] = self.func(instance)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/urls/resolvers.py", line 313, in url_patterns
-    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/utils/functional.py", line 35, in __get__
-    res = instance.__dict__[self.name] = self.func(instance)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/urls/resolvers.py", line 306, in urlconf_module
-    return import_module(self.urlconf_name)
-  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
-    __import__(name)
-  File "/home/alumne/Attendancy/attendancy/urls.py", line 22, in <module>
-    url(r'^API/', include('API.urls')),
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 50, in include
-    urlconf_module = import_module(urlconf_module)
-  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
-    __import__(name)
-  File "/home/alumne/Attendancy/API/urls.py", line 2, in <module>
-    from . import views
-  File "/home/alumne/Attendancy/API/views.py", line 138
-    classes = Classe.objects.filter(sala__MAC=mac_sala).filter(dia=dies["Mon])
-                                                                             ^
-SyntaxError: EOL while scanning string literal
-[21/May/2017 21:21:24] "GET /API/classes/?mac=B8:27:EB:B4:E2:05 HTTP/1.1" 200 184
-Not Found: /alumnes
-[21/May/2017 21:35:52] "POST /alumnes HTTP/1.1" 404 2251
-Not Found: /alumnes/redf/dispositiu
-[21/May/2017 21:35:52] "POST /alumnes/redf/dispositiu HTTP/1.1" 404 2299
-[21/May/2017 21:49:04] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
-[21/May/2017 21:49:04] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 184
-[21/May/2017 21:49:04] "GET /API/dispositius/E0:CB:EE:13:72:87/codi HTTP/1.1" 301 0
-[21/May/2017 21:49:04] "GET /API/dispositius/E0:CB:EE:13:72:87/codi/ HTTP/1.1" 200 20
-Not Found: /API/classes/11/assistencia/E0:CB:EE:13:72:87/
-[21/May/2017 21:49:04] "POST /API/classes/11/assistencia/E0:CB:EE:13:72:87/ HTTP/1.1" 404 45
-Not Found: /API/classes/11/assistencia/E0:CB:EE:13:72:87/
-[21/May/2017 21:49:04] "PUT /API/classes/11/assistencia/E0:CB:EE:13:72:87/ HTTP/1.1" 404 45
-Not Found: /alumnes
-[21/May/2017 21:53:36] "POST /alumnes HTTP/1.1" 404 2251
-Not Found: /alumnes/hgxgv/dispositiu
-[21/May/2017 21:53:36] "POST /alumnes/hgxgv/dispositiu HTTP/1.1" 404 2302
-Not Found: /alumnes
-[21/May/2017 21:54:40] "POST /alumnes HTTP/1.1" 404 2251
-Not Found: /alumnes/gdfj/dispositiu
-[21/May/2017 21:54:40] "POST /alumnes/gdfj/dispositiu HTTP/1.1" 404 2299
-Not Found: /alumnes
-[21/May/2017 22:25:17] "POST /alumnes HTTP/1.1" 404 2251
-Not Found: /alumnes/gg/dispositiu
-[21/May/2017 22:25:17] "POST /alumnes/gg/dispositiu HTTP/1.1" 404 2293
-[21/May/2017 22:26:58] "GET /WEB/ HTTP/1.1" 302 0
-[21/May/2017 22:26:59] "GET /WEB/profe/ HTTP/1.1" 200 3102
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = get_response(request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/decorators.py", line 52, in handler
+    return func(*args, **kwargs)
+  File "/home/alumne/Attendancy/API/views.py", line 37, in altaAlumne
+    alumne.save()
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 796, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 824, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 908, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 947, in _do_insert
+    using=using, raw=raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/query.py", line 1045, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 1054, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 337, in execute
+    return Database.Cursor.execute(self, query, params)
+IntegrityError: UNIQUE constraint failed: API_alumne.dni
+[22/May/2017 09:27:57] "POST /API/alumnes/ HTTP/1.1" 500 152941
+[22/May/2017 09:27:58] "POST /API/alumnes/ HTTP/1.1" 400 5404
+[22/May/2017 09:27:59] "GET /API/alumnes/ HTTP/1.1" 405 5388
+Internal Server Error: /API/alumnes/
+Traceback (most recent call last):
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = get_response(request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/decorators.py", line 52, in handler
+    return func(*args, **kwargs)
+  File "/home/alumne/Attendancy/API/views.py", line 37, in altaAlumne
+    alumne.save()
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 796, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 824, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 908, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 947, in _do_insert
+    using=using, raw=raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/query.py", line 1045, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 1054, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 337, in execute
+    return Database.Cursor.execute(self, query, params)
+IntegrityError: UNIQUE constraint failed: API_alumne.dni
+[22/May/2017 09:28:07] "POST /API/alumnes/ HTTP/1.1" 500 152927
+[22/May/2017 09:28:11] "GET /API/alumnes/ HTTP/1.1" 405 5388
+[22/May/2017 09:28:17] "POST /API/alumnes/ HTTP/1.1" 400 5404
+[22/May/2017 09:28:30] "POST /API/alumnes/ HTTP/1.1" 201 5301
+[22/May/2017 09:29:23] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 5603
+[22/May/2017 09:30:42] "GET /WEB/sysadmin/delete/?alumne=fred123235 HTTP/1.1" 302 0
+[22/May/2017 09:30:42] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 5194
+[22/May/2017 09:30:55] "GET /WEB/sysadmin/delete/?alumne=fred HTTP/1.1" 302 0
+[22/May/2017 09:30:56] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 4797
+[22/May/2017 09:31:18] "POST /API/alumnes/ HTTP/1.1" 400 79
+Not Found: /API/alumnes/frederic/dispositiu/
+[22/May/2017 09:31:18] "POST /API/alumnes/frederic/dispositiu/ HTTP/1.1" 404 46
+[22/May/2017 09:36:01] "POST /API/alumnes/ HTTP/1.1" 400 79
+Not Found: /API/alumnes/fredi/dispositiu/
+[22/May/2017 09:36:01] "POST /API/alumnes/fredi/dispositiu/ HTTP/1.1" 404 46
+[22/May/2017 09:43:04] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 4797
 Not Found: /favicon.ico
-[21/May/2017 22:26:59] "GET /favicon.ico HTTP/1.1" 404 2262
-[21/May/2017 22:27:02] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5549
-[21/May/2017 22:27:03] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 22:27:03] "GET /static/tmpls/month.html?_=1495398423325 HTTP/1.1" 200 935
-[21/May/2017 22:27:03] "GET /static/tmpls/month-day.html?_=1495398423409 HTTP/1.1" 200 625
-[21/May/2017 22:27:03] "GET /static/tmpls/events-list.html?_=1495398423593 HTTP/1.1" 200 490
-[21/May/2017 22:27:04] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4109
-[21/May/2017 22:27:06] "GET /WEB/profe/ HTTP/1.1" 200 3102
-[21/May/2017 22:27:07] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4109
-[21/May/2017 22:27:09] "GET /WEB/profe/alumnesprofessor/?assignatura=SLDS HTTP/1.1" 200 3402
-[21/May/2017 22:27:11] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 4034
-[21/May/2017 22:27:13] "GET /WEB/logout/ HTTP/1.1" 302 0
-[21/May/2017 22:27:13] "GET /WEB/ HTTP/1.1" 200 1588
-[21/May/2017 22:27:16] "POST /WEB/ HTTP/1.1" 302 0
-[21/May/2017 22:27:16] "GET /WEB/ HTTP/1.1" 302 0
-[21/May/2017 22:27:16] "GET /WEB/sysadmin/ HTTP/1.1" 200 3232
-[21/May/2017 22:27:18] "GET /WEB/sysadmin/assignatures/ HTTP/1.1" 200 4290
-[21/May/2017 22:27:19] "GET /WEB/sysadmin/sales/ HTTP/1.1" 200 3711
-[21/May/2017 22:27:20] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 4418
-[21/May/2017 22:27:23] "GET /WEB/sysadmin/professors/ HTTP/1.1" 200 4293
-[21/May/2017 22:27:24] "GET /WEB/sysadmin/ HTTP/1.1" 200 3232
-[21/May/2017 22:27:26] "GET /WEB/sysadmin/professors/ HTTP/1.1" 200 4293
-[21/May/2017 22:27:29] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 4418
-[21/May/2017 22:27:31] "GET /WEB/logout/ HTTP/1.1" 302 0
-[21/May/2017 22:27:31] "GET /WEB/ HTTP/1.1" 200 1588
-[21/May/2017 22:44:45] "GET /API/alumnes/ HTTP/1.1" 405 5388
-[21/May/2017 22:46:00] "POST /API/alumnes/ HTTP/1.1" 201 5301
-Not Found: /alumnes
-[21/May/2017 22:46:50] "POST /alumnes HTTP/1.1" 404 2251
-Not Found: /alumnes/ii/dispositiu
-[21/May/2017 22:46:50] "POST /alumnes/ii/dispositiu HTTP/1.1" 404 2293
-Internal Server Error: /API/alumnes
+[22/May/2017 09:43:05] "GET /favicon.ico HTTP/1.1" 404 2262
+[22/May/2017 09:43:07] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 4797
+[22/May/2017 09:43:13] "GET /WEB/sysadmin/assignatures/ HTTP/1.1" 200 4244
+[22/May/2017 09:43:26] "GET /WEB/sysadmin/crearclasse HTTP/1.1" 301 0
+[22/May/2017 09:43:26] "GET /WEB/sysadmin/crearclasse/ HTTP/1.1" 200 23444
+[22/May/2017 09:43:34] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 09:43:34] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 205
+[22/May/2017 09:43:42] "GET /WEB/sysadmin/classesassignatura/?assignatura=PTI HTTP/1.1" 200 4018
+Internal Server Error: /API/classes/47/assistencia/04:1B:BA:4A:1F:C3/
 Traceback (most recent call last):
   File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
     response = get_response(request)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/utils/deprecation.py", line 134, in __call__
-    response = self.process_request(request)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/middleware/common.py", line 63, in process_request
-    path = self.get_full_path_with_slash(request)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/middleware/common.py", line 101, in get_full_path_with_slash
-    'url': request.get_host() + new_path,
-RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 10.4.41.154:8000/API/alumnes/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
-[21/May/2017 22:49:08] "POST /API/alumnes HTTP/1.1" 500 63129
-Internal Server Error: /API/alumnes/gg/dispositiu
-Traceback (most recent call last):
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
-    response = get_response(request)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/utils/deprecation.py", line 134, in __call__
-    response = self.process_request(request)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/middleware/common.py", line 63, in process_request
-    path = self.get_full_path_with_slash(request)
-  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/middleware/common.py", line 101, in get_full_path_with_slash
-    'url': request.get_host() + new_path,
-RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 10.4.41.154:8000/API/alumnes/gg/dispositiu/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
-[21/May/2017 22:49:08] "POST /API/alumnes/gg/dispositiu HTTP/1.1" 500 63353
-[21/May/2017 22:51:42] "POST /API/alumnes/ HTTP/1.1" 400 79
-Not Found: /API/alumnes/gg/dispositiu/
-[21/May/2017 22:51:42] "POST /API/alumnes/gg/dispositiu/ HTTP/1.1" 404 46
-[21/May/2017 22:54:44] "POST /API/alumnes/ HTTP/1.1" 400 79
-Not Found: /API/alumnes/gg/dispositiu/
-[21/May/2017 22:54:44] "POST /API/alumnes/gg/dispositiu/ HTTP/1.1" 404 46
-[21/May/2017 23:00:25] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
-[21/May/2017 23:00:25] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 184
-[21/May/2017 23:00:56] "POST /API/alumnes/ HTTP/1.1" 400 79
-Not Found: /API/alumnes/gg/dispositiu/
-[21/May/2017 23:00:56] "POST /API/alumnes/gg/dispositiu/ HTTP/1.1" 404 46
-[21/May/2017 23:02:45] "POST /API/alumnes/ HTTP/1.1" 400 79
-Not Found: /API/alumnes/gg/dispositiu/
-[21/May/2017 23:02:45] "POST /API/alumnes/gg/dispositiu/ HTTP/1.1" 404 46
-[21/May/2017 23:04:32] "POST /API/alumnes/ HTTP/1.1" 400 79
-Not Found: /API/alumnes/gg/dispositiu/
-[21/May/2017 23:04:32] "POST /API/alumnes/gg/dispositiu/ HTTP/1.1" 404 46
-[21/May/2017 23:05:31] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
-[21/May/2017 23:05:31] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 184
-[21/May/2017 23:08:20] "POST /API/alumnes/ HTTP/1.1" 400 79
-Not Found: /API/alumnes/dani/dispositiu/
-[21/May/2017 23:08:20] "POST /API/alumnes/dani/dispositiu/ HTTP/1.1" 404 46
-[21/May/2017 23:09:14] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
-[21/May/2017 23:09:14] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 184
-[21/May/2017 23:14:58] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
-[21/May/2017 23:14:58] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 184
-[21/May/2017 23:18:52] "GET /API/classes/?mac=B8:27:EB:B4:E2:05 HTTP/1.1" 200 184
-[21/May/2017 23:19:04] "GET /API/classes/?mac=B8:27:EB:B4:E2:05 HTTP/1.1" 200 184
-[21/May/2017 23:19:14] "GET /API/classes/?mac=B8:27:EB:B4:E2:05 HTTP/1.1" 200 184
-[21/May/2017 23:21:17] "GET /API/classes/?mac=B8:27:EB:B4:E2:05 HTTP/1.1" 200 184
-[21/May/2017 23:21:22] "GET /API/classes/?mac=B8:27:EB:B4:E2:05 HTTP/1.1" 200 184
-[21/May/2017 23:21:44] "GET /API/classes/?mac=B8:27:EB:B4:E2:05 HTTP/1.1" 200 184
-[21/May/2017 23:22:44] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
-[21/May/2017 23:22:44] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 184
-[21/May/2017 23:23:14] "GET /API/classes/?mac=B8:27:EB:B4:E2:05 HTTP/1.1" 200 205
-[21/May/2017 23:24:24] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
-[21/May/2017 23:24:24] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 205
-[21/May/2017 23:24:45] "POST /API/classes/47/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 201 0
-[21/May/2017 23:25:36] "GET /WEB/ HTTP/1.1" 302 0
-[21/May/2017 23:25:36] "GET /WEB/profe/ HTTP/1.1" 200 3102
-[21/May/2017 23:25:38] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5549
-[21/May/2017 23:25:39] "GET /static/js/language/es-ES.js HTTP/1.1" 304 0
-[21/May/2017 23:25:40] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
-[21/May/2017 23:25:40] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 205
-[21/May/2017 23:25:40] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
-[21/May/2017 23:25:40] "GET /static/tmpls/month.html?_=1495401940806 HTTP/1.1" 200 935
-[21/May/2017 23:25:40] "GET /static/tmpls/month-day.html?_=1495401940906 HTTP/1.1" 200 625
-[21/May/2017 23:25:41] "GET /static/tmpls/events-list.html?_=1495401941103 HTTP/1.1" 200 490
-[21/May/2017 23:25:42] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-01%2008:00:00 HTTP/1.1" 200 4555
-[21/May/2017 23:25:48] "GET /WEB/profe/assistenciaclasse?classe=47&data=2017-05-08%2008:00:00 HTTP/1.1" 301 0
-[21/May/2017 23:25:48] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-08%2008:00:00 HTTP/1.1" 200 4555
-[21/May/2017 23:25:55] "POST /API/classes/47/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 201 0
-[21/May/2017 23:30:53] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-08%2008:00:00 HTTP/1.1" 200 4555
-[21/May/2017 23:30:59] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-21%2008:00:00 HTTP/1.1" 200 4556
-[21/May/2017 23:31:28] "GET /WEB/profe/assistenciaclasse/?classe=48&data=2017-05-21%2008:00:00 HTTP/1.1" 200 4556
-[21/May/2017 23:31:30] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-21%2008:00:00 HTTP/1.1" 200 4556
-[21/May/2017 23:31:36] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-9%2008:00:00 HTTP/1.1" 200 4555
-[21/May/2017 23:33:25] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
-[21/May/2017 23:33:25] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 205
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/alumne/Attendancy/API/views.py", line 100, in post
+    assistencia.save(True)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 796, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 824, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 908, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 947, in _do_insert
+    using=using, raw=raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/query.py", line 1045, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 1054, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 337, in execute
+    return Database.Cursor.execute(self, query, params)
+IntegrityError: UNIQUE constraint failed: API_assistencia.id
+[22/May/2017 09:43:59] "POST /API/classes/47/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 500 17957
+[22/May/2017 09:44:18] "GET /WEB/logout/ HTTP/1.1" 302 0
+[22/May/2017 09:44:18] "GET /WEB/ HTTP/1.1" 200 1588
+[22/May/2017 09:44:25] "POST /WEB/ HTTP/1.1" 302 0
+[22/May/2017 09:44:26] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 09:44:26] "GET /WEB/profe/ HTTP/1.1" 200 3054
+[22/May/2017 09:44:28] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 09:44:32] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
+[22/May/2017 09:44:32] "GET /static/tmpls/month.html?_=1495442617527 HTTP/1.1" 200 935
+[22/May/2017 09:44:32] "GET /static/tmpls/month-day.html?_=1495442617594 HTTP/1.1" 200 625
+[22/May/2017 09:44:33] "GET /static/tmpls/events-list.html?_=1495442617739 HTTP/1.1" 200 490
+[22/May/2017 09:44:34] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4124
+[22/May/2017 09:44:40] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4124
 Performing system checks...
 
 System check identified no issues (0 silenced).
-May 21, 2017 - 22:43:41
+May 22, 2017 - 09:35:35
 Django version 1.10.6, using settings 'attendancy.settings'
 Starting development server at http://10.4.41.154:8000/
 Quit the server with CONTROL-C.
-{u'username': u'fredy', u'first_name': u'Frederic', u'last_name': u'Uhlman', u'dni': u'39413819C', u'password': u'1234', u'email': u'fredy@mail.com'}
+Alta alumne
 {}
+{'username': [u'This field is required.'], 'password': [u'This field is required.']}
 {}
-gg
-{}
-{}
-gg
+fredi
 B8:27:EB:B4:E2:05
-{}
-{}
-gg
-{}
-{}
-gg
-{}
-{}
-gg
-B8:27:EB:B4:E2:05
-{}
-{}
-dani
-B8:27:EB:B4:E2:05
-B8:27:EB:B4:E2:05
-B8:27:EB:B4:E2:05
-B8:27:EB:B4:E2:05
-B8:27:EB:B4:E2:05
-B8:27:EB:B4:E2:05
-B8:27:EB:B4:E2:05
-B8:27:EB:B4:E2:05
-B8:27:EB:B4:E2:05
+post assistencia
+19:21
+Assistencia object
+[22/May/2017 09:46:25] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4502
+[22/May/2017 09:49:26] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4502
+[22/May/2017 09:49:50] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4502
+[22/May/2017 09:50:57] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4502
+[22/May/2017 09:50:59] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4502
+[22/May/2017 09:51:00] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4502
+[22/May/2017 09:51:00] "GET /static/css/main.css HTTP/1.1" 304 0
+[22/May/2017 09:51:00] "GET /static/js/moment.js HTTP/1.1" 304 0
+[22/May/2017 09:51:00] "GET /static/js/bootstrap-datetimepicker.min.js HTTP/1.1" 304 0
+[22/May/2017 09:51:00] "GET /static/css/bootstrap-datetimepicker.min.css HTTP/1.1" 304 0
+[22/May/2017 09:51:14] "GET /API/alumnes/ HTTP/1.1" 405 5388
+[22/May/2017 09:51:17] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4502
+[22/May/2017 09:51:29] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 09:51:30] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
+[22/May/2017 09:51:30] "GET /static/tmpls/month.html?_=1495443034705 HTTP/1.1" 200 935
+[22/May/2017 09:51:30] "GET /static/tmpls/month-day.html?_=1495443034753 HTTP/1.1" 200 625
+[22/May/2017 09:51:30] "GET /static/tmpls/events-list.html?_=1495443034870 HTTP/1.1" 200 490
+[22/May/2017 09:51:33] "GET /WEB/profe/json/?from=1490997600000&to=1493589600000 HTTP/1.1" 200 6081
+[22/May/2017 09:51:34] "GET /WEB/profe/json/?from=1488322800000&to=1490997600000 HTTP/1.1" 200 5013
+[22/May/2017 09:51:35] "GET /WEB/profe/json/?from=1485903600000&to=1488322800000 HTTP/1.1" 200 1809
+[22/May/2017 09:51:46] "GET /WEB/profe/assistenciaclasse?classe=47&data=2017-02-13%2008:00:00 HTTP/1.1" 301 0
+[22/May/2017 09:51:46] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-02-13%2008:00:00 HTTP/1.1" 200 4572
+[22/May/2017 09:52:01] "GET /WEB/profe/calendar HTTP/1.1" 301 0
+[22/May/2017 09:52:01] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 09:52:01] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
+[22/May/2017 09:52:01] "GET /static/tmpls/month.html?_=1495443066552 HTTP/1.1" 200 935
+[22/May/2017 09:52:01] "GET /static/tmpls/month-day.html?_=1495443066593 HTTP/1.1" 200 625
+[22/May/2017 09:52:02] "GET /static/tmpls/events-list.html?_=1495443066718 HTTP/1.1" 200 490
+[22/May/2017 09:52:12] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4502
+[22/May/2017 09:52:47] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 09:52:47] "GET /WEB/profe/ HTTP/1.1" 200 3054
+Not Found: /favicon.ico
+[22/May/2017 09:52:47] "GET /favicon.ico HTTP/1.1" 404 2262
+[22/May/2017 09:52:49] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 09:52:49] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6081
+[22/May/2017 09:52:49] "GET /static/tmpls/month.html?_=1495443114200 HTTP/1.1" 200 935
+[22/May/2017 09:52:49] "GET /static/tmpls/month-day.html?_=1495443114213 HTTP/1.1" 200 625
+[22/May/2017 09:52:49] "GET /static/tmpls/events-list.html?_=1495443114298 HTTP/1.1" 200 490
+[22/May/2017 09:52:52] "GET /WEB/profe/assistenciaclasse?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 301 0
+[22/May/2017 09:52:52] "GET /WEB/profe/assistenciaclasse/?classe=47&data=2017-05-22%2008:00:00 HTTP/1.1" 200 4502
+[22/May/2017 09:58:39] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 09:58:39] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 205
+[22/May/2017 09:59:23] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 09:59:23] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 205
+Internal Server Error: /API/classes/47/assistencia/04:1B:BA:4A:1F:C3/
+Traceback (most recent call last):
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = get_response(request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/alumne/Attendancy/API/views.py", line 100, in post
+    assistencia.save(True)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 796, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 824, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 908, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 947, in _do_insert
+    using=using, raw=raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/query.py", line 1045, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 1054, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 337, in execute
+    return Database.Cursor.execute(self, query, params)
+IntegrityError: UNIQUE constraint failed: API_assistencia.id
+[22/May/2017 10:00:11] "POST /API/classes/47/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 500 17957
+[22/May/2017 10:00:33] "GET /WEB/logout/ HTTP/1.1" 302 0
+[22/May/2017 10:00:34] "GET /WEB/ HTTP/1.1" 200 1588
+[22/May/2017 10:00:37] "POST /WEB/ HTTP/1.1" 302 0
+[22/May/2017 10:00:37] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 10:00:37] "GET /WEB/sysadmin/ HTTP/1.1" 200 3184
+[22/May/2017 10:00:41] "GET /WEB/sysadmin/assignatures/ HTTP/1.1" 200 4244
+[22/May/2017 10:00:53] "GET /WEB/sysadmin/delete/?assignatura=PTI HTTP/1.1" 302 0
+[22/May/2017 10:00:53] "GET /WEB/sysadmin/assignatures/ HTTP/1.1" 200 3885
+[22/May/2017 10:01:01] "GET /WEB/sysadmin/crearclasse/ HTTP/1.1" 200 23444
+[22/May/2017 10:01:03] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+Not Found: /API/classes/
+[22/May/2017 10:01:03] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 404 46
+[22/May/2017 10:01:34] "POST /WEB/sysadmin/crearclasse/ HTTP/1.1" 302 0
+[22/May/2017 10:01:34] "GET /WEB/sysadmin/assignatures HTTP/1.1" 301 0
+[22/May/2017 10:01:34] "GET /WEB/sysadmin/assignatures/ HTTP/1.1" 200 4244
+[22/May/2017 10:01:37] "GET /WEB/sysadmin/classesassignatura/?assignatura=PTI HTTP/1.1" 200 4013
+[22/May/2017 10:04:07] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 4797
+[22/May/2017 10:04:11] "GET /WEB/logout/ HTTP/1.1" 302 0
+[22/May/2017 10:04:11] "GET /WEB/ HTTP/1.1" 200 1588
+[22/May/2017 10:04:14] "POST /WEB/ HTTP/1.1" 302 0
+[22/May/2017 10:04:14] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 10:04:14] "GET /WEB/profe/ HTTP/1.1" 200 3054
+[22/May/2017 10:04:21] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 10:04:22] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 10:04:22] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 10:04:22] "GET /static/tmpls/month.html?_=1495443807334 HTTP/1.1" 200 935
+[22/May/2017 10:04:22] "GET /static/tmpls/month-day.html?_=1495443807350 HTTP/1.1" 200 625
+[22/May/2017 10:04:22] "GET /static/tmpls/events-list.html?_=1495443807468 HTTP/1.1" 200 490
+[22/May/2017 10:04:24] "GET /WEB/profe/assistenciaclasse?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 301 0
+[22/May/2017 10:04:24] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:04:30] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 10:04:30] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 10:04:31] "GET /static/tmpls/month.html?_=1495443815660 HTTP/1.1" 200 935
+[22/May/2017 10:04:31] "GET /static/tmpls/month-day.html?_=1495443815674 HTTP/1.1" 200 625
+[22/May/2017 10:04:31] "GET /static/tmpls/events-list.html?_=1495443815757 HTTP/1.1" 200 490
+[22/May/2017 10:04:32] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 10:04:35] "GET /WEB/profe/classesassigprofessor/?assignatura=PTI HTTP/1.1" 200 3880
+[22/May/2017 10:04:41] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 3679
+[22/May/2017 10:04:44] "GET /WEB/profe/historialAlumne?alumne=fredy&assignatura=PTI HTTP/1.1" 301 0
+[22/May/2017 10:04:44] "GET /WEB/profe/historialAlumne/?alumne=fredy&assignatura=PTI HTTP/1.1" 200 9095
+[22/May/2017 10:05:21] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 10:05:21] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 10:05:21] "GET /static/tmpls/month.html?_=1495443866071 HTTP/1.1" 200 935
+[22/May/2017 10:05:21] "GET /static/tmpls/month-day.html?_=1495443866086 HTTP/1.1" 200 625
+[22/May/2017 10:05:21] "GET /static/tmpls/events-list.html?_=1495443866174 HTTP/1.1" 200 490
+[22/May/2017 10:05:24] "GET /WEB/profe/assistenciaclasse?classe=52&data=2017-05-24%2010:00:00 HTTP/1.1" 301 0
+[22/May/2017 10:05:24] "GET /WEB/profe/assistenciaclasse/?classe=52&data=2017-05-24%2010:00:00 HTTP/1.1" 200 4124
+[22/May/2017 10:05:32] "GET /static/tmpls/month.html?_=1495443876862 HTTP/1.1" 200 935
+[22/May/2017 10:05:32] "GET /static/tmpls/month-day.html?_=1495443876956 HTTP/1.1" 200 625
+[22/May/2017 10:05:32] "GET /static/tmpls/events-list.html?_=1495443877044 HTTP/1.1" 200 490
+[22/May/2017 10:05:33] "GET /WEB/profe/assistenciaclasse?classe=50&data=2017-05-18%2008:00:00 HTTP/1.1" 301 0
+[22/May/2017 10:05:33] "GET /WEB/profe/assistenciaclasse/?classe=50&data=2017-05-18%2008:00:00 HTTP/1.1" 200 4125
+[22/May/2017 10:05:36] "GET /WEB/profe/assistenciaclasse?classe=52&data=2017-05-17%2010:00:00 HTTP/1.1" 301 0
+[22/May/2017 10:05:36] "GET /WEB/profe/assistenciaclasse/?classe=52&data=2017-05-17%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:05:49] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:05:49] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+Internal Server Error: /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/
+Traceback (most recent call last):
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = get_response(request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/alumne/Attendancy/API/views.py", line 100, in post
+    assistencia.save(True)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 796, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 824, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 908, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 947, in _do_insert
+    using=using, raw=raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/query.py", line 1045, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 1054, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 337, in execute
+    return Database.Cursor.execute(self, query, params)
+IntegrityError: UNIQUE constraint failed: API_assistencia.id
+[22/May/2017 10:05:53] "POST /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 500 17957
+[22/May/2017 10:06:11] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:07:57] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:09:23] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:09:25] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:09:26] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:09:27] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:09:28] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2017 - 09:46:23
+Django version 1.10.6, using settings 'attendancy.settings'
+Starting development server at http://10.4.41.154:8000/
+Quit the server with CONTROL-C.
+subi1
+2017-05-22
+subi2
+2017-05-22
+fredy
+2017-05-22
+subi1
+2017-05-22
+subi2
+2017-05-22
+fredy
+2017-05-22
+subi1
+2017-05-22
+subi2
+2017-05-22
+fredy
+2017-05-22
+subi1
+2017-05-22
+subi2
+2017-05-22
+fredy
+2017-05-22
+subi1
+2017-05-22
+subi2
+2017-05-22
+fredy
+2017-05-22
+subi1
+2017-05-22
+subi2
+2017-05-22
+fredy
+2017-05-22
+subi1
+2017-05-22
+subi2
+2017-05-22
+fredy
+2017-05-22
+subi1
+2017-02-13
+subi2
+2017-02-13
+fredy
+2017-02-13
+subi1
+2017-05-22
+subi2
+2017-05-22
+fredy
+2017-05-22
+subi1
+2017-05-22
+subi2
+2017-05-22
+fredy
+2017-05-22
 B8:27:EB:B4:E2:05
 B8:27:EB:B4:E2:05
 post assistencia
-17:51
+9:59
 Assistencia object
 B8:27:EB:B4:E2:05
-Subi 1
-Subi 2
-Frederic Uhlman
-Subi 1
-Subi 2
-Frederic Uhlman
+fredy
+2017-05-22
+fredy
+2017-05-17
+B8:27:EB:B4:E2:05
 post assistencia
-17:52
+10:5
 Assistencia object
-Subi 1
-Subi 2
-Frederic Uhlman
-Subi 1
-Subi 2
-Frederic Uhlman
-Subi 1
-Subi 2
-Frederic Uhlman
-Subi 1
-Subi 2
-Frederic Uhlman
-Subi 1
-Subi 2
-Frederic Uhlman
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+[22/May/2017 10:11:19] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:11:35] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:12:16] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4325
+[22/May/2017 10:12:39] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:20:27] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:20:30] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:22:06] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:22:06] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+Internal Server Error: /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/
+Traceback (most recent call last):
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = get_response(request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/alumne/Attendancy/API/views.py", line 100, in post
+    assistencia.save(True)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 796, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 824, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 908, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/base.py", line 947, in _do_insert
+    using=using, raw=raw)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/query.py", line 1045, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 1054, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 337, in execute
+    return Database.Cursor.execute(self, query, params)
+IntegrityError: UNIQUE constraint failed: API_assistencia.id
+[22/May/2017 10:22:11] "POST /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 500 17957
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2017 - 10:10:19
+Django version 1.10.6, using settings 'attendancy.settings'
+Starting development server at http://10.4.41.154:8000/
+Quit the server with CONTROL-C.
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
 B8:27:EB:B4:E2:05
+post assistencia
+10:0
+Assistencia object
+[22/May/2017 10:28:07] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:28:07] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+[22/May/2017 10:28:11] "POST /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 201 0
+[22/May/2017 10:28:23] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:31:20] "PUT /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 400 41
+[22/May/2017 10:31:41] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2017 - 10:26:03
+Django version 1.10.6, using settings 'attendancy.settings'
+Starting development server at http://10.4.41.154:8000/
+Quit the server with CONTROL-C.
+B8:27:EB:B4:E2:05
+post assistencia
+10:6
+Assistencia object
+fredy
+2017-05-22
+fredy
+2017-05-22
+[22/May/2017 10:37:51] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:38:06] "POST /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 201 0
+[22/May/2017 10:38:24] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:38:26] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:38:27] "GET /static/js/moment.js HTTP/1.1" 304 0
+[22/May/2017 10:38:27] "GET /static/css/main.css HTTP/1.1" 304 0
+[22/May/2017 10:38:27] "GET /static/js/bootstrap-datetimepicker.min.js HTTP/1.1" 304 0
+[22/May/2017 10:38:27] "GET /static/css/bootstrap-datetimepicker.min.css HTTP/1.1" 304 0
+[22/May/2017 10:38:32] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 10:38:36] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 3679
+Internal Server Error: /WEB/profe/historialAlumne/
+Traceback (most recent call last):
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = get_response(request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/alumne/Attendancy/WEB/views.py", line 438, in historial_alumne
+    if assist.entrada >= event.start.time() and assist.sortida <= event.end.time():
+TypeError: can't compare datetime.time to NoneType
+[22/May/2017 10:38:37] "GET /WEB/profe/historialAlumne/?alumne=fredy&assignatura=PTI HTTP/1.1" 500 84693
+[22/May/2017 10:38:57] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 10:38:58] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 10:38:58] "GET /static/tmpls/month.html?_=1495445882705 HTTP/1.1" 200 935
+[22/May/2017 10:38:58] "GET /static/tmpls/month-day.html?_=1495445882722 HTTP/1.1" 200 625
+[22/May/2017 10:38:58] "GET /static/tmpls/events-list.html?_=1495445882810 HTTP/1.1" 200 490
+[22/May/2017 10:39:02] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:40:53] "PUT /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 204 0
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2017 - 10:36:45
+Django version 1.10.6, using settings 'attendancy.settings'
+Starting development server at http://10.4.41.154:8000/
+Quit the server with CONTROL-C.
+fredy
+2017-05-22
+post assistencia
+10:16
+Assistencia object
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+[22/May/2017 10:42:34] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4327
+[22/May/2017 10:42:48] "GET /WEB/profe/ HTTP/1.1" 200 3054
+[22/May/2017 10:42:49] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 10:42:52] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 3679
+[22/May/2017 10:42:54] "GET /WEB/profe/historialAlumne/?alumne=fredy&assignatura=PTI HTTP/1.1" 200 9095
+[22/May/2017 10:46:26] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 3679
+[22/May/2017 10:46:27] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 3679
+[22/May/2017 10:46:28] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:46:28] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+[22/May/2017 10:46:29] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 10:46:29] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 10:46:29] "GET /static/tmpls/month.html?_=1495446334373 HTTP/1.1" 200 935
+[22/May/2017 10:46:29] "GET /static/tmpls/month-day.html?_=1495446334390 HTTP/1.1" 200 625
+[22/May/2017 10:46:29] "GET /static/tmpls/events-list.html?_=1495446334482 HTTP/1.1" 200 490
+[22/May/2017 10:46:31] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4327
+[22/May/2017 10:46:38] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:46:38] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+[22/May/2017 10:46:45] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:46:45] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+[22/May/2017 10:47:09] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:47:09] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+[22/May/2017 10:47:19] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:47:19] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+[22/May/2017 10:48:13] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:48:13] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2017 - 10:42:30
+Django version 1.10.6, using settings 'attendancy.settings'
+Starting development server at http://10.4.41.154:8000/
+Quit the server with CONTROL-C.
+fredy
+2017-05-22
+B8:27:EB:B4:E2:05
+fredy
+2017-05-22
+B8:27:EB:B4:E2:05
+B8:27:EB:B4:E2:05
+B8:27:EB:B4:E2:05
+B8:27:EB:B4:E2:05
+B8:27:EB:B4:E2:05
+[22/May/2017 10:49:37] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:49:37] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+[22/May/2017 10:50:13] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 10:50:13] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2017 - 10:48:15
+Django version 1.10.6, using settings 'attendancy.settings'
+Starting development server at http://10.4.41.154:8000/
+Quit the server with CONTROL-C.
+B8:27:EB:B4:E2:05
+B8:27:EB:B4:E2:05
+[22/May/2017 10:51:24] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:51:32] "POST /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 201 0
+[22/May/2017 10:51:35] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 10:51:37] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2017 - 10:51:09
+Django version 1.10.6, using settings 'attendancy.settings'
+Starting development server at http://10.4.41.154:8000/
+Quit the server with CONTROL-C.
+fredy
+2017-05-22
+post assistencia
+10:29
+Assistencia object
+fredy
+2017-05-22
+fredy
+2017-05-22
+Internal Server Error: /WEB/profe/assistenciaclasse/
+Traceback (most recent call last):
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = get_response(request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/alumne/Attendancy/WEB/views.py", line 486, in assistencia_classe
+    a.entrada = assistenciaAlumne.entrada.isoformat()
+NameError: global name 'assistenciaAlumne' is not defined
+[22/May/2017 10:54:43] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 500 77570
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2017 - 10:54:40
+Django version 1.10.6, using settings 'attendancy.settings'
+Starting development server at http://10.4.41.154:8000/
+Quit the server with CONTROL-C.
+fredy
+2017-05-22
+[22/May/2017 10:55:27] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4524
+[22/May/2017 10:56:35] "PUT /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 400 41
+[22/May/2017 10:56:40] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4524
+[22/May/2017 10:56:43] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4524
+[22/May/2017 10:56:44] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4524
+[22/May/2017 10:56:46] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4524
+[22/May/2017 11:00:03] "POST /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 201 0
+[22/May/2017 11:04:10] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 11:04:13] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 11:04:47] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 11:04:49] "GET /WEB/profe/ HTTP/1.1" 200 3054
+[22/May/2017 11:04:50] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 11:04:52] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 3679
+[22/May/2017 11:04:53] "GET /WEB/profe/historialAlumne/?alumne=fredy&assignatura=PTI HTTP/1.1" 200 9095
+[22/May/2017 11:04:56] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 11:04:56] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 11:04:56] "GET /static/tmpls/month.html?_=1495447441039 HTTP/1.1" 200 935
+[22/May/2017 11:04:56] "GET /static/tmpls/month-day.html?_=1495447441056 HTTP/1.1" 200 625
+[22/May/2017 11:04:56] "GET /static/tmpls/events-list.html?_=1495447441144 HTTP/1.1" 200 490
+[22/May/2017 11:04:58] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 11:05:34] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 11:06:10] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 11:08:26] "GET /WEB/profe/ HTTP/1.1" 200 3054
+[22/May/2017 11:08:37] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 11:08:42] "GET /WEB/profe/classesassigprofessor/?assignatura=PTI HTTP/1.1" 200 3880
+[22/May/2017 11:08:47] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 11:08:48] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 11:08:48] "GET /static/tmpls/month.html?_=1495447672824 HTTP/1.1" 200 935
+[22/May/2017 11:08:48] "GET /static/tmpls/month-day.html?_=1495447672840 HTTP/1.1" 200 625
+[22/May/2017 11:08:48] "GET /static/tmpls/events-list.html?_=1495447672917 HTTP/1.1" 200 490
+[22/May/2017 11:08:54] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 11:08:56] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 3679
+[22/May/2017 11:09:05] "GET /WEB/profe/historialAlumne/?alumne=fredy&assignatura=PTI HTTP/1.1" 200 9095
+[22/May/2017 11:09:30] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 11:09:31] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 11:09:31] "GET /static/tmpls/month.html?_=1495447715743 HTTP/1.1" 200 935
+[22/May/2017 11:09:31] "GET /static/tmpls/month-day.html?_=1495447715759 HTTP/1.1" 200 625
+[22/May/2017 11:09:31] "GET /static/tmpls/events-list.html?_=1495447715842 HTTP/1.1" 200 490
+[22/May/2017 11:09:38] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 11:09:49] "GET /static/tmpls/month.html?_=1495447734145 HTTP/1.1" 200 935
+[22/May/2017 11:09:49] "GET /static/tmpls/month-day.html?_=1495447734222 HTTP/1.1" 200 625
+[22/May/2017 11:09:49] "GET /static/tmpls/events-list.html?_=1495447734303 HTTP/1.1" 200 490
+[22/May/2017 11:09:52] "GET /WEB/logout/ HTTP/1.1" 302 0
+[22/May/2017 11:09:52] "GET /WEB/ HTTP/1.1" 200 1588
+[22/May/2017 11:09:57] "POST /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:09:57] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:09:57] "GET /WEB/sysadmin/ HTTP/1.1" 200 3184
+[22/May/2017 11:10:02] "GET /WEB/sysadmin/professors/ HTTP/1.1" 200 4247
+[22/May/2017 11:10:11] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 4797
+[22/May/2017 11:10:13] "GET /WEB/sysadmin/sales/ HTTP/1.1" 200 3665
+[22/May/2017 11:10:14] "GET /WEB/sysadmin/assignatures/ HTTP/1.1" 200 4244
+[22/May/2017 11:10:16] "GET /WEB/sysadmin/crearclasse/ HTTP/1.1" 200 23444
+[22/May/2017 11:11:10] "POST /WEB/sysadmin/crearclasse/ HTTP/1.1" 302 0
+[22/May/2017 11:11:10] "GET /WEB/sysadmin/assignatures HTTP/1.1" 301 0
+[22/May/2017 11:11:10] "GET /WEB/sysadmin/assignatures/ HTTP/1.1" 200 4603
+[22/May/2017 11:11:22] "GET /WEB/sysadmin/sales/ HTTP/1.1" 200 3665
+[22/May/2017 11:11:29] "GET /WEB/sysadmin/assignatures/ HTTP/1.1" 200 4603
+[22/May/2017 11:11:44] "GET /WEB/sysadmin/sales/ HTTP/1.1" 200 3665
+[22/May/2017 11:11:53] "GET /WEB/logout/ HTTP/1.1" 302 0
+[22/May/2017 11:11:53] "GET /WEB/ HTTP/1.1" 200 1588
+[22/May/2017 11:11:56] "POST /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:11:56] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:11:56] "GET /WEB/profe/ HTTP/1.1" 200 3055
+[22/May/2017 11:11:58] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 3688
+[22/May/2017 11:12:01] "GET /WEB/profe/alumnesprofessor/?assignatura=TXC HTTP/1.1" 200 3357
+[22/May/2017 11:12:03] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5504
+[22/May/2017 11:12:03] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 3072
+[22/May/2017 11:12:04] "GET /static/tmpls/month.html?_=1495447868670 HTTP/1.1" 200 935
+[22/May/2017 11:12:04] "GET /static/tmpls/month-day.html?_=1495447868689 HTTP/1.1" 200 625
+[22/May/2017 11:12:04] "GET /static/tmpls/events-list.html?_=1495447868766 HTTP/1.1" 200 490
+[22/May/2017 11:12:06] "GET /WEB/profe/ HTTP/1.1" 200 3055
+[22/May/2017 11:12:10] "GET /WEB/logout/ HTTP/1.1" 302 0
+[22/May/2017 11:12:10] "GET /WEB/ HTTP/1.1" 200 1588
+[22/May/2017 11:12:13] "POST /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:12:13] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:12:13] "GET /WEB/profe/ HTTP/1.1" 200 3054
+[22/May/2017 11:13:12] "GET /API/classes?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 301 0
+[22/May/2017 11:13:12] "GET /API/classes/?mac=B8%3A27%3AEB%3AB4%3AE2%3A05 HTTP/1.1" 200 163
+[22/May/2017 11:13:18] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 11:13:18] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 11:13:18] "GET /static/tmpls/month.html?_=1495447943170 HTTP/1.1" 200 935
+[22/May/2017 11:13:18] "GET /static/tmpls/month-day.html?_=1495447943187 HTTP/1.1" 200 625
+[22/May/2017 11:13:18] "GET /static/tmpls/events-list.html?_=1495447943265 HTTP/1.1" 200 490
+[22/May/2017 11:13:20] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4256
+[22/May/2017 11:13:43] "POST /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 201 0
+[22/May/2017 11:14:02] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4321
+[22/May/2017 11:15:39] "PUT /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 400 41
+[22/May/2017 11:15:59] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4321
+[22/May/2017 11:16:01] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4321
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2017 - 10:55:25
+Django version 1.10.6, using settings 'attendancy.settings'
+Starting development server at http://10.4.41.154:8000/
+Quit the server with CONTROL-C.
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+post assistencia
+10:38
+Assistencia object
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+B8:27:EB:B4:E2:05
+fredy
+2017-05-22
+post assistencia
+10:51
+Assistencia object
+fredy
+2017-05-22
+fredy
+2017-05-22
+fredy
+2017-05-22
+[22/May/2017 11:19:08] "POST /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 201 0
+[22/May/2017 11:19:12] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4321
+[22/May/2017 11:19:13] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4321
+[22/May/2017 11:20:24] "PUT /API/classes/51/assistencia/04:1B:BA:4A:1F:C3/ HTTP/1.1" 204 0
+[22/May/2017 11:20:32] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4327
+[22/May/2017 11:20:39] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 11:20:41] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 3679
+[22/May/2017 11:20:44] "GET /WEB/profe/historialAlumne/?alumne=fredy&assignatura=PTI HTTP/1.1" 200 9095
+[22/May/2017 11:22:44] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 11:22:45] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 11:22:45] "GET /static/tmpls/month.html?_=1495448509719 HTTP/1.1" 200 935
+[22/May/2017 11:22:45] "GET /static/tmpls/month-day.html?_=1495448509738 HTTP/1.1" 200 625
+[22/May/2017 11:22:45] "GET /static/tmpls/events-list.html?_=1495448509817 HTTP/1.1" 200 490
+[22/May/2017 11:22:49] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4327
+[22/May/2017 11:26:32] "GET /API/alumnes/ HTTP/1.1" 405 5388
+[22/May/2017 11:27:25] "POST /API/alumnes/ HTTP/1.1" 201 5301
+[22/May/2017 11:27:34] "GET /WEB/logout/ HTTP/1.1" 302 0
+[22/May/2017 11:27:34] "GET /WEB/ HTTP/1.1" 200 1588
+[22/May/2017 11:27:42] "POST /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:27:42] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:27:42] "GET /WEB/sysadmin/ HTTP/1.1" 200 3184
+[22/May/2017 11:27:49] "GET /WEB/sysadmin/alumnes/ HTTP/1.1" 200 5194
+[22/May/2017 11:28:44] "GET /WEB/sysadmin/assignatures/ HTTP/1.1" 200 4603
+[22/May/2017 11:29:07] "GET /API/assignatures/lXBS66Ngn6l0VfVLjrA7g8v26kou6sMB/alumnes/dani HTTP/1.1" 301 0
+[22/May/2017 11:29:07] "GET /API/assignatures/lXBS66Ngn6l0VfVLjrA7g8v26kou6sMB/alumnes/dani/ HTTP/1.1" 405 5678
+Internal Server Error: /API/assignatures/lXBS66Ngn6l0VfVLjrA7g8v26kou6sMB/alumnes/dani/
+Traceback (most recent call last):
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = get_response(request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 485, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 405, in finalize_response
+    % type(response)
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<type 'NoneType'>`
+[22/May/2017 11:29:16] "POST /API/assignatures/lXBS66Ngn6l0VfVLjrA7g8v26kou6sMB/alumnes/dani/ HTTP/1.1" 500 16265
+[22/May/2017 11:29:16] "GET /API/assignatures/lXBS66Ngn6l0VfVLjrA7g8v26kou6sMB/alumnes/dani/ HTTP/1.1" 405 5678
+Internal Server Error: /API/assignatures/lXBS66Ngn6l0VfVLjrA7g8v26kou6sMB/alumnes/dani/
+Traceback (most recent call last):
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = get_response(request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 485, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+  File "/home/alumne/.virtualenvs/djangodev/local/lib/python2.7/site-packages/rest_framework/views.py", line 405, in finalize_response
+    % type(response)
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<type 'NoneType'>`
+[22/May/2017 11:29:23] "POST /API/assignatures/lXBS66Ngn6l0VfVLjrA7g8v26kou6sMB/alumnes/dani/ HTTP/1.1" 500 16265
+[22/May/2017 11:29:23] "GET /API/assignatures/lXBS66Ngn6l0VfVLjrA7g8v26kou6sMB/alumnes/dani/ HTTP/1.1" 405 5678
+[22/May/2017 11:29:44] "GET /WEB/logout/ HTTP/1.1" 302 0
+[22/May/2017 11:29:44] "GET /WEB/ HTTP/1.1" 200 1588
+[22/May/2017 11:29:47] "POST /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:29:47] "GET /WEB/ HTTP/1.1" 302 0
+[22/May/2017 11:29:47] "GET /WEB/profe/ HTTP/1.1" 200 3054
+[22/May/2017 11:29:49] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 11:29:51] "GET /WEB/profe/alumnesprofessor/?assignatura=PTI HTTP/1.1" 200 3991
+[22/May/2017 11:29:59] "GET /WEB/profe/historialAlumne?alumne=dani&assignatura=PTI HTTP/1.1" 301 0
+[22/May/2017 11:29:59] "GET /WEB/profe/historialAlumne/?alumne=dani&assignatura=PTI HTTP/1.1" 200 9095
+[22/May/2017 11:30:02] "GET /WEB/profe/assigsprofessor/ HTTP/1.1" 200 4063
+[22/May/2017 11:30:03] "GET /WEB/profe/calendar/ HTTP/1.1" 200 5503
+[22/May/2017 11:30:04] "GET /WEB/profe/json/?from=1493589600000&to=1496268000000 HTTP/1.1" 200 6257
+[22/May/2017 11:30:04] "GET /static/tmpls/month.html?_=1495448948788 HTTP/1.1" 200 935
+[22/May/2017 11:30:04] "GET /static/tmpls/month-day.html?_=1495448948803 HTTP/1.1" 200 625
+[22/May/2017 11:30:04] "GET /static/tmpls/events-list.html?_=1495448948879 HTTP/1.1" 200 490
+[22/May/2017 11:30:05] "GET /WEB/profe/assistenciaclasse/?classe=51&data=2017-05-22%2010:00:00 HTTP/1.1" 200 4573

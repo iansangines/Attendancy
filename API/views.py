@@ -23,8 +23,12 @@ def index(request):
 
 @api_view(['POST'])
 def altaAlumne(request):
+    print("Alta alumne")
     print(request.data)
-    serializedUser = UserSerializer(data=request.data)
+    try:
+    	serializedUser = UserSerializer(data=request.data)
+    except ValueError:
+	print(ValueError)
     if serializedUser.is_valid():
         user = User.objects.create_user(email=serializedUser.validated_data['email'],
             username=serializedUser.validated_data['username'],
@@ -36,6 +40,7 @@ def altaAlumne(request):
         alumne.save()
         return Response(status=status.HTTP_201_CREATED)
     else:
+	print serializedUser.errors
         return Response(serializedUser.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -91,7 +96,7 @@ class Assistencies(APIView):
             assistencia = Assistencia(classeAlumne=classeAlumne, data=datetime.datetime.now().date(),
                                       entrada=datetime.datetime.strptime(entrada, '%H:%M').time(), sortida=None)
             print(assistencia)
-            assistencia.save(True)
+            assistencia.save()
         except ValueError:
             print(ValueError)
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "Can't save Assistencia object"})
@@ -118,7 +123,7 @@ class Assistencies(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "Not found any Assistencia with this parameters"})
         try:
-            assistencia.sortida=sortida
+	    assistencia.sortida = sortida
             assistencia.save()
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "Can't save Assistencia object"})
@@ -178,4 +183,3 @@ def alumneAssignatura(request, codiassig, username):
     for classe in classes:
         ca = ClasseAlumne(classe=classe, alumne=alumne)
         ca.save()
-    return Response(status=status.HTTP_200_OK)
