@@ -409,7 +409,7 @@ def historial_alumne(request):
     user = User.objects.get(username=request.GET.get('alumne'))
     alumne = Alumne.objects.get(user=user)
     assignatura = Assignatura.objects.get(nom=request.GET.get('assignatura'))
-    events = CalendarEvent.objects.filter(title=assignatura.nom, start__lte=datetime.now()).order_by('start')
+    events = CalendarEvent.objects.filter(title=assignatura.nom, start__lt=datetime.now()).order_by('start')
 
     classes = Classe.objects.filter(assignatura=assignatura)
     classesAlumne = ClasseAlumne.objects.filter(alumne=alumne)
@@ -435,6 +435,9 @@ def historial_alumne(request):
 	estada = event.end - event.end
         for assist in assistencies:
             if assist.data == event.start.date():
+		if assist.sortida is None:
+			assist.sortida = datetime.now().time()
+			print assist.sortida
                 if assist.entrada >= event.start.time() and assist.sortida <= event.end.time():
 		    entrada = datetime.combine(event.start, assist.entrada)
                     sortida = datetime.combine(event.start, assist.sortida)
@@ -484,6 +487,8 @@ def assistencia_classe(request):
 		not_assistencies.append(ca.alumne)
 	    for a in assistenciesAlumne:
     	        a.entrada = a.entrada.isoformat()
+		if a.sortida is not None:
+			a.sortida = a.sortida.isoformat()
     	        alumnesAssistents.append(a)
     return render(request, 'profe/assistenciaclasse.html',
                   {'classe': classe, 'data': data, 'noassistents': not_assistencies,

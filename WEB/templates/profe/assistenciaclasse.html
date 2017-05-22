@@ -34,6 +34,7 @@
                         <td>{{ assistent.classeAlumne.alumne.user.first_name }} {{ assistent.classeAlumne.alumne.user.last_name }}</td>
                         <td>{{ assistent.entrada }}</td>
                         <td>{{ assistent.sortida }}</td>
+			<td> <td> <a href="/WEB/profe/historialAlumne?alumne={{assistent.classeAlumne.alumne.user.username}}&assignatura={{assistent.classeAlumne.classe.assignatura.nom}}">Historial del Alumne</a></td></td>
                     </tr>
                 {% endfor %}
                 </tbody>
