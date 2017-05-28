@@ -272,7 +272,8 @@ def delete(request):
         user = User.objects.get(username=alumnenom)
 	alumne = Alumne.objects.get(user=user)
 	dispositiu = alumne.dispositiu
-	dispositiu.delete()
+	if dispositiu is not None:
+		dispositiu.delete()
         user.delete()
         return HttpResponseRedirect('/WEB/sysadmin/alumnes')
     elif salanom is not None:
